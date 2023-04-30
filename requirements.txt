@@ -1,3 +1,5 @@
 numpy
 networkx
 osmnx
+geopandas
+matplotlib

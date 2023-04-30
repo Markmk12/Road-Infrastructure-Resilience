@@ -1,8 +1,8 @@
-# This is a sample Python script.
+# Main program
 
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import numpy as np
+import networkx as nx
+import dataRetrieval as dr
 
 A = np.identity(10)
 print(A)
@@ -17,3 +17,5 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
