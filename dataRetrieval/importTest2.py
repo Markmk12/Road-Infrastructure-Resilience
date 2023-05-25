@@ -11,14 +11,14 @@ state1 = 'Luxembourg'
 state2 = 'Germany'
 # state3 = 'Russia'
 state4 = 'Turkey'
-
+state5 = 'Austria'  # ca. 65 sec. on laptop
 cf1 = '["highway"~"motorway|primary|secondary"]'
 cf2 = '["highway"~"motorway"]'
 
 start = time.time()
 
 # Plot region within its borders
-G = ox.graph_from_place(state4, network_type='drive', custom_filter=cf2)
+G = ox.graph_from_place(state5, network_type='drive', custom_filter=cf2)
 G = ox.project_graph(G)
 print(G)
 
