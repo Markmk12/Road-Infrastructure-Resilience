@@ -1,11 +1,15 @@
 import time
 import matplotlib.pyplot as plt
+import networkx as nx
 import osmnx as ox
+import numpy as np
 
 region1 = 'Hannover, Germany'
 region2 = 'Springe, Germany'
 region3 = 'Rinteln, Germany'
 region4 = 'Emskirchen, Germany'
+region5 = 'Belgrade, Serbia'        # 21 sec. on laptop
+region6 = 'Amed, Turkey'            # 45 sec. on laptop
 
 state1 = 'Luxembourg'
 state2 = 'Germany'
@@ -18,7 +22,7 @@ cf2 = '["highway"~"motorway"]'
 start = time.time()
 
 # Plot region within its borders
-G = ox.graph_from_place(state5, network_type='drive', custom_filter=cf2)
+G = ox.graph_from_place(region5, network_type='drive', custom_filter=cf1)
 G = ox.project_graph(G)
 print(G)
 
@@ -35,6 +39,8 @@ plt.show()
 end = time.time()
 print(end-start)
 
-# Art plot
-# ox.plot_graph(G, node_color="white", node_size=4, edge_color="white", edge_linewidth=1, bgcolor='black', show=False, close=False)
-# plt.show()
+# Matrix
+roadMatrix = nx.to_numpy_array(G)      # Adjacency matrix
+print(roadMatrix)
+print(np.size(roadMatrix))             # 2295225
+
