@@ -22,25 +22,25 @@ cf2 = '["highway"~"motorway"]'
 start = time.time()
 
 # Plot region within its borders
-G = ox.graph_from_place(region5, network_type='drive', custom_filter=cf1)
-G = ox.project_graph(G)
-print(G)
+G1 = ox.graph_from_place(region5, network_type='drive', custom_filter=cf1)
+G1 = ox.project_graph(G1)
+print(G1)
 
-# Plot region within a radius
-# G = ox.graph_from_address(region1, network_type='drive', dist=1400)
-# G = ox.project_graph(G)
 
-ox.plot_graph(G, node_color="r", node_size=4, edge_color="blue", edge_linewidth=1, bgcolor='white', show=False, close=False)
+# Simplification
+G2 = ox.simplification.consolidate_intersections(G1, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)
+G2 = ox.utils_graph.get_undirected(G2)
+
+# Plot
+ox.plot_graph(G1, node_color="r", node_size=4, edge_color="blue", edge_linewidth=1, bgcolor='white', show=False, close=False)
+plt.show()
+ox.plot_graph(G2, node_color="r", node_size=4, edge_color="blue", edge_linewidth=1, bgcolor='white', show=False, close=False)
 plt.show()
 
-# Save as a shape file for QGis
-# G.save_graphml_shapefile(filename=r"C:\Users\markm\Desktop\testshape.shp")
-
-end = time.time()
-print(end-start)
-
 # Matrix
-roadMatrix = nx.to_numpy_array(G)      # Adjacency matrix
+roadMatrix = nx.to_numpy_array(G1)      # Adjacency matrix
 print(roadMatrix)
 print(np.size(roadMatrix))             # 2295225
 
+end = time.time()
+print(end-start)
