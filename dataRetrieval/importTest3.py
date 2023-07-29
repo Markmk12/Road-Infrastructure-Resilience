@@ -5,11 +5,14 @@ import osmnx as ox
 import numpy as np
 
 # Filter
-cf1 = '["highway"~"motorway|primary|secondary"]'
-cf2 = '["highway"~"motorway"]'
+cf01 = '["highway"~"motorway|trunk|primary|secondary|tertiary"]'
+cf00 = '["highway"~"motorway|trunk|primary"]'                       # diesen filter für autobahnen-betrachtung
+cf1 = '["highway"~"motorway|trunk|primary|secondary"]'
+cf2 = '["highway"~"motorway|trunk|primary"]'
+cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Bennigsen', network_type='drive')
+G = ox.graph_from_place('Niedersachsen', network_type='drive', custom_filter=cf00)
 # print(G)
 
 # Simplification
@@ -19,6 +22,11 @@ G = ox.simplification.consolidate_intersections(G, tolerance=10, rebuild_graph=T
 # Transform MultiDiGraph into MultiGraph
 G = ox.utils_graph.get_undirected(G)
 print(G)
+
+# Delete nodes with degree of 2 or lower
+# nodes_to_remove = [node for node, degree in G.degree() if degree == 2]
+# G.remove_nodes_from(nodes_to_remove)
+
 
 # Matrix
 roadMatrix = nx.to_numpy_array(G)      # Adjacency matrix
