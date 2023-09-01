@@ -3,3 +3,4 @@ networkx
 osmnx
 geopandas
 matplotlib
+pandas
