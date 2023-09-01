@@ -3,20 +3,19 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-import dataRetrieval as dr
 
-roadNetwork1 = nx.MultiDiGraph()
-roadNetwork1.add_node(1)
-roadNetwork1.add_node(2)
-roadNetwork1.add_edge(1, 2, key=0, length=12, lanes=2, velocity=100, AAT=450, PCI=50, time=15)   # Der key-Parameter hilft dabei, die verschiedenen Kanten zu unterscheiden.
-roadNetwork1.add_edge(2, 1, key=1, length=12, lanes=2, velocity=100, AAT=700, PCI=90, time=15)
+road_network_1 = nx.MultiDiGraph()
+road_network_1.add_node(1)
+road_network_1.add_node(2)
+road_network_1.add_edge(1, 2, key=0, length=12, lanes=2, velocity=100, AAT=450, PCI=50, time=15)   # Der key-Parameter hilft dabei, die verschiedenen Kanten zu unterscheiden.
+road_network_1.add_edge(2, 1, key=1, length=12, lanes=2, velocity=100, AAT=700, PCI=90, time=15)
 
-# nx.draw(roadNetwork1)
+# nx.draw(road_network_1)
 # plt.show()
 
 # Alle Kanten mit ihren Attributen als Liste ausgeben
-# roadList1 = list(roadNetwork1.edges(data=True, keys=True))
-# print(roadList1)
+# road_list_1 = list(road_network_1.edges(data=True, keys=True))
+# print(road_list_1)
 
 
 def velocity_change(PCI, velocity):
@@ -27,29 +26,29 @@ def velocity_change(PCI, velocity):
 
 
 def PCI_degradation(PCI):
-    degradedPCI = PCI-0.1
-    return degradedPCI
+    degraded_PCI = PCI - 0.1
+    return degraded_PCI
 
-velocityHistory = []
+velocity_history = []
 
 
 # Simulation
 # Alle Kanten durchlaufen und das Attribut traffic_strength verändern und das 360 mal
 for j in range(360):
-    for u, v, key, data in roadNetwork1.edges(data=True, keys=True):
+    for u, v, key, data in road_network_1.edges(data=True, keys=True):
         data['PCI'] = PCI_degradation(data['PCI'])
         data['velocity'] = velocity_change(data['PCI'], data['velocity'])
 
     # Werte der Kante (1, 2, 0) speichern
-    velocityHistory.append(roadNetwork1[1][2][0]['velocity'])
+    velocity_history.append(road_network_1[1][2][0]['velocity'])
 
 # Plotten einer Kantengeschwindigkeit
-plt.plot(range(360), velocityHistory, color='tab:red')
+plt.plot(range(360), velocity_history, color='tab:red')
 plt.xlabel('Iteration')
 plt.ylabel('velocity')
 plt.title("Verlauf der Geschwindigkeit v [km/h]")
 plt.show()
 
 # Alle Kanten mit ihren Attributen als Liste ausgeben
-roadList1 = list(roadNetwork1.edges(data=True, keys=True))
-print(roadList1)
+road_list_1 = list(road_network_1.edges(data=True, keys=True))
+print(road_list_1)
