@@ -1,6 +1,6 @@
-numpy
+numpy==1.25.2
 networkx
-osmnx
-geopandas
-matplotlib
-pandas
+osmnx==1.6.0
+geopandas==0.13.2
+matplotlib==3.7.2
+pandas==2.1.0
