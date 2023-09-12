@@ -1,3 +1,3 @@
-def pavement_degradation(PCI):
-    degraded_PCI = PCI - 0.1
+def pavement_deterioration(PCI):
+    degraded_PCI = PCI - 0.99
     return degraded_PCI

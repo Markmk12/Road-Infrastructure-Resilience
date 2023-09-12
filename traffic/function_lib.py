@@ -16,7 +16,7 @@ def velocity_change(PCI, velocity):
         The current code does not take into account the `velocity` parameter. The maximum velocity
         is hardcoded to 100.
     """
-    delta_v = 1385.406/PCI-15.985
+    delta_v = 1/PCI
     velocity = 100                      # deltaV always refers to maxSpeed
-    new_velocity = velocity - delta_v
+    new_velocity = velocity - delta_v*100
     return new_velocity
