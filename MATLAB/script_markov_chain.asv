@@ -15,4 +15,4 @@ end
 %plot(PCI())
 
 %% Plot Whk-Verteilung nach n Jahren
-bar(100:-10:0,PCI(50,:))
+bar(100:-10:0,PCI(30,:))
