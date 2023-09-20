@@ -11,13 +11,19 @@ road_network_1 = nx.Graph()
 road_network_1.add_node(1)
 road_network_1.add_node(2)
 road_network_1.add_node(3)
+road_network_1.add_node(4)
+road_network_1.add_node(5)
 road_network_1.add_edge(1, 2, key=0, length=100, lanes=4, velocity=100, AAT=450, PCI=100, time=60)   # Der key-Parameter hilft dabei, die verschiedenen Kanten zu unterscheiden.
 road_network_1.add_edge(2, 1, key=1, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
 road_network_1.add_edge(2, 3, key=2, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
 road_network_1.add_edge(1, 3, key=3, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
+road_network_1.add_edge(3, 4, key=4, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
+road_network_1.add_edge(2, 4, key=5, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
+road_network_1.add_edge(4, 5, key=6, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
 
-# nx.draw(road_network_1)
-# plt.show()
+# Plot graph
+nx.draw(road_network_1)
+plt.show()
 
 # Alle Kanten mit ihren Attributen als Liste ausgeben
 # road_list_1 = list(road_network_1.edges(data=True, keys=True))
