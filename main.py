@@ -7,11 +7,14 @@ from traffic import function_lib as tf
 from pavement import function_lib as pv
 from network_efficiency import function_lib as eff
 
-road_network_1 = nx.MultiDiGraph()
+road_network_1 = nx.Graph()
 road_network_1.add_node(1)
 road_network_1.add_node(2)
-road_network_1.add_edge(1, 2, key=0, length=100, lanes=2, velocity=100, AAT=450, PCI=100, time=60)   # Der key-Parameter hilft dabei, die verschiedenen Kanten zu unterscheiden.
-road_network_1.add_edge(2, 1, key=1, length=100, lanes=2, velocity=100, AAT=700, PCI=100, time=60)
+road_network_1.add_node(3)
+road_network_1.add_edge(1, 2, key=0, length=100, lanes=4, velocity=100, AAT=450, PCI=100, time=60)   # Der key-Parameter hilft dabei, die verschiedenen Kanten zu unterscheiden.
+road_network_1.add_edge(2, 1, key=1, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
+road_network_1.add_edge(2, 3, key=2, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
+road_network_1.add_edge(1, 3, key=3, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
 
 # nx.draw(road_network_1)
 # plt.show()
@@ -46,49 +49,63 @@ initial_status = np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 PCI_history = []
 velocity_history = []
 travel_time_history = []
+efficiency_history = []
 
 # Simulation of the network for 100 years
 for j in range(100):
-    for u, v, key, data in road_network_1.edges(data=True, keys=True):
+    for u, v, data in road_network_1.edges(data=True):
         data['PCI'] = pv.pavement_deterioration(data['PCI'], PCI_groups, transition_matrix, initial_status, j)
         data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'])
         data['time'] = tf.travel_time(data['velocity'], data['length'])
 
     # Saving the PCI and velocity values of edge (1, 2, 0) for exemplary
-    PCI_history.append(road_network_1[1][2][0]['PCI'])
-    velocity_history.append(road_network_1[1][2][0]['velocity'])
-    travel_time_history.append(road_network_1[1][2][0]['time'])
+    PCI_history.append(road_network_1[1][2]['PCI'])
+    velocity_history.append(road_network_1[1][2]['velocity'])
+    travel_time_history.append(road_network_1[1][2]['time'])
 
-import matplotlib.pyplot as plt
+    # Network Efficiency
+    efficiency_t = eff.network_efficiency(road_network_1)
 
-# Erstellen Sie eine Figur und Achsen für die Subplots
-fig, axs = plt.subplots(3, 1, figsize=(8, 12))
+    # Saving network efficiency history data
+    efficiency_history.append(efficiency_t)
 
-# Plot für PCI history
-axs[0].plot(range(100), PCI_history, color='tab:red')
-axs[0].set_ylabel('PCI')
-axs[0].set_title("PCI history")
-axs[0].grid(True)
+# Create a figure and axes for the subplots in a 2x2 layout
+fig, axs = plt.subplots(2, 2, figsize=(12, 12))
 
-# Plot für Velocity history
-axs[1].plot(range(100), velocity_history, color='tab:red')
-axs[1].set_ylabel('Velocity [km/h]')
-axs[1].set_title("Velocity history")
-axs[1].grid(True)
+# Plot for PCI history
+axs[0, 0].plot(range(100), PCI_history, color='tab:red')
+axs[0, 0].set_ylabel('PCI')
+axs[0, 0].set_title("PCI history")
+axs[0, 0].grid(True)
 
-# Plot für Travel Time history
-axs[2].plot(range(100), travel_time_history, color='tab:red')
-axs[2].set_xlabel('Year')
-axs[2].set_ylabel('Travel time [min]')
-axs[2].set_title("Travel Time history")
-axs[2].grid(True)
+# Plot for Velocity history
+axs[0, 1].plot(range(100), velocity_history, color='tab:red')
+axs[0, 1].set_ylabel('Velocity [km/h]')
+axs[0, 1].set_title("Velocity history")
+axs[0, 1].grid(True)
 
-# Anzeige der Plots
+# Plot for Travel Time history
+axs[1, 0].plot(range(100), travel_time_history, color='tab:red')
+axs[1, 0].set_xlabel('Year')
+axs[1, 0].set_ylabel('Travel time [min]')
+axs[1, 0].set_title("Travel Time history")
+axs[1, 0].grid(True)
+
+# Plot for Efficiency History
+axs[1, 1].plot(range(100), efficiency_history, color='tab:red')
+axs[1, 1].set_xlabel('Year')
+axs[1, 1].set_ylabel('Network Efficiency [min]')
+axs[1, 1].set_title("Network Efficiency history")
+axs[1, 1].grid(True)
+
+# Display the plots
 plt.tight_layout()
 plt.show()
 
+
 # Alle Kanten mit ihren Attributen als Liste ausgeben
-road_list_1 = list(road_network_1.edges(data=True, keys=True))
+road_list_1 = list(road_network_1.edges(data=True))
 print(road_list_1)
 
-# print(eff.network_efficiency(road_network_1))
+efficiency = eff.network_efficiency(road_network_1)
+print(efficiency)
