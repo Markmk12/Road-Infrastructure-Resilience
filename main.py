@@ -5,7 +5,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from traffic import function_lib as tf
 from pavement import function_lib as pv
-from network_efficiency import function_lib as ne
+from network_efficiency import function_lib as eff
 
 road_network_1 = nx.MultiDiGraph()
 road_network_1.add_node(1)
@@ -91,4 +91,4 @@ plt.show()
 road_list_1 = list(road_network_1.edges(data=True, keys=True))
 print(road_list_1)
 
-# print(ne.network_efficiency(road_network_1))
+# print(eff.network_efficiency(road_network_1))
