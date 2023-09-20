@@ -20,3 +20,8 @@ def velocity_change(PCI, velocity):
     velocity = 100                      # deltaV always refers to maxSpeed
     new_velocity = velocity - delta_v*100
     return new_velocity
+
+
+def travel_time(velocity, length):
+    edge_travel_time = length/velocity*60
+    return edge_travel_time

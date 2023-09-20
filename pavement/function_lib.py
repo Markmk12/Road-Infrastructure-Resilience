@@ -1,17 +1,15 @@
 import numpy as np
 
 
-def pavement_deterioration(PCI, transition_matrix, status, t):
+def pavement_deterioration(pci, pci_groups, transition_matrix, status, t):
 
-    # probability distribution at t
-    v = status.dot(np.linalg.matrix_power(transition_matrix, t))
+    # Markov Chain after t time steps
+    p_distribution = status.dot(np.linalg.matrix_power(transition_matrix, t))                # probability distribution at t
 
-    # MC-Simulation
+    # MC samples
+    sample = np.random.choice(pci_groups, 300, p=p_distribution)
 
+    # Expected value (arithmetic mean)
+    mean = np.mean(sample)
 
-    degraded_PCI = PCI - 0.99
-    return degraded_PCI
-
-def mcmc_pavement(pci):
-    a = pci+1
-    return a
+    return mean
