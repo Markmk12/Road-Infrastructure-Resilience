@@ -7,7 +7,7 @@ def pavement_deterioration(pci, pci_groups, transition_matrix, status, t):
     p_distribution = status.dot(np.linalg.matrix_power(transition_matrix, t))                # probability distribution at t
 
     # MC samples
-    sample = np.random.choice(pci_groups, 10000, p=p_distribution)
+    sample = np.random.choice(pci_groups, 100000, p=p_distribution)
 
     # Expected value (arithmetic mean)
     mean = np.mean(sample)

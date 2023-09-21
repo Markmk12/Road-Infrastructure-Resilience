@@ -78,30 +78,30 @@ for j in range(100):
 # Create a figure and axes for the subplots in a 2x2 layout
 fig, axs = plt.subplots(2, 2, figsize=(12, 12))
 
-# Plot for PCI history
+# Plot for PCI history for edge (1, 2)
 axs[0, 0].plot(range(100), PCI_history, color='tab:red')
 axs[0, 0].set_ylabel('PCI')
-axs[0, 0].set_title("PCI history")
+axs[0, 0].set_title("PCI prediction for edge (1, 2)")
 axs[0, 0].grid(True)
 
-# Plot for Velocity history
+# Plot for Velocity history for edge (1, 2)
 axs[0, 1].plot(range(100), velocity_history, color='tab:red')
 axs[0, 1].set_ylabel('Velocity [km/h]')
-axs[0, 1].set_title("Velocity history")
+axs[0, 1].set_title("Velocity prediction for edge (1, 2)")
 axs[0, 1].grid(True)
 
-# Plot for Travel Time history
+# Plot for Travel Time history for edge (1, 2)
 axs[1, 0].plot(range(100), travel_time_history, color='tab:red')
 axs[1, 0].set_xlabel('Year')
 axs[1, 0].set_ylabel('Travel time [min]')
-axs[1, 0].set_title("Travel Time history")
+axs[1, 0].set_title("Travel time prediction for edge (1, 2)")
 axs[1, 0].grid(True)
 
 # Plot for Efficiency History
 axs[1, 1].plot(range(100), efficiency_history, color='tab:red')
 axs[1, 1].set_xlabel('Year')
-axs[1, 1].set_ylabel('Network Efficiency [min]')
-axs[1, 1].set_title("Network Efficiency history")
+axs[1, 1].set_ylabel('Network Efficiency [-]')
+axs[1, 1].set_title("Network efficiency prediction")
 axs[1, 1].grid(True)
 
 # Display the plots
