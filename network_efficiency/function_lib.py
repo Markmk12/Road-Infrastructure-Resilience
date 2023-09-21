@@ -6,5 +6,5 @@ import networkx as nx
 def network_efficiency(graph):
     n = nx.Graph.number_of_nodes(graph)
     shortest_path_matrix = nx.floyd_warshall_numpy(graph, weight='time')
-    efficiency = 1/(n*(n-1))*np.sum(0.5*shortest_path_matrix)
+    efficiency = 1/(n*(n-1))*np.sum(1/shortest_path_matrix)
     return efficiency
