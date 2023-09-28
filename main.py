@@ -81,7 +81,8 @@ normed_efficiency_history = []
 # Simulation of the network for 100 years
 for j in range(100):
     for u, v, data in road_network_1.edges(data=True):
-        data['PCI'] = pv.pavement_deterioration(data['PCI'], PCI_groups, transition_matrix, initial_status, j)
+        data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
+                                                             j)
         data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'])
         data['time'] = tf.travel_time(data['velocity'], data['length'])
 
@@ -141,4 +142,4 @@ print(efficiency)
 
 # Normalized efficiency
 norm_efficiency = efficiency / eff.network_efficiency(road_network_0)
-print(norm_efficiency)
+print ("The Normalized Network Efficiency is: " + str(norm_efficiency))

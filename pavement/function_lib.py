@@ -1,7 +1,8 @@
+import math
 import numpy as np
 
 
-def pavement_deterioration(pci, pci_groups, transition_matrix, status, t):
+def pavement_deterioration_markov_chain(pci, pci_groups, transition_matrix, status, t):
 
     # Markov Chain after t time steps
     p_distribution = status.dot(np.linalg.matrix_power(transition_matrix, t))           # probability distribution at t
@@ -13,3 +14,10 @@ def pavement_deterioration(pci, pci_groups, transition_matrix, status, t):
     mean = np.mean(sample)
 
     return mean
+
+
+def pavement_deterioration_gamma_process(pci, t):
+
+    pci = math.gamma(t)
+
+    return pci
