@@ -78,11 +78,15 @@ velocity_history = []
 travel_time_history = []
 normed_efficiency_history = []
 
+# Simulation time period
+simulation_time_period = range(1, 100)
+
 # Simulation of the network for 100 years
-for j in range(100):
+for t in simulation_time_period:
     for u, v, data in road_network_1.edges(data=True):
-        data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
-                                                             j)
+        #data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
+        #                                                     t)
+        data['PCI'] = pv.pavement_deterioration_gamma_process(data['PCI'], t)
         data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'])
         data['time'] = tf.travel_time(data['velocity'], data['length'])
 
@@ -102,26 +106,26 @@ for j in range(100):
 fig, axs = plt.subplots(2, 2, figsize=(12, 12))
 
 # Plot for PCI prediction for edge (1, 2)
-axs[0, 0].plot(range(100), PCI_history, color='tab:red')
+axs[0, 0].plot(simulation_time_period, PCI_history, color='tab:red')
 axs[0, 0].set_ylabel('PCI')
 axs[0, 0].set_title("PCI prediction for edge (1, 2)")
 axs[0, 0].grid(True)
 
 # Plot for Velocity prediction for edge (1, 2)
-axs[0, 1].plot(range(100), velocity_history, color='tab:red')
+axs[0, 1].plot(simulation_time_period, velocity_history, color='tab:red')
 axs[0, 1].set_ylabel('Velocity [km/h]')
 axs[0, 1].set_title("Velocity prediction for edge (1, 2)")
 axs[0, 1].grid(True)
 
 # Plot for Travel Time prediction for edge (1, 2)
-axs[1, 0].plot(range(100), travel_time_history, color='tab:red')
+axs[1, 0].plot(simulation_time_period, travel_time_history, color='tab:red')
 axs[1, 0].set_xlabel('Year')
 axs[1, 0].set_ylabel('Travel time [min]')
 axs[1, 0].set_title("Travel time prediction for edge (1, 2)")
 axs[1, 0].grid(True)
 
 # Plot for efficiency prediction
-axs[1, 1].plot(range(100), normed_efficiency_history, color='tab:red')
+axs[1, 1].plot(simulation_time_period, normed_efficiency_history, color='tab:red')
 axs[1, 1].set_xlabel('Year')
 axs[1, 1].set_ylabel('Normed network Efficiency [-]')
 axs[1, 1].set_title("Normed network efficiency prediction")
@@ -142,4 +146,4 @@ print(efficiency)
 
 # Normalized efficiency
 norm_efficiency = efficiency / eff.network_efficiency(road_network_0)
-print ("The Normalized Network Efficiency is: " + str(norm_efficiency))
+print("The Normalized Network Efficiency is: " + str(norm_efficiency))
