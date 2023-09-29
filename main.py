@@ -77,30 +77,36 @@ PCI_history = []
 velocity_history = []
 travel_time_history = []
 normed_efficiency_history = []
+normed_efficiency_sample = []
 
 # Simulation time period
-simulation_time_period = range(1, 100)
+# simulation_time_period = range(1, 10)   # this for Gamma Process
+simulation_time_period = range(100)   # this for Markov Chain
 
 # Simulation of the network for 100 years
 for t in simulation_time_period:
-    for u, v, data in road_network_1.edges(data=True):
-        #data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
-        #                                                     t)
-        data['PCI'] = pv.pavement_deterioration_gamma_process(data['PCI'], t)
-        data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'])
-        data['time'] = tf.travel_time(data['velocity'], data['length'])
+    for sample in range(4):
+        for u, v, data in road_network_1.edges(data=True):
+            data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
+                                                             t)
+            # data['PCI'] = pv.pavement_deterioration_gamma_process(data['PCI'], t)
+            data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'])
+            data['time'] = tf.travel_time(data['velocity'], data['length'])
 
-    # Saving the PCI and velocity values of edge (1, 2, 0) for exemplary
-    PCI_history.append(road_network_1[1][2]['PCI'])
-    velocity_history.append(road_network_1[1][2]['velocity'])
-    travel_time_history.append(road_network_1[1][2]['time'])
+        # Normed network Efficiency for sample at time t
+        efficiency_t_sample = eff.network_efficiency(road_network_1)
+        normed_efficiency_t = efficiency_t_sample / eff.network_efficiency(road_network_0)
 
-    # Normed network Efficiency at time t
-    efficiency_t = eff.network_efficiency(road_network_1)
-    normed_efficiency_t = efficiency_t / eff.network_efficiency(road_network_0)
+        # Saving network efficiency prediction data
+        normed_efficiency_sample.append(normed_efficiency_t)
 
-    # Saving network efficiency prediction data
-    normed_efficiency_history.append(normed_efficiency_t)
+
+
+        # Saving the PCI and velocity values of edge (1, 2, 0) for exemplary
+        PCI_history.append(road_network_1[1][2]['PCI'])
+        velocity_history.append(road_network_1[1][2]['velocity'])
+        travel_time_history.append(road_network_1[1][2]['time'])
+
 
 # Create a figure and axes for the subplots in a 2x2 layout
 fig, axs = plt.subplots(2, 2, figsize=(12, 12))

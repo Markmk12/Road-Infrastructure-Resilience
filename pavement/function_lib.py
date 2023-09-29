@@ -8,10 +8,11 @@ def pavement_deterioration_markov_chain(pci, pci_groups, transition_matrix, stat
     p_distribution = status.dot(np.linalg.matrix_power(transition_matrix, t))           # probability distribution at t
 
     # MC samples
-    sample = np.random.choice(pci_groups, 100000, p=p_distribution)            # best results when using >10,000 samples
+    # sample = np.random.choice(pci_groups, 100000, p=p_distribution)            # best results when using >10,000 samples
+    sample = np.random.choice(pci_groups, 1, p=p_distribution)              # choose only one => no MC here
 
     # Expected value (arithmetic mean)
-    mean = np.mean(sample)
+    mean = np.mean(sample)                                                    # n.a. when only one sampled
 
     return mean
 
@@ -29,6 +30,6 @@ def pavement_deterioration_gamma_process(pci, t):
     rate_lambda = mean / variance
 
     # Gamma process
-    pci_sample = (pow(rate_lambda, rate_gamma*t)/math.gamma(rate_gamma*t)) * pow(pci, rate_gamma*t-1) * np.exp(-rate_lambda*pci)
+    pci_new = pci - (pow(rate_lambda, rate_gamma * t) / math.gamma(rate_gamma * t)) * pow(pci, rate_gamma * t - 1) * np.exp(-rate_lambda * pci)
 
-    return pci_sample
+    return pci_new
