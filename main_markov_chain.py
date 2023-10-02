@@ -84,9 +84,9 @@ simulation_time_period = range(1, 100)
 # Simulation of the network for 100 years
 for t in simulation_time_period:
     for u, v, data in road_network_1.edges(data=True):
-        #data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
-        #                                                     t)
-        data['PCI'] = pv.pavement_deterioration_gamma_process(data['PCI'], t)
+        data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
+                                                             t)
+        # data['PCI'] = pv.pavement_deterioration_gamma_process(data['PCI'], t)
         data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'])
         data['time'] = tf.travel_time(data['velocity'], data['length'])
 
