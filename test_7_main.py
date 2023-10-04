@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import copy
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -53,6 +54,12 @@ for _, _, data in road_network_1.edges(data=True):
 for u, v, attrs in road_network_1.edges(data=True):
     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
+# # Visualize the graph
+# pos = nx.spring_layout(G)
+# nx.draw(G, pos, with_labels=True, node_size=500)
+# labels = nx.get_edge_attributes(G, 'weight')
+# nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+
 # Lists
 normed_efficiency_t_samples = []
 normed_efficiency_history = []
@@ -99,16 +106,18 @@ for t in simulation_time_period:
         # Sample Normalizing
         normed_efficiency_t = efficiency_t_sample / eff.network_efficiency(road_network_0)
 
-        # Sample
+        # Save the Network Efficiency sample
         normed_efficiency_t_samples.append(normed_efficiency_t)
 
     # Calculate means of the samples at time t
-    PCI_mean = np.mean(pci_samples)
+    PCI_mean = np.mean(pci_samples)                         # Bevor mean berechnen evtl. Liste pci_samples enthält die Tupel der Kanten filtern oder indizieren  siehe Chat GPT!
     velocity_mean = np.mean(velocity_samples)
     time_mean = np.mean(time_samples)
+
+    # Mean of the Network Efficiency at time t
     efficiency_t_mean = np.mean(normed_efficiency_t_samples)
 
-    # Update the road network with the calculated means
+    # Update the road network with the calculated PCI means
     for u, v, data in road_network_1.edges(data=True):
         data['PCI'] = PCI_mean
         data['velocity'] = velocity_mean
@@ -141,14 +150,3 @@ plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
 plt.minorticks_on()
 plt.show()
-
-# Show the major grid and style it slightly.
-
-# Show the minor grid as well. Style it in very light gray as a thin,
-# dotted line.
-
-# Make the minor ticks and gridlines show.
-
-
-
-print(pci_samples)
