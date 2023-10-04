@@ -31,7 +31,7 @@ def pavement_deterioration_markov_chain_alternative(pci, pci_groups, transition_
 def pavement_deterioration_gamma_process(pci, t):
 
     # Gamma distribution
-    shape_k = 7.5
+    shape_k = 5
     scale_theta = 1
     mean = shape_k * scale_theta
     variance = shape_k * pow(scale_theta, 2)
@@ -48,16 +48,17 @@ def pavement_deterioration_gamma_process(pci, t):
 
 def pavement_deterioration_gamma_process_alternative(pci, t):
 
-    alpha = 5       # shape minimum 2 so that it starts by 0
-    beta = 0.5      # rate
+    alpha = 2       # shape minimum 2 so that it starts by 0
+    beta = 1      # rate
 
     # Zeitintervall für jeden Schritt
     dt = t / 100
 
     # Generiere unabhängige Gamma-verteilte Zuwächse
-    increments = np.random.gamma(alpha * dt, 1 / beta, 100)
+    #increments = np.random.gamma(alpha * dt, 1 / beta, 100)
+    increment = np.random.gamma(alpha*t, beta)
 
     # Akkumuliere die Zuwächse, um den Prozess zu konstruieren
-    pci_degradation = np.sum(increments)
+    #pci_degradation = np.sum(increments)
 
-    return pci_degradation
+    return increment

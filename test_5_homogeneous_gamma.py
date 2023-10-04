@@ -10,7 +10,7 @@ tEnd = 100
 # Sampling frequency window
 fs = np.array([2, 5])
 # Number of histories
-nbHist = 100000
+nbHist = 10                     # 100000
 
 # Time vector:
 dt = np.array([tStart])
@@ -27,13 +27,27 @@ I = np.concatenate((np.zeros((1, nbHist)), I), axis=0)
 # Degradation calculation
 Y = np.cumsum(I, axis=0)
 
-# Illustration
+# # Illustration
+# fig = plt.figure(figsize=(8, 8))
+# ax = fig.add_subplot(1, 1, 1)
+# for id in range(np.minimum(75, nbHist)):
+#     ax.plot(t, Y[:, id], '.-', color=(0.8, 0.8, 0.8))
+# ax.plot(t, np.mean(Y, axis=1), '.-', color=(0, 0, 1))
+# ax.plot(t, alpha/beta*t, '.-', color=(1, 0, 0))
+# ax.set_xlabel('Time')
+# ax.set_ylabel('Degradation')
+# ax.set_title('Degradation with homogeneous gamma process')
+# ax.grid(True)
+# plt.tight_layout()
+# plt.show()
+
+# Illustration as ste function
 fig = plt.figure(figsize=(8, 8))
 ax = fig.add_subplot(1, 1, 1)
 for id in range(np.minimum(75, nbHist)):
-    ax.plot(t, Y[:, id], '.-', color=(0.8, 0.8, 0.8))
-ax.plot(t, np.mean(Y, axis=1), '.-', color=(0, 0, 1))
-ax.plot(t, alpha/beta*t, '.-', color=(1, 0, 0))
+    ax.step(t, Y[:, id], '.-', color=(0.8, 0.8, 0.8))
+ax.step(t, np.mean(Y, axis=1), '.-', color=(0, 0, 1))
+ax.step(t, alpha/beta*t, '.-', color=(1, 0, 0))
 ax.set_xlabel('Time')
 ax.set_ylabel('Degradation')
 ax.set_title('Degradation with homogeneous gamma process')

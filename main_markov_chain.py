@@ -6,7 +6,7 @@ from pavement import function_lib as pv
 from network_efficiency import function_lib as eff
 
 # Notes and TODOs:
-# Note 1
+# Last time worked on 02.10.2023
 # Note 1
 # ...
 
@@ -32,12 +32,12 @@ road_network_1.add_node(2)
 road_network_1.add_node(3)
 road_network_1.add_node(4)
 road_network_1.add_node(5)
-road_network_1.add_edge(1, 2, key=0, length=100, lanes=4, velocity=100, AAT=450, PCI=100, time=60)   # Der key-Parameter hilft dabei, die verschiedenen Kanten zu unterscheiden.
-road_network_1.add_edge(2, 1, key=1, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
-road_network_1.add_edge(2, 3, key=2, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
-road_network_1.add_edge(1, 3, key=3, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
-road_network_1.add_edge(3, 4, key=4, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
-road_network_1.add_edge(2, 4, key=5, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
+road_network_1.add_edge(1, 2, key=0, length=100, lanes=4, velocity=100, AAT=450, PCI=40, time=60)   # Der key-Parameter hilft dabei, die verschiedenen Kanten zu unterscheiden.
+road_network_1.add_edge(2, 1, key=1, length=100, lanes=4, velocity=100, AAT=700, PCI=50, time=60)
+road_network_1.add_edge(2, 3, key=2, length=100, lanes=4, velocity=100, AAT=700, PCI=60, time=60)
+road_network_1.add_edge(1, 3, key=3, length=100, lanes=4, velocity=100, AAT=700, PCI=70, time=60)
+road_network_1.add_edge(3, 4, key=4, length=100, lanes=4, velocity=100, AAT=700, PCI=80, time=60)
+road_network_1.add_edge(2, 4, key=5, length=100, lanes=4, velocity=100, AAT=700, PCI=90, time=60)
 road_network_1.add_edge(4, 5, key=6, length=100, lanes=4, velocity=100, AAT=700, PCI=100, time=60)
 
 # Plot graph
@@ -84,8 +84,10 @@ simulation_time_period = range(1, 100)
 # Simulation of the network for 100 years
 for t in simulation_time_period:
     for u, v, data in road_network_1.edges(data=True):
-        data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status,
-                                                             t)
+        if data['PCI'] > 30:
+            data['PCI'] = pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status, t)
+        else:
+            data['PCI'] = 30 + pv.pavement_deterioration_markov_chain(data['PCI'], PCI_groups, transition_matrix, initial_status, t)
         # data['PCI'] = pv.pavement_deterioration_gamma_process(data['PCI'], t)
         data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'])
         data['time'] = tf.travel_time(data['velocity'], data['length'])
