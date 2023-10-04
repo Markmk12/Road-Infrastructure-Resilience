@@ -52,7 +52,7 @@ def pavement_deterioration_gamma_process_alternative(pci, t):
     beta = 1      # rate
 
     # Zeitintervall für jeden Schritt
-    dt = t / 100
+    #dt = t / 100
 
     # Generiere unabhängige Gamma-verteilte Zuwächse
     #increments = np.random.gamma(alpha * dt, 1 / beta, 100)

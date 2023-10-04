@@ -21,6 +21,10 @@ def velocity_change(pci, velocity, max_speed):
 
     delta_v = 1/pci
     new_velocity = velocity - delta_v * max_speed
+
+    if new_velocity <= 0:
+        new_velocity = 5      # Schrittgeschwindigkeit
+
     return new_velocity
 
 

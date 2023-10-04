@@ -9,8 +9,6 @@ from maintenance import function_lib as ma
 from network_efficiency import function_lib as eff
 
 # Notes and TODOs:
-# The sampling should not update the graph of time step t
-# Wird jede Kante nach jedem Schritt mit dem z.B. PCI Mean überschrieben?????
 # ...
 
 # Ideal road network
@@ -54,11 +52,12 @@ for _, _, data in road_network_1.edges(data=True):
 for u, v, attrs in road_network_1.edges(data=True):
     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
-# # Visualize the graph
-# pos = nx.spring_layout(G)
-# nx.draw(G, pos, with_labels=True, node_size=500)
-# labels = nx.get_edge_attributes(G, 'weight')
-# nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+# Visualize the graph
+pos = nx.spring_layout(road_network_1)
+nx.draw(road_network_1, pos, with_labels=True, node_size=500)
+labels = nx.get_edge_attributes(road_network_1, 'PCI')
+nx.draw_networkx_edge_labels(road_network_1, pos, edge_labels=labels)
+plt.show()
 
 # Lists
 normed_efficiency_t_samples = []
@@ -66,7 +65,7 @@ normed_efficiency_history = []
 pci_mean_history = []
 
 # Simulation time period
-simulation_time_period = range(1, 100)
+simulation_time_period = range(1, 70)
 
 # Simulation of the network efficiency over 100 years
 for t in simulation_time_period:
@@ -88,9 +87,10 @@ for t in simulation_time_period:
         for u, v, data in temp_network.edges(data=True):
 
             data['PCI'] = data['PCI'] - pv.pavement_deterioration_gamma_process_alternative(data['PCI'], t)
+            if data['PCI'] <= 0:
+                data['PCI'] = 10
             data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['max_speed'])
             data['time'] = tf.travel_time(data['velocity'], data['length'])
-            data['age'] = data['age'] + 1
 
             # Store samples of the attributes
 
@@ -109,19 +109,33 @@ for t in simulation_time_period:
         # Save the Network Efficiency sample
         normed_efficiency_t_samples.append(normed_efficiency_t)
 
-    # Calculate means of the samples at time t
-    PCI_mean = np.mean(pci_samples)                         # Bevor mean berechnen evtl. Liste pci_samples enthält die Tupel der Kanten filtern oder indizieren  siehe Chat GPT!
+    # Calculate means of the samples at time t          # not needed anymore only for the plot
+    PCI_mean = np.mean(pci_samples)
     velocity_mean = np.mean(velocity_samples)
     time_mean = np.mean(time_samples)
 
     # Mean of the Network Efficiency at time t
     efficiency_t_mean = np.mean(normed_efficiency_t_samples)
 
-    # Update the road network with the calculated PCI means
+    # Mean of the PCI at time t
+    # Convert the data into a pandas DataFrame
+    df = pd.DataFrame(pci_samples, columns=['Node1', 'Node2', 'PCI'])
+    # Group by the first two columns and compute the mean for each group
+    mean_values_df = df.groupby(['Node1', 'Node2']).mean().reset_index()
+    # Update edges based on mean_values_df
+    for _, row in mean_values_df.iterrows():
+        road_network_1.add_edge(row['Node1'], row['Node2'], PCI=row['PCI'])
+
+    # Update the rest of the road network with calculated PCI mean of time t
     for u, v, data in road_network_1.edges(data=True):
-        data['PCI'] = PCI_mean
-        data['velocity'] = velocity_mean
-        data['time'] = time_mean
+        data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['max_speed'])
+        data['time'] = tf.travel_time(data['velocity'], data['length'])
+
+        data['age'] = data['age'] + 1
+
+    # Test the road network at time t
+    for u, v, attrs in road_network_1.edges(data=True):
+        print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
     # Saving the means
     pci_mean_history.append(PCI_mean)
