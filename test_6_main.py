@@ -2,9 +2,7 @@ import numpy as np
 import copy
 import networkx as nx
 import matplotlib.pyplot as plt
-from traffic import function_lib as tf
-from pavement import function_lib as pv
-from maintenance import function_lib as ma
+from function_library import traffic_dynamics as tf, pavement as pv
 from network_efficiency import function_lib as eff
 
 # Notes and TODOs:

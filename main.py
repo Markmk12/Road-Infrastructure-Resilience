@@ -3,10 +3,7 @@ import pandas as pd
 import copy
 import networkx as nx
 import matplotlib.pyplot as plt
-from traffic import function_lib as tf
-from pavement import function_lib as pv
-from maintenance import function_lib as ma
-from network_efficiency import function_lib as eff
+from function_library import system, traffic_dynamics as tf, pavement as pv
 
 # Notes and TODOs:
 # ...
@@ -65,12 +62,12 @@ normed_efficiency_history = []
 pci_mean_history = []
 
 # Simulation time period
-simulation_time_period = range(1, 70)
+simulation_time_period = range(0, 21)                          # 0-101
 
 # Simulation of the network efficiency over 100 years
 for t in simulation_time_period:
 
-    sample_size = 30
+    sample_size = 5
 
     pci_samples = []
     velocity_samples = []
@@ -101,10 +98,10 @@ for t in simulation_time_period:
 
         # Calculations for each sample
         # Sample Network Efficiency
-        efficiency_t_sample = eff.network_efficiency(temp_network)
+        efficiency_t_sample = system.network_efficiency(temp_network)
 
         # Sample Normalizing
-        normed_efficiency_t = efficiency_t_sample / eff.network_efficiency(road_network_0)
+        normed_efficiency_t = efficiency_t_sample / system.network_efficiency(road_network_0)
 
         # Save the Network Efficiency sample
         normed_efficiency_t_samples.append(normed_efficiency_t)
@@ -141,8 +138,12 @@ for t in simulation_time_period:
     pci_mean_history.append(PCI_mean)
     normed_efficiency_history.append(efficiency_t_mean)
 
+# Resilience
+resilience = system.resilience_metric(normed_efficiency_history, 1, len(simulation_time_period))
+
 print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
 print("The predicted PCI mean is: " + str(pci_mean_history))
+print(print("The resilience is: " + str(resilience)))
 
 # Plotting
 plt.step(simulation_time_period, normed_efficiency_history, '-')
