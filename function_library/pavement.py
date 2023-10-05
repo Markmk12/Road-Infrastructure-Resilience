@@ -62,3 +62,13 @@ def pavement_deterioration_gamma_process_alternative(pci, t):
     #pci_degradation = np.sum(increments)
 
     return increment
+
+
+def pavement_deterioration_variance_gamma_process(pci, t):
+
+    alpha = 2       # shape minimum 2 so that it starts by 0
+    beta = 1      # rate
+
+    increment = np.random.gamma(alpha*t, beta) - np.random.gamma(alpha*t, beta)     # difference bewtween two independent gamma processes
+
+    return increment

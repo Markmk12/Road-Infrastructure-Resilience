@@ -62,7 +62,7 @@ normed_efficiency_history = []
 pci_mean_history = []
 
 # Simulation time period
-simulation_time_period = range(0, 21)                          # 0-101
+simulation_time_period = range(0, 101)                          # 0-101
 
 # Simulation of the network efficiency over 100 years
 for t in simulation_time_period:
@@ -83,9 +83,13 @@ for t in simulation_time_period:
 
         for u, v, data in temp_network.edges(data=True):
 
-            data['PCI'] = data['PCI'] - pv.pavement_deterioration_gamma_process_alternative(data['PCI'], t)
+            data['PCI'] = data['PCI'] - pv.pavement_deterioration_variance_gamma_process(data['PCI'], t)
+
             if data['PCI'] <= 0:
                 data['PCI'] = 10
+            elif data['PCI'] > 100:
+                data['PCI'] = 100
+
             data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['max_speed'])
             data['time'] = tf.travel_time(data['velocity'], data['length'])
 

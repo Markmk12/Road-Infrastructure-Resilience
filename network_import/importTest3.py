@@ -13,7 +13,8 @@ cf2 = '["highway"~"motorway|trunk|primary"]'
 cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Hannover', network_type='drive', custom_filter=cf00)
+G = ox.graph_from_place('Hameln', network_type='drive', custom_filter=cf1)
+
 # G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
 # G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
 # print(G)
@@ -44,7 +45,14 @@ edge_list = G.edges(data=True)
 for u, v, attr in edge_list:
     print(f"Edge ({u}, {v}): {attr}")
 
-# Plot
-fig, ax = ox.plot_graph(G, node_color="r", node_size=20, edge_color="black",edge_linewidth=1,bgcolor='white', show=False, close=False)
-plt.show()
+# Visualize the graph as with OSMNX
+# fig, ax = ox.plot_graph(G, node_color="r", node_size=20, edge_color="black",edge_linewidth=1,bgcolor='white', show=False, close=False)
+# plt.show()
 # plt.savefig('photo 1', dpi =1000,  bbox_inches='tight')
+
+# Visualize the graph as with NetworkX
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=True, node_size=500)
+labels = nx.get_edge_attributes(G, 'PCI')
+nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+plt.show()
