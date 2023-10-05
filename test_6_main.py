@@ -44,7 +44,7 @@ road_network_1.add_edge(4, 5, key=6, length=100, lanes=4, velocity=100, max_spee
 for _, _, data in road_network_1.edges(data=True):
     data['PCI'] = np.random.choice(list(range(70, 100)))
     data['age'] = np.random.choice(list(range(8)))
-    data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['max_speed'])
+    data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
     data['time'] = tf.travel_time(data['velocity'], data['length'])
 
 # Test
@@ -89,7 +89,7 @@ for t in simulation_time_period:
             #     data['PCI'] = ma.simple_maintenance(data['PCI'])
 
             data['PCI'] = data['PCI'] - pv.pavement_deterioration_gamma_process_alternative(data['PCI'], t)
-            data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['max_speed'])
+            data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
             data['time'] = tf.travel_time(data['velocity'], data['length'])
             data['age'] = data['age'] + 1
 
