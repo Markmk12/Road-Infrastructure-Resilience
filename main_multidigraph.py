@@ -6,54 +6,65 @@ import matplotlib.pyplot as plt
 from function_library import system, traffic_dynamics as tf, pavement as pv
 
 # Notes and TODOs:
-# Code umschreiben für MultiGraph
+# Code umschreiben für MultiDiGraph
 
 # Ideal road network
-road_network_0 = nx.Graph()
-road_network_0.add_node(1)
-road_network_0.add_node(2)
-road_network_0.add_node(3)
-road_network_0.add_node(4)
-road_network_0.add_node(5)
-road_network_0.add_edge(1, 2, key=0, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=450, PCI=100, time=60, maintenance=0, age=0)
-road_network_0.add_edge(2, 1, key=1, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_0.add_edge(2, 3, key=2, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_0.add_edge(1, 3, key=3, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_0.add_edge(3, 4, key=4, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_0.add_edge(2, 4, key=5, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_0.add_edge(4, 5, key=6, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+road_network_0 = nx.read_gexf("network_import/networks_of_investigation/germany_hameln.gexf")
+
+# Test Case
+# road_network_0 = nx.MultiDiGraph()
+# road_network_0.add_node(1)
+# road_network_0.add_node(2)
+# road_network_0.add_node(3)
+# road_network_0.add_node(4)
+# road_network_0.add_node(5)
+# road_network_0.add_edge(1, 2, key=0, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=450, PCI=100, time=60, maintenance=0, age=0)
+# road_network_0.add_edge(2, 1, key=1, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_0.add_edge(2, 3, key=2, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_0.add_edge(1, 3, key=3, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_0.add_edge(3, 4, key=4, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_0.add_edge(2, 4, key=5, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_0.add_edge(4, 5, key=6, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_0.add_edge(5, 4, key=7, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+
 
 # Road network for simulation
-road_network_1 = nx.Graph()
-road_network_1.add_node(1)
-road_network_1.add_node(2)
-road_network_1.add_node(3)
-road_network_1.add_node(4)
-road_network_1.add_node(5)
-road_network_1.add_edge(1, 2, key=0, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=450, PCI=100, time=60, maintenance=0, age=0)
-road_network_1.add_edge(2, 1, key=1, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_1.add_edge(2, 3, key=2, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_1.add_edge(1, 3, key=3, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_1.add_edge(3, 4, key=4, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_1.add_edge(2, 4, key=5, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
-road_network_1.add_edge(4, 5, key=6, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# Import of a graph
+road_network_1 = nx.read_gexf("network_import/networks_of_investigation/germany_hameln.gexf")
+
+# Test Case
+# road_network_1 = nx.MultiDiGraph()
+# road_network_1.add_node(1)
+# road_network_1.add_node(2)
+# road_network_1.add_node(3)
+# road_network_1.add_node(4)
+# road_network_1.add_node(5)
+# road_network_1.add_edge(1, 2, key=0, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=450, PCI=100, time=60, maintenance=0, age=0)
+# road_network_1.add_edge(2, 1, key=1, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_1.add_edge(2, 3, key=2, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_1.add_edge(1, 3, key=3, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_1.add_edge(3, 4, key=4, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_1.add_edge(2, 4, key=5, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_1.add_edge(4, 5, key=6, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
+# road_network_1.add_edge(5, 4, key=7, length=100000, lanes=4, velocity=100, maxspeed=100, AAT=700, PCI=100, time=60, maintenance=0, age=0)
 
 # Randomly sampling PCI and age to each edge and adjust correspond velocity and travel time
-for _, _, data in road_network_1.edges(data=True):
+for _, _, key, data in road_network_1.edges(keys=True, data=True):
     data['PCI'] = np.random.choice(list(range(70, 100)))
     data['age'] = np.random.choice(list(range(8)))
     data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
     data['time'] = tf.travel_time(data['velocity'], data['length'])
 
-# Test
+# Debugging
+print(road_network_1)
 for u, v, attrs in road_network_1.edges(data=True):
     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
 # Visualize the graph
 pos = nx.spring_layout(road_network_1)
 nx.draw(road_network_1, pos, with_labels=True, node_size=500)
-labels = nx.get_edge_attributes(road_network_1, 'PCI')
-nx.draw_networkx_edge_labels(road_network_1, pos, edge_labels=labels)
+# labels = nx.get_edge_attributes(road_network_1, 'PCI')                    # (doesn't work for MultiDiGraphs)
+# nx.draw_networkx_edge_labels(road_network_1, pos, edge_labels=labels)     # (doesn't work for MultiDiGraphs)
 plt.show()
 
 # Lists
@@ -74,14 +85,13 @@ for t in simulation_time_period:
     time_samples = []
     deterioration_samples = []
 
-    pci_samples_new = [[] for _ in range(sample_size)]                      # hier soll für jede Kante ihre gesampelten PCI in einer sublist gespeichert werden
-
+    # Create samples for each time step
     for _ in range(sample_size):
 
         # Create a copy of the road network to avoid modifying the original
         temp_network = copy.deepcopy(road_network_1)
 
-        for u, v, data in temp_network.edges(data=True):
+        for u, v, key, data in temp_network.edges(keys=True, data=True):
 
             data['PCI'] = data['PCI'] - pv.pavement_deterioration_variance_gamma_process(data['PCI'], t)
 
@@ -95,7 +105,7 @@ for t in simulation_time_period:
 
             # Store samples of the attributes
 
-            pci_samples.append((u, v, data['PCI']))
+            pci_samples.append((u, v, key, data['PCI']))
             # pci_samples.append(data['PCI'])
             velocity_samples.append(data['velocity'])
             time_samples.append(data['time'])
@@ -111,7 +121,9 @@ for t in simulation_time_period:
         normed_efficiency_t_samples.append(normed_efficiency_t)
 
     # Calculate means of the samples at time t          # not needed anymore only for the plot
-    PCI_mean = np.mean(pci_samples)
+    # PCI_mean = np.mean(pci_samples)
+    PCI_values = [x[3] for x in pci_samples]            #In pci_samples.append((u, v, key, data['PCI'])) fügen Sie ein Tupel zur Liste pci_samples hinzu, das aus vier Elementen besteht: u, v, key und data['PCI'].
+    PCI_mean = np.mean(PCI_values)
     velocity_mean = np.mean(velocity_samples)
     time_mean = np.mean(time_samples)
 
@@ -120,22 +132,26 @@ for t in simulation_time_period:
 
     # Mean of the PCI at time t
     # Convert the data into a pandas DataFrame
-    df = pd.DataFrame(pci_samples, columns=['Node1', 'Node2', 'PCI'])
+    df = pd.DataFrame(pci_samples, columns=['Node1', 'Node2', 'key', 'PCI'])
     # Group by the first two columns and compute the mean for each group
-    mean_values_df = df.groupby(['Node1', 'Node2']).mean().reset_index()
+    mean_values_df = df.groupby(['Node1', 'Node2', 'key']).mean().reset_index()
     # Update edges based on mean_values_df
     for _, row in mean_values_df.iterrows():
-        road_network_1.add_edge(row['Node1'], row['Node2'], PCI=row['PCI'])
+        road_network_1.add_edge(row['Node1'], row['Node2'], key=row['key'], PCI=row['PCI'])
+
+    # Debugging
+    for u, v, attrs in road_network_1.edges(data=True):
+        print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
     # Update the rest of the road network with calculated PCI mean of time t
-    for u, v, data in road_network_1.edges(data=True):
+    for u, v, key, data in road_network_1.edges(keys=True, data=True):
         data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
         data['time'] = tf.travel_time(data['velocity'], data['length'])
 
         data['age'] = data['age'] + 1
 
     # Test the road network at time t
-    for u, v, attrs in road_network_1.edges(data=True):
+    for u, v, key, attrs in road_network_1.edges(keys=True, data=True):
         print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
     # Saving the means
@@ -147,7 +163,7 @@ resilience = system.resilience_metric(normed_efficiency_history, 1, len(simulati
 
 print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
 print("The predicted PCI mean is: " + str(pci_mean_history))
-print(print("The resilience is: " + str(resilience)))
+print("The resilience is: " + str(resilience))
 
 # Plotting
 plt.step(simulation_time_period, normed_efficiency_history, '-')

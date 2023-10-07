@@ -42,33 +42,51 @@ print(G)
 
 
 # Traverses all edges and changes attributes from string to integer
-attributes_to_convert = ['lanes', 'maxspeed']
+# If an edge has more than one lane data, only the lower value is taken
+# If an edge has more than one maxspeed data, the mean is taken
+
+attributes_to_convert = ['lanes', 'maxspeed', 'length']
 
 for u, v, k, data in G.edges(data=True, keys=True):
     for attribute in attributes_to_convert:
-        if attribute in data and isinstance(data[attribute], str):
-            try:
-                data[attribute] = int(data[attribute])
-            except ValueError:
-                pass   # If the conversion is not possible (e.g. if the string contains not only digits), it will be skipped
+        if attribute in data:
+            # If the attribute is a single string, convert it to int
+            if isinstance(data[attribute], str):
+                try:
+                    data[attribute] = int(data[attribute])
+                except ValueError:
+                    pass
+            # If the attribute is a list of strings, process as before
+            elif isinstance(data[attribute], list):
+                try:
+                    values_as_int = np.array(data[attribute], dtype=int)
+
+                    if attribute == 'lanes':
+                        # Take the minimum value for 'lanes'
+                        data[attribute] = values_as_int.min()
+                    elif attribute == 'maxspeed':
+                        # Calculate the mean value for 'maxspeed'
+                        data[attribute] = int(values_as_int.mean())
+                except ValueError:
+                    pass
 
 
 # Delete attributes
-attributes_to_remove = ['u_original', 'v_original', 'from', 'to', 'oneway', 'reversed', 'geometry', 'osmid']
+attributes_to_remove = ['u_original', 'v_original', 'from', 'to', 'oneway', 'reversed', 'geometry', 'bridge']
 
 for u, v, k, data in G.edges(data=True, keys=True):
     for attribute in attributes_to_remove:
         data.pop(attribute, None)
 
 
-# Adding new attributes
+# Adding new attributes (for an ideal network)
 for u, v, k, data in G.edges(data=True, keys=True):
-    data['PCI'] = np.random.choice(list(range(70, 100)))
+    data['PCI'] = 100
     data['maintenance'] = 0
     data['AAT'] = 700
-    data['age'] = np.random.choice(list(range(8)))
-    # data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
-    # data['time'] = tf.travel_time(data['velocity'], data['length'])
+    data['velocity'] = data['maxspeed']
+    data['age'] = 0
+    data['time'] = tf.travel_time(data['velocity'], data['length'])
 
 
 # Get the list of edges and their attributes
@@ -78,8 +96,6 @@ for u, v, attr in edge_list:
     print(f"Edge ({u}, {v}): {attr}")
 
 # Visualize the graph as with OSMNX
-# fig, ax = ox.plot_graph(G, node_color="r", node_size=20, edge_color="black", edge_linewidth=1, bgcolor='white', show=False, close=False)
-
 edge_labels = {(u, v): data['PCI'] for u, v, key, data in G.edges(keys=True, data=True)}
 fig, ax = ox.plot_graph(G, show=False, close=False)
 
@@ -98,3 +114,19 @@ plt.show()
 # labels = nx.get_edge_attributes(G, 'PCI')
 # nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 # plt.show()
+
+# Dieser Code konvertiert die Listen in Zeichenketten, indem er die Elemente der Listen mit einem Komma verbindet.
+# Nachdem Sie diesen Code ausgeführt haben, sollten Sie in der Lage sein, den Graphen ohne Fehler im GEXF-Format
+# zu speichern.
+
+for u, v, data in G.edges(data=True):
+    if isinstance(data.get('osmid'), list):
+        data['osmid'] = ",".join(map(str, data['osmid']))
+    if isinstance(data.get('name'), list):
+        data['name'] = ",".join(data['name'])
+    if isinstance(data.get('ref'), list):
+        data['ref'] = ",".join(data['ref'])
+
+
+# Saving the retrieved graph for export
+nx.write_gexf(G, "networks_of_investigation/germany_hameln.gexf")
