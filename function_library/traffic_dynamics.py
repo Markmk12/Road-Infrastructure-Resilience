@@ -20,7 +20,21 @@ def velocity_change(pci, velocity, max_speed):
         pci = 1
 
     delta_v = 1/pci
-    new_velocity = velocity - delta_v * max_speed
+    # new_velocity = velocity - delta_v * max_speed
+    new_velocity = max_speed - delta_v * max_speed
+
+    if new_velocity <= 0:
+        new_velocity = 5      # Schrittgeschwindigkeit
+
+    return new_velocity
+
+
+def velocity_change_linear(pci, velocity, max_speed):
+
+    if pci < 0:
+        pci = 0
+
+    new_velocity = max_speed - (0.5*(100 - pci))
 
     if new_velocity <= 0:
         new_velocity = 5      # Schrittgeschwindigkeit
@@ -29,6 +43,7 @@ def velocity_change(pci, velocity, max_speed):
 
 
 def travel_time(velocity, length):
+
     if velocity <= 0:
         velocity = 1
 

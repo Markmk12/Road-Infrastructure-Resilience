@@ -14,18 +14,18 @@ cf2 = '["highway"~"motorway|trunk|primary"]'
 cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Hameln', network_type='drive', custom_filter=cf1)
+G = ox.graph_from_place('Bennigsen', network_type='drive')               # , custom_filter=cf01)
 
 # G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
 # G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
 # print(G)
 
 # Simplification
-G = ox.project_graph(G)
-G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
+# G = ox.project_graph(G)
+# G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
 
 # Transform MultiDiGraph into MultiGraph
-G = ox.utils_graph.get_undirected(G)                                                                                  # Why transform MultiDiGraph into MultiGraph ?
+# G = ox.utils_graph.get_undirected(G)                                                                                  # Why transform MultiDiGraph into MultiGraph ?
 print(G)
 
 # Delete nodes with degree of 2 or lower
@@ -72,8 +72,7 @@ for u, v, k, data in G.edges(data=True, keys=True):
 
 
 # Delete attributes
-attributes_to_remove = ['u_original', 'v_original', 'from', 'to', 'oneway', 'reversed', 'geometry', 'bridge']
-
+attributes_to_remove = ['u_original', 'v_original', 'from', 'to', 'oneway', 'reversed', 'geometry', 'bridge', 'osmid', 'ref', 'name', 'highway', 'width']
 for u, v, k, data in G.edges(data=True, keys=True):
     for attribute in attributes_to_remove:
         data.pop(attribute, None)
@@ -84,6 +83,21 @@ for u, v, k, data in G.edges(data=True, keys=True):
     data['PCI'] = 100
     data['maintenance'] = 0
     data['AAT'] = 700
+
+    # Does a 'maxspeed' data exist for the edge?
+    if 'maxspeed' in data:
+        # Wenn der Wert 'none' ist, setze ihn auf den Standardwert
+        if data['maxspeed'] == 'none':
+            data['maxspeed'] = 75
+        else:
+            try:
+                data['maxspeed'] = int(data['maxspeed'])
+            except ValueError:
+                data['maxspeed'] = 75
+    else:
+        # Wenn kein 'maxspeed' Attribut vorhanden ist, setze den Standardwert
+        data['maxspeed'] = 75
+
     data['velocity'] = data['maxspeed']
     data['age'] = 0
     data['time'] = tf.travel_time(data['velocity'], data['length'])
@@ -127,6 +141,11 @@ for u, v, data in G.edges(data=True):
     if isinstance(data.get('ref'), list):
         data['ref'] = ",".join(data['ref'])
 
+#  alle Kantenattribute zu überprüfen und Listen in Zeichenketten umzuwandeln
+for u, v, data in G.edges(data=True):
+    for key, value in data.items():
+        if isinstance(value, list):
+            data[key] = ",".join(map(str, value))
 
 # Saving the retrieved graph for export
-nx.write_gexf(G, "networks_of_investigation/germany_hameln.gexf")
+nx.write_gexf(G, "networks_of_investigation/germany_test.gexf")
