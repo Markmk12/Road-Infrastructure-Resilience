@@ -7,15 +7,10 @@ from function_library import system, traffic_dynamics as tf, pavement as pv
 import time
 
 # Notes and TODOs:
-# Maintenance
-# Ausreißer???
-
-# Measure computation time
-start = time.time()
+# Code umschreiben für MultiDiGraph
 
 # Import Road Network
 imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
-print(imported_road_network)
 
 # Ideal road network
 road_network_0 = imported_road_network
@@ -85,25 +80,28 @@ for _, _, key, data in road_network_1.edges(keys=True, data=True):
 normed_efficiency_t_samples = []
 normed_efficiency_history = []
 pci_mean_history = []
-mean_efficiency_history = []
 
-# Simulation time period and sample size
-simulation_time_period = range(0, 101)                          # 0-101 years        # 0-601 months = 50 years
-sample_size = 5                                                 # increase sample size ! 300  # 50 ?
-
-# Matrix
-efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
+# Simulation time period
+simulation_time_period = range(0, 301)                          # 0-101 years        # 0-601 months = 50 years
 
 # Simulation of the network efficiency over 100 years
-for sample in range(sample_size):
+for t in simulation_time_period:
 
-    # Simulation of the network efficiency for each sample
-    for t in simulation_time_period:
+    sample_size = 5                                            # increase sample size ! 300
+
+    pci_samples = []
+    velocity_samples = []
+    time_samples = []
+    deterioration_samples = []
+
+    # Create samples for each time step
+    start = time.time()
+
+    for _ in range(sample_size):
 
         # Create a copy of the road network to avoid modifying the original
         temp_network = copy.deepcopy(road_network_1)
 
-        # Modify the network for time t
         for u, v, key, data in temp_network.edges(keys=True, data=True):
 
             data['PCI'] = data['PCI'] - pv.pavement_deterioration_gamma_process_alternative(data['PCI'], t)
@@ -115,44 +113,87 @@ for sample in range(sample_size):
 
             data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
             data['time'] = tf.travel_time(data['velocity'], data['length'])
-            data['age'] = data['age'] + 1
 
-        # Sample Network Efficiency at time t
-        efficiency_sample_t = system.network_efficiency(temp_network)
+            # Store samples of the attributes
+
+            pci_samples.append((u, v, key, data['PCI']))
+            # pci_samples.append(data['PCI'])
+            velocity_samples.append(data['velocity'])
+            time_samples.append(data['time'])
+
+        end = time.time()
+        print(end - start)
+        
+        # Calculations for each sample
+        # Sample Network Efficiency
+        efficiency_t_sample = system.network_efficiency(temp_network)
+
         # Sample Normalizing
-        normed_sample_efficiency_t = efficiency_sample_t / target_efficiency
-        # Save the normed efficiency at time t in a matrix (rows = sample, columns = time)
-        efficiency_matrix[sample, t] = normed_sample_efficiency_t
+        normed_efficiency_t = efficiency_t_sample / target_efficiency
 
-# Calculate the efficiency mean of each column and save it in an extra row
-mean_efficiency_row = efficiency_matrix.mean(axis=0)
-efficiency_matrix = np.vstack([efficiency_matrix, mean_efficiency_row])
+        # Save the Network Efficiency sample
+        normed_efficiency_t_samples.append(normed_efficiency_t)
 
-# Debugging
-print(efficiency_matrix)
+    # Calculate means of the samples at time t          # not needed anymore only for the plot
+    # PCI_mean = np.mean(pci_samples)
+    PCI_values = [x[3] for x in pci_samples]            #In pci_samples.append((u, v, key, data['PCI'])) fügen Sie ein Tupel zur Liste pci_samples hinzu, das aus vier Elementen besteht: u, v, key und data['PCI'].
+    PCI_mean = np.mean(PCI_values)
+    velocity_mean = np.mean(velocity_samples)
+    time_mean = np.mean(time_samples)
+
+    # Mean of the Network Efficiency at time t
+    efficiency_t_mean = np.mean(normed_efficiency_t_samples)
+
+    # Mean of the PCI at time t
+    # Convert the data into a pandas DataFrame
+    df = pd.DataFrame(pci_samples, columns=['Node1', 'Node2', 'key', 'PCI'])
+    # Group by the first two columns and compute the mean for each group
+    mean_values_df = df.groupby(['Node1', 'Node2', 'key']).mean().reset_index()
+    # Update edges based on mean_values_df
+    for _, row in mean_values_df.iterrows():
+        road_network_1.add_edge(row['Node1'], row['Node2'], key=row['key'], PCI=row['PCI'])
+
+    # Debugging
+    # for u, v, attrs in road_network_1.edges(data=True):
+    #     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
+
+    # Update the rest of the road network with calculated PCI mean of time t
+    for u, v, key, data in road_network_1.edges(keys=True, data=True):
+
+        data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
+        data['time'] = tf.travel_time(data['velocity'], data['length'])
+        data['age'] = data['age'] + 1
+
+    # Debugging (road network at time t)
+    # for u, v, key, attrs in road_network_1.edges(keys=True, data=True):
+    #     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
+
+    # Saving the means
+    pci_mean_history.append(PCI_mean)
+    normed_efficiency_history.append(efficiency_t_mean)
 
 # Resilience
 resilience = system.resilience_metric(normed_efficiency_history, 1, len(simulation_time_period))
 
-# print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
-# print("The predicted PCI mean is: " + str(pci_mean_history))
-# print("The resilience is: " + str(resilience))
+print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
+print("The predicted PCI mean is: " + str(pci_mean_history))
+print("The resilience is: " + str(resilience))
 
-# Measure computation time
-end = time.time()
-print(end-start)
+# Plotting
+plt.step(simulation_time_period, normed_efficiency_history, '-')
+plt.xlabel('Time t [Years]')
+plt.ylabel('Mean of Network Efficiency [-]')
+plt.title('Prediction of Network Efficiency')
+plt.grid(True)
+plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
+plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
+plt.minorticks_on()
+plt.show()
 
-# Plot of the samples
-for row in efficiency_matrix[:-1]:
-    plt.step(simulation_time_period, row, color='lightgray')
-
-# Plot of the means
-mean_values = efficiency_matrix[-1, :]
-plt.step(simulation_time_period, mean_values, color='red', linestyle='-')
-
-plt.xlabel('Simulation Time Period [Year]')
-plt.ylabel('Network Efficiency [-]')
-plt.title('Network Efficiency')
+plt.step(simulation_time_period, pci_mean_history, '-')
+plt.xlabel('Time t [Years]')
+plt.ylabel('Mean of the PCI [-]')
+plt.title('PCI Prediction')
 plt.grid(True)
 plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
