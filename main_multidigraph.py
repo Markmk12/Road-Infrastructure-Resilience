@@ -92,8 +92,8 @@ sample_size = 5                                                 # increase sampl
 
 # Info of inputs before starting the calculation
 print(imported_road_network)
-print("Simulation time period [Year]: ", simulation_time_period[0], "-", simulation_time_period[-1])
-print("Sample size [-]: " + str(sample_size))
+print("Simulation time period: ", simulation_time_period[0], "-", simulation_time_period[-1], "[Years]")
+print("Sample size: " + str(sample_size), "[-]")
 
 # Matrix
 efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
@@ -144,11 +144,11 @@ resilience = system.resilience_metric(efficiency_matrix[-1, :], 1, len(simulatio
 
 # Print of the results
 # print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
-print("Resilience [-]: ", str(resilience))
+print("Resilience: ", str(resilience), "[-]")
 
 # Measure computation time
 end = time.time()
-print("Execution time [sec]: ", str(end-start))
+print("Execution time: ", str(end-start), "[sec]")
 
 # Plot of the samples
 for row in efficiency_matrix[:-1]:
