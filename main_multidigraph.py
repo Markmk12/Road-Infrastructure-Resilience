@@ -8,14 +8,13 @@ import time
 
 # Notes and TODOs:
 # Maintenance
-# Ausreißer???
+# Ausreißer???  -> Erstmal ein Filter
 
 # Measure computation time
 start = time.time()
 
 # Import Road Network
 imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
-print(imported_road_network)
 
 # Ideal road network
 road_network_0 = imported_road_network
@@ -91,6 +90,11 @@ mean_efficiency_history = []
 simulation_time_period = range(0, 101)                          # 0-101 years        # 0-601 months = 50 years
 sample_size = 5                                                 # increase sample size ! 300  # 50 ?
 
+# Info of inputs before starting the calculation
+print(imported_road_network)
+print("Simulation time period [Year]: ", simulation_time_period[0], "-", simulation_time_period[-1])
+print("Sample size [-]: " + str(sample_size))
+
 # Matrix
 efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
 
@@ -124,23 +128,27 @@ for sample in range(sample_size):
         # Save the normed efficiency at time t in a matrix (rows = sample, columns = time)
         efficiency_matrix[sample, t] = normed_sample_efficiency_t
 
+# Delete all rows (sample) in the matrix that have a row element greater than 1
+efficiency_matrix = efficiency_matrix[~(efficiency_matrix > 1).any(axis=1)]
+
 # Calculate the efficiency mean of each column and save it in an extra row
 mean_efficiency_row = efficiency_matrix.mean(axis=0)
 efficiency_matrix = np.vstack([efficiency_matrix, mean_efficiency_row])
 
 # Debugging
-print(efficiency_matrix)
+# print(efficiency_matrix)
 
 # Resilience
-resilience = system.resilience_metric(normed_efficiency_history, 1, len(simulation_time_period))
+# resilience = system.resilience_metric(normed_efficiency_history, 1, len(simulation_time_period))        # korrigieren!!!!
+resilience = system.resilience_metric(efficiency_matrix[-1, :], 1, len(simulation_time_period))
 
+# Print of the results
 # print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
-# print("The predicted PCI mean is: " + str(pci_mean_history))
-# print("The resilience is: " + str(resilience))
+print("Resilience [-]: ", str(resilience))
 
 # Measure computation time
 end = time.time()
-print(end-start)
+print("Execution time [sec]: ", str(end-start))
 
 # Plot of the samples
 for row in efficiency_matrix[:-1]:
