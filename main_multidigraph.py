@@ -8,15 +8,15 @@ import time
 
 # Notes and TODOs:
 # Maintenance
-# Ausreißer???  -> Erstmal ein Filter
+# Spikes in NetEff? Have set a filter for now
 
 # Measure computation time
 start = time.time()
 
-# Import Road Network
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
+# Import a road network (You can find examples in: network_import/networks_of_investigation)
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_minden.gexf")
 
-# Ideal road network
+# Perfect state of the road network
 road_network_0 = imported_road_network
 
 # Test Case
@@ -68,7 +68,7 @@ for _, _, key, data in road_network_1.edges(keys=True, data=True):
     data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
     data['time'] = tf.travel_time(data['velocity'], data['length'])
 
-# Debugging
+# Debugging (show all edges of the graph with their attributes)
 # print(road_network_1)
 # for u, v, attrs in road_network_1.edges(data=True):
 #     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
@@ -79,12 +79,6 @@ for _, _, key, data in road_network_1.edges(keys=True, data=True):
 # labels = nx.get_edge_attributes(road_network_1, 'PCI')                    # (doesn't work for MultiDiGraphs)
 # nx.draw_networkx_edge_labels(road_network_1, pos, edge_labels=labels)     # (doesn't work for MultiDiGraphs)
 # plt.show()
-
-# Lists
-normed_efficiency_t_samples = []
-normed_efficiency_history = []
-pci_mean_history = []
-mean_efficiency_history = []
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 101)                          # 0-101 years        # 0-601 months = 50 years
@@ -139,7 +133,6 @@ efficiency_matrix = np.vstack([efficiency_matrix, mean_efficiency_row])
 # print(efficiency_matrix)
 
 # Resilience
-# resilience = system.resilience_metric(normed_efficiency_history, 1, len(simulation_time_period))        # korrigieren!!!!
 resilience = system.resilience_metric(efficiency_matrix[-1, :], 1, len(simulation_time_period))
 
 # Print of the results
