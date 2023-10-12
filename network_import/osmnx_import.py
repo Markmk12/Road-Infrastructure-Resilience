@@ -72,7 +72,7 @@ for u, v, k, data in G.edges(data=True, keys=True):
 
 
 # Delete attributes
-attributes_to_remove = ['u_original', 'v_original', 'from', 'to', 'oneway', 'reversed', 'geometry', 'bridge', 'osmid', 'ref', 'name', 'highway', 'width']
+attributes_to_remove = ['u_original', 'v_original', 'from', 'to', 'oneway', 'reversed', 'geometry', 'bridge', 'osmid', 'ref', 'name', 'width']
 for u, v, k, data in G.edges(data=True, keys=True):
     for attribute in attributes_to_remove:
         data.pop(attribute, None)
