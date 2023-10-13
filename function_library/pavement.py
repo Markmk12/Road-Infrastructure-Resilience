@@ -28,47 +28,38 @@ def pavement_deterioration_markov_chain_alternative(pci, pci_groups, transition_
     return sample
 
 
-def pavement_deterioration_gamma_process(pci, t):
+def pavement_deterioration_gamma_process(t):
 
-    # Gamma distribution
-    shape_k = 5
-    scale_theta = 1
-    mean = shape_k * scale_theta
-    variance = shape_k * pow(scale_theta, 2)
-
-    # Gamma process parameterised in terms of the mean and variance
-    rate_gamma = pow(mean, 2) / variance
-    rate_lambda = mean / variance
-
-    # Gamma process
-    pci_degradation = (pow(rate_lambda, rate_gamma * t) / gamma(rate_gamma * t)) * pow(pci, rate_gamma * t - 1) * np.exp(-rate_lambda * pci)
-
-    return pci_degradation
-
-
-def pavement_deterioration_gamma_process_alternative(pci, t):
-
-    alpha = 2       # shape minimum 2 so that it starts by 0
+    alpha = 1       # shape minimum 2 so that it starts by 0
     beta = 1      # rate
 
-    # Zeitintervall für jeden Schritt
-    #dt = t / 100
-
-    # Generiere unabhängige Gamma-verteilte Zuwächse
-    #increments = np.random.gamma(alpha * dt, 1 / beta, 100)
     increment = np.random.gamma(alpha*t, beta)
 
-    # Akkumuliere die Zuwächse, um den Prozess zu konstruieren
-    #pci_degradation = np.sum(increments)
-
     return increment
 
 
-def pavement_deterioration_variance_gamma_process(pci, t):
+def pavement_deterioration_variance_gamma_process(t):
 
     alpha = 2       # shape minimum 2 so that it starts by 0
     beta = 1      # rate
 
-    increment = np.random.gamma(alpha*t, beta) - np.random.gamma(alpha*t, beta)     # difference bewtween two independent gamma processes
+    deterioration_delta = np.random.gamma(alpha*t, beta) - np.random.gamma(alpha*t, beta)     # difference bewtween two independent gamma processes
 
-    return increment
+    return deterioration_delta
+
+
+def pavement_deterioration_random_process(t):
+
+    # Parameter environment (natural deterioration???)
+    alpha_environment = 1       # shape minimum 2 so that it starts by 0
+    beta_environment = 1      # rate
+
+    # Parameter traffic load
+    alpha_traffic = 0.5
+    beta_traffic = 0.5
+
+    # t = 10
+
+    deterioration_delta = np.random.gamma(alpha_environment*t, beta_environment) + np.random.gamma(alpha_traffic*t, beta_traffic)
+
+    return deterioration_delta
