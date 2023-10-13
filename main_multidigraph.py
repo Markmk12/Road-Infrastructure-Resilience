@@ -46,9 +46,9 @@ road_network_1 = road_network_0
 # Randomly sampling PCI and age to each edge and adjust correspond velocity and travel time
 # start1 = time.time()
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
-    data['PCI'] = np.random.choice(list(range(99, 100)))
-    data['age'] = 0
-    # data['age'] = np.random.choice(list(range(8)))
+    data['PCI'] = np.random.choice(list(range(40, 100)))
+    # data['age'] = 0
+    data['age'] = np.random.choice(list(range(8)))
 
     # Assign traffic_load based on classification
     # if data['highway'] == 'primary':
