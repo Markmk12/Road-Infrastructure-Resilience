@@ -74,11 +74,12 @@ for u, v, attrs in road_network_1.edges(data=True):
 # plt.show()
 
 # Simulation time period and sample size
-simulation_time_period = range(0, 61)                          # 0-101 years        # 0-601 months = 50 years
+simulation_time_period = range(0, 101)                          # 0-101 years        # 0-601 months = 50 years
 sample_size = 5                                                 # increase sample size ! 300  # 50 ?
 
 # Quality levels of road maintenance
 quality_levels = ["none", "moderate", "extensive"]
+quality_level = 'extensive'
 
 # Generate all strategy paths and time points of decision-making
 
@@ -128,24 +129,65 @@ for sample in range(sample_size):
                 data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                 data['time'] = tf.travel_time(data['velocity'], data['length'])
 
-            elif data['maintenance'] == 'scheduled':
-                data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
-                data['time'] = tf.travel_time(data['velocity'], data['length'])*1.25        # increase travel time x1.25
-                data['age'] = data['age'] + 1
-                data['maintenance'] = 'yes'
+            # Ongoing measures
+            # Ongoing preventive maintenance
+            elif data['maintenance'] == 'preventive_measures_planning_and_realization':
+                travel_time_impact, *_ = ma.preventive_maintenance(quality_level, data['PCI'], data['length'])
 
-            elif data['maintenance'] == 'yes':
-                data['PCI'] = ma.simple_maintenance(data['PCI'])
+                data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
+                data['time'] = tf.travel_time(data['velocity'], data['length'])*travel_time_impact
+                data['maintenance'] = 'preventive_measures_ongoing'
+
+            # Ongoing corrective maintenance
+            elif data['maintenance'] == 'corrective_measures_planning_and_realization':
+                travel_time_impact, *_ = ma.corrective_maintenance(quality_level, data['PCI'], data['length'], data['age'])
+
+                data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
+                data['time'] = tf.travel_time(data['velocity'], data['length']) * travel_time_impact
+                data['maintenance'] = 'corrective_measures_ongoing'
+
+            # Completed measures
+            # Completed preventive maintenance
+            elif data['maintenance'] == 'preventive_measures_ongoing':
+                _, duration, new_pci, maintenance_status, age_reset, costs = ma.preventive_maintenance(quality_level, data['PCI'], data['length'])
+
+                data['age'] = data['age'] - age_reset
+                data['PCI'] = new_pci
                 data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                 data['time'] = tf.travel_time(data['velocity'], data['length'])
-                data['age'] = 0
-                data['maintenance'] = 'no'
+                data['maintenance'] = maintenance_status
+
+            # Completed corrective maintenance
+            elif data['maintenance'] == 'corrective_measures_ongoing':
+                _, duration, new_pci, maintenance_status, age_reset, costs = ma.corrective_maintenance(
+                    quality_level, data['PCI'], data['length'], data['age'])
+
+                data['age'] = data['age'] - age_reset
+                data['PCI'] = new_pci
+                data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
+                data['time'] = tf.travel_time(data['velocity'], data['length'])
+                data['maintenance'] = maintenance_status
+
+
+            # elif data['maintenance'] == 'scheduled':
+            #     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
+            #     data['time'] = tf.travel_time(data['velocity'], data['length'])*1.25        # increase travel time x1.25
+            #     data['age'] = data['age'] + 1
+            #     data['maintenance'] = 'yes'
+            #
+            # elif data['maintenance'] == 'yes':
+            #     data['PCI'] = ma.simple_maintenance(data['PCI'])
+            #     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
+            #     data['time'] = tf.travel_time(data['velocity'], data['length'])
+            #     data['age'] = 0
+            #     data['maintenance'] = 'no'
 
             # data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
             # data['time'] = tf.travel_time(data['velocity'], data['length'])
 
             # Debugging
             # print(temp_network[1][2][0]['PCI'])
+            print(temp_network[1][2][0]['maintenance'])
 
         # Sample Network Efficiency at time t
         efficiency_sample_t = system.network_efficiency(temp_network)

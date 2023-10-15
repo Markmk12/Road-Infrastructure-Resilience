@@ -3,14 +3,12 @@ import numpy as np
 
 def inspection(pci, maintenance_status):
 
-    if pci < 50:
-        maintenance_status = 'scheduled'
-
-    elif pci < 25:
-        maintenance_status = 'corrective_measures_planned'
+    # Imperfect insepction considers (budget and manpower)
+    if pci < 25:
+        maintenance_status = np.random.choice(['no', 'corrective_measures_planning_and_realization'], p=[0.25, 0.75])
 
     elif pci < 70:
-        maintenance_status = 'preventive_measures_planned'
+        maintenance_status = np.random.choice(['no', 'preventive_measures_planning_and_realization'], p=[0.4, 0.6])
 
     return maintenance_status
 
@@ -19,14 +17,18 @@ def preventive_maintenance(quality_level, pci, length):
 
     # No measures at all
     if quality_level == 'none':
-
+        pci = pci
+        travel_time_impact = 0
+        duration = 0
+        age_reset = 0
+        costs = length*0
         maintenance_status = 'no'
-
-        return maintenance_status
 
     # Patching, crack sealing, repair of small potholes
     elif quality_level == 'moderate':
-        pci = pci + 10
+
+        # Consider variance in PCI improvement
+        pci = pci + np.random.normal(10, 2)
         travel_time_impact = 1.25
         duration = 1
         age_reset = 1
@@ -35,14 +37,16 @@ def preventive_maintenance(quality_level, pci, length):
 
     # Resurfacing (Repaving)
     elif quality_level == 'extensive':
-        pci = pci + 20
+
+        # Consider variance in PCI improvement
+        pci = pci + np.random.normal(20, 4)
         travel_time_impact = 1.5
         duration = 1
         age_reset = 1
         costs = length*25
         maintenance_status = 'no'
 
-    return pci, travel_time_impact, duration, age_reset, costs, maintenance_status
+    return travel_time_impact, duration, pci, maintenance_status, age_reset, costs
 
 
 def corrective_maintenance(quality_level, pci, length, age):
@@ -50,13 +54,19 @@ def corrective_maintenance(quality_level, pci, length, age):
     # No measures at all
     if quality_level == 'none':
 
+        pci = pci
+        travel_time_impact = 0
+        duration = 0
+        age_reset = 0
+        costs = length * 0
         maintenance_status = 'no'
 
-        return maintenance_status
 
     # Road rehabilitation/renovation
     elif quality_level == 'moderate':
-        pci = pci + 50
+
+        # Consider variance in PCI improvement
+        pci = pci + np.random.normal(50, 7)
         travel_time_impact = 2
         duration = 1
         age_reset = 1
@@ -65,6 +75,8 @@ def corrective_maintenance(quality_level, pci, length, age):
 
     # Reconstruction
     elif quality_level == 'extensive':
+
+        # PCI as good as new
         pci = 100
         travel_time_impact = 3              # road should be closed !!!!!!!! infinite travel time ???
         duration = 2
@@ -72,7 +84,7 @@ def corrective_maintenance(quality_level, pci, length, age):
         costs = length*100
         maintenance_status = 'no'
 
-    return pci, travel_time_impact, duration, age_reset, costs, maintenance_status
+    return travel_time_impact, duration, pci, maintenance_status, age_reset, costs
 
 
 def maintenance_duration(maintenance_status):
