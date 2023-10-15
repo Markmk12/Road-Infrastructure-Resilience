@@ -77,10 +77,20 @@ for u, v, attrs in road_network_1.edges(data=True):
 simulation_time_period = range(0, 101)                          # 0-101 years        # 0-601 months = 50 years
 sample_size = 50                                                 # increase sample size ! 300  # 50 ?
 
+# Quality levels of road maintenance
+quality_levels = ["none", "moderate", "extensive"]
+
+# Generate all strategy paths and time points of decision-making
+
+
+# Set resilience threshold
+res_threshold = 0.8
+
 # Info of inputs before starting the calculation
 print(road_network_1)
 print("Simulation time period: ", simulation_time_period[0], "-", simulation_time_period[-1], "[Years]")
 print("Sample size: " + str(sample_size), "[-]")
+print("Resilience threshold: ", str(res_threshold), "[-]")
 
 # Matrix
 efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
