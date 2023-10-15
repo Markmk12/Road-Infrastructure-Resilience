@@ -5,10 +5,10 @@ def inspection(pci, maintenance_status):
 
     # Imperfect insepction considers (budget and manpower)
     if pci < 25:
-        maintenance_status = np.random.choice(['no', 'corrective_measures_planning_and_realization'], p=[0.25, 0.75])
+        maintenance_status = np.random.choice(['no', 'corrective_measures_planning_and_realization'], p=[0.3, 0.7])
 
-    elif pci < 70:
-        maintenance_status = np.random.choice(['no', 'preventive_measures_planning_and_realization'], p=[0.4, 0.6])
+    elif pci < 90:
+        maintenance_status = np.random.choice(['no', 'preventive_measures_planning_and_realization'], p=[0.3, 0.7])
 
     return maintenance_status
 

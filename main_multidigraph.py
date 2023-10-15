@@ -46,7 +46,7 @@ road_network_1 = road_network_0
 # Randomly sampling PCI and age to each edge and adjust correspond velocity and travel time
 # start1 = time.time()
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
-    data['PCI'] = np.random.choice(list(range(40, 100)))
+    data['PCI'] = np.random.choice(list(range(70, 100)))
     # data['age'] = 0
     data['age'] = np.random.choice(list(range(8)))
 
@@ -79,7 +79,7 @@ sample_size = 5                                                 # increase sampl
 
 # Quality levels of road maintenance
 quality_levels = ["none", "moderate", "extensive"]
-quality_level = 'extensive'
+quality_level = 'moderate'
 
 # Generate all strategy paths and time points of decision-making
 
@@ -187,7 +187,7 @@ for sample in range(sample_size):
 
             # Debugging
             # print(temp_network[1][2][0]['PCI'])
-            print(temp_network[1][2][0]['maintenance'])
+            # print(temp_network[1][2][0]['maintenance'])
 
         # Sample Network Efficiency at time t
         efficiency_sample_t = system.network_efficiency(temp_network)
