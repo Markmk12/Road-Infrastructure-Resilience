@@ -19,7 +19,10 @@ def preventive_maintenance(quality_level, pci, length):
 
     # No measures at all
     if quality_level == 'none':
-        return
+
+        maintenance_status = 'no'
+
+        return maintenance_status
 
     # Patching, crack sealing, repair of small potholes
     elif quality_level == 'moderate':
@@ -28,6 +31,7 @@ def preventive_maintenance(quality_level, pci, length):
         duration = 1
         age_reset = 1
         costs = length*12.5
+        maintenance_status = 'no'
 
     # Resurfacing (Repaving)
     elif quality_level == 'extensive':
@@ -36,15 +40,19 @@ def preventive_maintenance(quality_level, pci, length):
         duration = 1
         age_reset = 1
         costs = length*25
+        maintenance_status = 'no'
 
-    return pci, travel_time_impact, duration, age_reset, costs
+    return pci, travel_time_impact, duration, age_reset, costs, maintenance_status
 
 
 def corrective_maintenance(quality_level, pci, length, age):
 
     # No measures at all
     if quality_level == 'none':
-        return
+
+        maintenance_status = 'no'
+
+        return maintenance_status
 
     # Road rehabilitation/renovation
     elif quality_level == 'moderate':
@@ -53,6 +61,7 @@ def corrective_maintenance(quality_level, pci, length, age):
         duration = 1
         age_reset = 1
         costs = length*50
+        maintenance_status = 'no'
 
     # Reconstruction
     elif quality_level == 'extensive':
@@ -61,8 +70,9 @@ def corrective_maintenance(quality_level, pci, length, age):
         duration = 2
         age_reset = age
         costs = length*100
+        maintenance_status = 'no'
 
-    return pci, travel_time_impact, duration, age_reset, costs
+    return pci, travel_time_impact, duration, age_reset, costs, maintenance_status
 
 
 def maintenance_duration(maintenance_status):

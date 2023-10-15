@@ -74,8 +74,8 @@ for u, v, attrs in road_network_1.edges(data=True):
 # plt.show()
 
 # Simulation time period and sample size
-simulation_time_period = range(0, 101)                          # 0-101 years        # 0-601 months = 50 years
-sample_size = 50                                                 # increase sample size ! 300  # 50 ?
+simulation_time_period = range(0, 61)                          # 0-101 years        # 0-601 months = 50 years
+sample_size = 5                                                 # increase sample size ! 300  # 50 ?
 
 # Quality levels of road maintenance
 quality_levels = ["none", "moderate", "extensive"]
@@ -89,8 +89,8 @@ res_threshold = 0.8
 # Info of inputs before starting the calculation
 print(road_network_1)
 print("Simulation time period: ", simulation_time_period[0], "-", simulation_time_period[-1], "[Years]")
-print("Sample size: " + str(sample_size), "[-]")
-print("Resilience threshold: ", str(res_threshold), "[-]")
+print("Sample size: " + str(sample_size))
+print("Resilience threshold: ", str(res_threshold))
 
 # Matrix
 efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
@@ -113,14 +113,22 @@ for sample in range(sample_size):
         for u, v, key, data in temp_network.edges(keys=True, data=True):
 
             data['age'] = data['age'] + 1
-            data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])       # data['age']
+            data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])
 
+            # Logical correction
             if data['PCI'] <= 0:
                 data['PCI'] = 0
             elif data['PCI'] > 100:
                 data['PCI'] = 100
 
-            if data['maintenance'] == 'scheduled':
+            # Inspection and Maintenance
+            # Inspection
+            if data['maintenance'] == 'no':
+                data['maintenance'] = ma.inspection(data['PCI'], data['maintenance'])
+                data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
+                data['time'] = tf.travel_time(data['velocity'], data['length'])
+
+            elif data['maintenance'] == 'scheduled':
                 data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                 data['time'] = tf.travel_time(data['velocity'], data['length'])*1.25        # increase travel time x1.25
                 data['age'] = data['age'] + 1
@@ -133,18 +141,11 @@ for sample in range(sample_size):
                 data['age'] = 0
                 data['maintenance'] = 'no'
 
-            elif data['maintenance'] == 'no':
-                data['maintenance'] = ma.inspection(data['PCI'], data['maintenance'])
-                data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
-                data['time'] = tf.travel_time(data['velocity'], data['length'])
-                data['age'] = data['age'] + 1
-
             # data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
             # data['time'] = tf.travel_time(data['velocity'], data['length'])
 
             # Debugging
             # print(temp_network[1][2][0]['PCI'])
-
 
         # Sample Network Efficiency at time t
         efficiency_sample_t = system.network_efficiency(temp_network)
@@ -177,7 +178,7 @@ resilience = system.resilience_metric(efficiency_matrix[-1, :], 1, len(simulatio
 
 # Print of the results
 # print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
-print("Resilience: ", str(resilience), "[-]")
+print("Resilience: ", str(resilience))
 
 # Measure computation time
 end = time.time()
