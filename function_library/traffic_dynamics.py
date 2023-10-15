@@ -45,7 +45,7 @@ def velocity_change_linear(pci, velocity, max_speed):
 def travel_time(velocity, length):
 
     if velocity <= 0:
-        velocity = 1
+        velocity = 5
 
     edge_travel_time = (length/1000)/velocity*60            # length from [m] in [km]
     return edge_travel_time

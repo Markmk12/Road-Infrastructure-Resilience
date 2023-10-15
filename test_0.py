@@ -34,3 +34,13 @@ tuples_for_one_timepoint = list(itertools.product(quality_levels, repeat=2))
 all_paths = list(itertools.product(tuples_for_one_timepoint, repeat=4))
 
 print(all_paths)
+
+# Changing the strategy configuration (tuple) every 10 years
+# if t == 0:
+#     quality_level = strategy[0]
+# if t == 10:
+#     quality_level = strategy[1]
+# if t == 20:
+#     quality_level = strategy[2]
+# if t == 30:
+#     quality_level = strategy[3]

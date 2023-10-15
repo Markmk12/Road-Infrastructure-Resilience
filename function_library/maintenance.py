@@ -3,7 +3,7 @@ import numpy as np
 
 def inspection(pci, maintenance_status):
 
-    # Imperfect insepction considers (budget and manpower)
+    # Imperfect inspection considers (budget and manpower)
     if pci < 25:
         maintenance_status = np.random.choice(['no', 'corrective_measures_planning_and_realization'], p=[0.3, 0.7])
 
