@@ -4,6 +4,7 @@ import copy
 import networkx as nx
 import matplotlib.pyplot as plt
 from function_library import system, traffic_dynamics as tf, pavement as pv, maintenance as ma
+import itertools
 import time
 
 # Notes and TODOs:
@@ -82,7 +83,14 @@ quality_levels = ["none", "moderate", "extensive"]
 quality_level = 'moderate'
 
 # Generate all strategy paths and time points of decision-making
+# Generate all tuple for one time point
+tuples = list(itertools.product(quality_levels, repeat=2))
 
+# Generate all possible paths for 4 time points (10,20,30,40 years)
+all_strategies = list(itertools.product(tuples, repeat=4))
+
+# Debugging
+# print(all_strategies[0])
 
 # Set resilience threshold
 res_threshold = 0.8
@@ -105,7 +113,7 @@ for sample in range(sample_size):
 
     # start2 = time.time()
 
-    # Simulation of the network efficiency for each sample
+    # Calculation of the network efficiency
     for t in simulation_time_period:
 
         # start3 = time.time()
@@ -167,23 +175,6 @@ for sample in range(sample_size):
                 data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                 data['time'] = tf.travel_time(data['velocity'], data['length'])
                 data['maintenance'] = maintenance_status
-
-
-            # elif data['maintenance'] == 'scheduled':
-            #     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
-            #     data['time'] = tf.travel_time(data['velocity'], data['length'])*1.25        # increase travel time x1.25
-            #     data['age'] = data['age'] + 1
-            #     data['maintenance'] = 'yes'
-            #
-            # elif data['maintenance'] == 'yes':
-            #     data['PCI'] = ma.simple_maintenance(data['PCI'])
-            #     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
-            #     data['time'] = tf.travel_time(data['velocity'], data['length'])
-            #     data['age'] = 0
-            #     data['maintenance'] = 'no'
-
-            # data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
-            # data['time'] = tf.travel_time(data['velocity'], data['length'])
 
             # Debugging
             # print(temp_network[1][2][0]['PCI'])
