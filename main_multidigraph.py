@@ -227,78 +227,55 @@ for idx, strategy in enumerate(all_strategies):
 
 # Debugging
 # print(strategies_matrix_resilience)
-print(strategies_matrix_efficiency)
+# print(strategies_matrix_efficiency)
 
 # Find the best strategy
 indices = np.where(strategies_matrix_resilience > res_threshold)
 values = strategies_matrix_resilience[indices]
 
-# print(indices)
+print(indices)
 # print(values)
 
-# Drucken Sie die Indizes und Werte
+# Print of the indices and values
 for idx, value in zip(indices, values):
-    print(f"Index: {idx}, Wert: {value}")
+    print(f"Index: {idx}, Value: {value}")
 
 # print(len(strategies_matrix_efficiency))
 # print(len(strategies_matrix_resilience))
 
 num_rows, num_cols = strategies_matrix_efficiency.shape
-print(f"Anzahl der Zeilen: {num_rows}")
-print(f"Anzahl der Spalten: {num_cols}")
+print(f"Number of rows: {num_rows}")
+print(f"Number of columns: {num_cols}")
 
-# Plot of the samples
-# for row in strategies_matrix_efficiency[:-1]:
+# Plot of all strategies
+# for row in strategies_matrix_efficiency:
 #     plt.step(simulation_time_period, row, color='lightgray')
-
-# Plot of the best resilient strategies
-# mean_values = strategies_matrix_efficiency[indices, :]
-# plt.step(simulation_time_period, mean_values, color='red', linestyle='-')
-#
-# plt.xlabel('Simulation Time Period [Year]')
-# plt.ylabel('Network Efficiency [-]')
-# plt.title('Network Efficiency')
-# plt.grid(True)
-# plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
-# plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
-# plt.minorticks_on()
 # plt.show()
 
+# Plot of the efficiency for the best resilient strategies
+number_of_plots = len(indices[0])
+fig, axes = plt.subplots(number_of_plots, 1, figsize=(8, 4*number_of_plots))  # 4*number_of_plots gives each plot enough vertical space.
 
+for idx, row_index in enumerate(indices[0]):
+    ax = axes[idx]  # Select the current subplot.
+    ax.step(simulation_time_period, strategies_matrix_efficiency[row_index], color='red', linestyle='-')
+    ax.set_xlabel('Time [Year]')
+    ax.set_ylabel('Network Efficiency [-]')
+    ax.set_title(f'Network Efficiency for Index {row_index}')
+    ax.grid(True)
+    ax.grid(which='major', color='#DDDDDD', linewidth=0.9)
+    ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
+    ax.minorticks_on()
 
-# Print of the results
-# print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
+plt.tight_layout()  # Provides enough space between the subplots.
+plt.show()
 
-# print("Resilience: ", str(resilience))
-#
-# # Measure computation time
-# end = time.time()
-# print("Execution time: ", str(end-start), "[sec]")
-#
-# # Plot of the samples
-# for row in efficiency_matrix[:-1]:
-#     plt.step(simulation_time_period, row, color='lightgray')
-#
-# # Plot of the means
-# mean_values = efficiency_matrix[-1, :]
-# plt.step(simulation_time_period, mean_values, color='red', linestyle='-')
-#
-# plt.xlabel('Simulation Time Period [Year]')
+# mean_values = strategies_matrix_efficiency[indices[0], :]
+# for row in mean_values:
+#     plt.step(simulation_time_period, row, color='red', linestyle='-')
+# plt.xlabel('Time [Year]')
 # plt.ylabel('Network Efficiency [-]')
 # plt.title('Network Efficiency')
-# plt.grid(True)
-# plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
-# plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
-# plt.minorticks_on()
-# plt.show()
-
-# Plot of the samples PCI of first edge
-# for row in pci_matrix[:-1]:
-#     plt.step(simulation_time_period, row, color='lightgray')
-#
-# plt.xlabel('Simulation Time Period [Year]')
-# plt.ylabel('PCI [-]')
-# plt.title('PCI of first edge')
 # plt.grid(True)
 # plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
 # plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
