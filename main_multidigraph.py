@@ -15,27 +15,27 @@ import time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
 
 # Perfect state of the road network
-# road_network_0 = imported_road_network
+road_network_0 = imported_road_network
 
 # Test Case
-road_network_0 = nx.MultiDiGraph()
-road_network_0.add_node(1)
-road_network_0.add_node(2)
-road_network_0.add_node(3)
-road_network_0.add_node(4)
-road_network_0.add_node(5)
-road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(2, 3, key=2, highway='secondary', length=100000, capacity=15000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(1, 3, key=3, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(3, 4, key=4, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(2, 4, key=5, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0 = nx.MultiDiGraph()
+# road_network_0.add_node(1)
+# road_network_0.add_node(2)
+# road_network_0.add_node(3)
+# road_network_0.add_node(4)
+# road_network_0.add_node(5)
+# road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(2, 3, key=2, highway='secondary', length=100000, capacity=15000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(1, 3, key=3, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(3, 4, key=4, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(2, 4, key=5, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
 
 # Ideal network efficiency (target efficiency)
 target_efficiency = system.network_efficiency(road_network_0)
@@ -49,7 +49,7 @@ road_network_1 = road_network_0
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
     data['PCI'] = np.random.choice(list(range(70, 100)))
     # data['age'] = 0
-    data['age'] = np.random.choice(list(range(8)))
+    data['age'] = np.random.choice(list(range(4)))
 
     # Assign traffic_load based on classification
     # if data['highway'] == 'primary':

@@ -14,7 +14,7 @@ cf2 = '["highway"~"motorway|trunk|primary"]'
 cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Region Hannover', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
+G = ox.graph_from_place('Bennigsen', network_type='drive')               # , custom_filter=cf01)
 
 # G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
 # G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
@@ -39,6 +39,7 @@ G.remove_edges_from(edges_to_remove)
 # Entfernen von isolierten Knoten
 graph = ox.utils_graph.remove_isolated_nodes(G)
 
+
 # Traverses all edges and changes attributes from string to integer
 # If an edge has more than one lane data, only the lower value is taken
 # If an edge has more than one maxspeed data, the mean is taken
@@ -54,29 +55,17 @@ for u, v, k, data in G.edges(data=True, keys=True):
                     data[attribute] = int(data[attribute])
                 except ValueError:
                     pass
-            # Debugging
-            # elif isinstance(data[attribute], list):
-            #     try:
-            #         values_as_int = np.array(data[attribute], dtype=int)
-            #     except ValueError:
-            #         print(f"Failed to convert {data[attribute]} for edge ({u}, {v}, {k})")
             # If the attribute is a list of strings, process as before
             elif isinstance(data[attribute], list):
                 try:
-                    # Entfernen von nicht-numerischen Werten aus der Liste
-                    valid_values = [int(val) for val in data[attribute] if val.isdigit()]
+                    values_as_int = np.array(data[attribute], dtype=int)
 
-                    # Wenn keine gültigen Werte vorhanden sind, setzen Sie einen Standardwert
-                    if not valid_values:
-                        data[attribute] = 75  # oder einen anderen Standardwert
-                    else:
-                        # Wenn es gültige Werte gibt, berechnen Sie den Durchschnitt
-                        if attribute == 'lanes':
-                            # Nehmen Sie den minimalen Wert für 'lanes'
-                            data[attribute] = min(valid_values)
-                        elif attribute == 'maxspeed':
-                            # Berechnen Sie den Durchschnittswert für 'maxspeed'
-                            data[attribute] = int(np.mean(valid_values))
+                    if attribute == 'lanes':
+                        # Take the minimum value for 'lanes'
+                        data[attribute] = values_as_int.min()
+                    elif attribute == 'maxspeed':
+                        # Calculate the mean value for 'maxspeed'
+                        data[attribute] = int(values_as_int.mean())
                 except ValueError:
                     pass
 
@@ -160,4 +149,4 @@ for u, v, data in G.edges(data=True):
             data[key] = ",".join(map(str, value))
 
 # Saving the retrieved graph for export
-nx.write_gexf(G, "networks_of_investigation/germany_region_hannover.gexf")
+nx.write_gexf(G, "networks_of_investigation/germany_bennigsen.gexf")
