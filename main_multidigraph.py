@@ -5,6 +5,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from function_library import system, traffic_dynamics as tf, pavement as pv, maintenance as ma
 import itertools
+import math
 import time
 
 # Notes and TODOs:
@@ -15,27 +16,27 @@ import time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
+# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_hannover.gexf")
 
 # Perfect state of the road network
-road_network_0 = imported_road_network
+# road_network_0 = imported_road_network
 
 # Test Case
-# road_network_0 = nx.MultiDiGraph()
-# road_network_0.add_node(1)
-# road_network_0.add_node(2)
-# road_network_0.add_node(3)
-# road_network_0.add_node(4)
-# road_network_0.add_node(5)
-# road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(2, 3, key=2, highway='secondary', length=100000, capacity=15000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(1, 3, key=3, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(3, 4, key=4, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(2, 4, key=5, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0 = nx.MultiDiGraph()
+road_network_0.add_node(1)
+road_network_0.add_node(2)
+road_network_0.add_node(3)
+road_network_0.add_node(4)
+road_network_0.add_node(5)
+road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(2, 3, key=2, highway='secondary', length=100000, capacity=15000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(1, 3, key=3, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(3, 4, key=4, highway='secondary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(2, 4, key=5, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
 
 # Ideal network efficiency (target efficiency)
 target_efficiency = system.network_efficiency(road_network_0)
@@ -47,18 +48,11 @@ road_network_1 = road_network_0
 # Randomly sampling PCI and age to each edge and adjust correspond velocity and travel time
 # start1 = time.time()
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
-    data['PCI'] = np.random.choice(list(range(70, 100)))
-    # data['age'] = 0
-    data['age'] = np.random.choice(list(range(4)))
-
-    # Assign traffic_load based on classification
-    # if data['highway'] == 'primary':
-    #     data['traffic_load'] = int(np.random.randn() * 30 + 100)  # Standard deviation of 15, mean of 100
-    # else:
-    #     data['traffic_load'] = int(np.random.randn() * 15 + 50)  # Standard deviation of 10, mean of 50
-
-    data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
-    data['time'] = tf.travel_time(data['velocity'], data['length'])
+    # data['PCI'] = np.random.choice(list(range(70, 100)))
+    data['age'] = 0
+    # data['age'] = np.random.choice(list(range(4)))
+    # data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
+    # data['time'] = tf.travel_time(data['velocity'], data['length'])
 # end1 = time.time()
 # print("Execution time of randomization: ", str(end1-start1), "[sec]")
 
@@ -92,7 +86,7 @@ all_strategies = list(itertools.product(tuples, repeat=3))
 # print(all_strategies[0])
 
 # Set resilience threshold
-res_threshold = 0.65
+res_threshold = 0.85
 
 # Info of inputs before starting the calculation
 print(road_network_1)
@@ -254,21 +248,24 @@ print(f"Number of columns: {num_cols}")
 
 # Plot of the efficiency for the best resilient strategies
 number_of_plots = len(indices[0])
-fig, axes = plt.subplots(number_of_plots, 1, figsize=(8, 4*number_of_plots))  # 4*number_of_plots gives each plot enough vertical space.
+if number_of_plots <= 0:
+    print("Number of plots cannot be zero or negative!")
+else:
+    fig, axes = plt.subplots(number_of_plots, 1, figsize=(8, 4*number_of_plots))  # 4*number_of_plots gives each plot enough vertical space.
 
-for idx, row_index in enumerate(indices[0]):
-    ax = axes[idx]  # Select the current subplot.
-    ax.step(simulation_time_period, strategies_matrix_efficiency[row_index], color='red', linestyle='-')
-    ax.set_xlabel('Time [Year]')
-    ax.set_ylabel('Network Efficiency [-]')
-    ax.set_title(f'Network Efficiency for Index {row_index}')
-    ax.grid(True)
-    ax.grid(which='major', color='#DDDDDD', linewidth=0.9)
-    ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
-    ax.minorticks_on()
+    for idx, row_index in enumerate(indices[0]):
+        ax = axes[idx]  # Select the current subplot.
+        ax.step(simulation_time_period, strategies_matrix_efficiency[row_index], color='red', linestyle='-')
+        ax.set_xlabel('Time [Year]')
+        ax.set_ylabel('Network Efficiency [-]')
+        ax.set_title(f'Network Efficiency for Index {row_index}')
+        ax.grid(True)
+        ax.grid(which='major', color='#DDDDDD', linewidth=0.9)
+        ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
+        ax.minorticks_on()
 
-plt.tight_layout()  # Provides enough space between the subplots.
-plt.show()
+    plt.tight_layout()  # Provides enough space between the subplots.
+    plt.show()
 
 # mean_values = strategies_matrix_efficiency[indices[0], :]
 # for row in mean_values:

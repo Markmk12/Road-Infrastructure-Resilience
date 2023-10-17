@@ -50,6 +50,10 @@ def pavement_deterioration_variance_gamma_process(t):
 
 def pavement_deterioration_random_process(t):
 
+    # Logical correction
+    if t < 0:
+        t = 0
+
     # Parameter environment (natural deterioration???)
     alpha_environment = 1       # shape minimum 2 so that it starts by 0
     beta_environment = 1      # rate
@@ -57,8 +61,6 @@ def pavement_deterioration_random_process(t):
     # Parameter traffic load
     alpha_traffic = 0.5
     beta_traffic = 0.5
-
-    # t = 10
 
     deterioration_delta = np.random.gamma(alpha_environment*t, beta_environment) + np.random.gamma(alpha_traffic*t, beta_traffic)
 

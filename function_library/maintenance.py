@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 
 def inspection(pci, maintenance_status):
@@ -18,7 +19,7 @@ def preventive_maintenance(quality_level, pci, length):
     # No measures at all
     if quality_level == 'none':
         pci = pci
-        travel_time_impact = 0
+        travel_time_impact = 1
         duration = 0
         age_reset = 0
         costs = length*0
@@ -28,10 +29,10 @@ def preventive_maintenance(quality_level, pci, length):
     elif quality_level == 'moderate':
 
         # Consider variance in PCI improvement
-        pci = pci + np.random.normal(10, 2)
+        pci = pci + np.random.normal(15, 2)
         travel_time_impact = 1.25
         duration = 1
-        age_reset = 1
+        age_reset = 3
         costs = length*12.5
         maintenance_status = 'no'
 
@@ -39,10 +40,10 @@ def preventive_maintenance(quality_level, pci, length):
     elif quality_level == 'extensive':
 
         # Consider variance in PCI improvement
-        pci = pci + np.random.normal(20, 4)
+        pci = pci + np.random.normal(30, 4)
         travel_time_impact = 1.5
         duration = 1
-        age_reset = 1
+        age_reset = 5
         costs = length*25
         maintenance_status = 'no'
 
@@ -66,10 +67,10 @@ def corrective_maintenance(quality_level, pci, length, age):
     elif quality_level == 'moderate':
 
         # Consider variance in PCI improvement
-        pci = pci + np.random.normal(50, 7)
+        pci = pci + np.random.normal(55, 7)
         travel_time_impact = 2
         duration = 1
-        age_reset = 1
+        age_reset = 10
         costs = length*50
         maintenance_status = 'no'
 
@@ -78,7 +79,7 @@ def corrective_maintenance(quality_level, pci, length, age):
 
         # PCI as good as new
         pci = 100
-        travel_time_impact = 3              # road should be closed !!!!!!!! infinite travel time ???
+        travel_time_impact = float('inf')
         duration = 2
         age_reset = age
         costs = length*100

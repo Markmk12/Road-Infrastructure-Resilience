@@ -5,6 +5,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from function_library import system, traffic_dynamics as tf, pavement as pv, maintenance as ma
 import itertools
+import math
+import random
 import time
 
 # Notes and TODOs:
@@ -37,8 +39,30 @@ road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=4, 
 road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
 road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
 
+# # Füge 50 zusätzliche Knoten hinzu
+# for i in range(6, 56):  # Wir starten von 6, da 5 der letzte Knoten in Ihrer Vorlage war
+#     road_network_0.add_node(i)
+#
+# # Füge zufällige Kanten hinzu
+# for _ in range(200):  # Als Beispiel fügen wir 200 zufällige Kanten hinzu
+    # source = random.randint(1, 55)  # Wählen Sie zufällig einen Knoten von 1 bis 55
+    # target = random.randint(1, 55)  # Wählen Sie zufällig einen Knoten von 1 bis 55
+    #
+    # # Überprüfen, ob eine Kante zwischen source und target existiert
+    # if target in road_network_0[source]:
+    #     key = len(road_network_0[source][target])
+    # else:
+    #     key = 0  # Wenn es keine Kante gibt, setzen wir den key auf 0
+    #
+    # road_network_0.add_edge(source, target, key=key, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+
+# Debugging (delete all isolated nodes)
+# isolated_nodes = list(nx.isolates(road_network_0))
+# road_network_0.remove_nodes_from(isolated_nodes)
+
 # Ideal network efficiency (target efficiency)
 target_efficiency = system.network_efficiency(road_network_0)
+# target_efficiency = 1
 
 # Road network for simulation
 # Import of a graph
@@ -47,16 +71,9 @@ road_network_1 = road_network_0
 # Randomly sampling PCI and age to each edge and adjust correspond velocity and travel time
 # start1 = time.time()
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
-    data['PCI'] = np.random.choice(list(range(70, 100)))
+    data['PCI'] = np.random.choice(list(range(60, 100)))
     # data['age'] = 0
-    data['age'] = np.random.choice(list(range(8)))
-
-    # Assign traffic_load based on classification
-    # if data['highway'] == 'primary':
-    #     data['traffic_load'] = int(np.random.randn() * 30 + 100)  # Standard deviation of 15, mean of 100
-    # else:
-    #     data['traffic_load'] = int(np.random.randn() * 15 + 50)  # Standard deviation of 10, mean of 50
-
+    data['age'] = np.random.choice(list(range(5)))
     data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
     data['time'] = tf.travel_time(data['velocity'], data['length'])
 # end1 = time.time()
@@ -75,12 +92,12 @@ for u, v, attrs in road_network_1.edges(data=True):
 # plt.show()
 
 # Simulation time period and sample size
-simulation_time_period = range(0, 101)                          # 0-101 years        # 0-601 months = 50 years
-sample_size = 5                                                 # increase sample size ! 300  # 50 ?
+simulation_time_period = range(0, 121)                          # 0-101 years        # 0-601 months = 50 years   0-46
+sample_size = 60                                                 # increase sample size ! 300  # 50 ?
 
 # Quality levels of road maintenance
 quality_levels = ["none", "moderate", "extensive"]
-quality_level = 'none'
+quality_level = 'moderate'
 
 # Generate all strategy paths and time points of decision-making
 # Generate all tuple for one time point
@@ -93,12 +110,13 @@ all_strategies = list(itertools.product(tuples, repeat=4))
 # print(all_strategies[0])
 
 # Set resilience threshold
-res_threshold = 0.8
+res_threshold = 0.9
 
 # Info of inputs before starting the calculation
 print(road_network_1)
 print("Simulation time period: ", simulation_time_period[0], "-", simulation_time_period[-1], "[Years]")
 print("Sample size: " + str(sample_size))
+print("Target efficiency: " + str(target_efficiency))
 print("Resilience threshold: ", str(res_threshold))
 
 # Matrix
@@ -188,7 +206,7 @@ for sample in range(sample_size):
         efficiency_matrix[sample, t] = normed_sample_efficiency_t
 
         # Save PCI value of edge
-        pci_matrix[sample, t] = temp_network[1][2][0]['PCI']
+        # pci_matrix[sample, t] = temp_network[1][2][0]['PCI']                              # Wozu?  Key aus OSMnx Graph hat andere key, daher geht das hier nicht mit key [0]
 
         # end3 = time.time()
         # print("Execution time of one time step: ", str(end3 - start3), "[sec]")
@@ -235,14 +253,14 @@ plt.minorticks_on()
 plt.show()
 
 # Plot of the samples PCI of first edge
-for row in pci_matrix[:-1]:
-    plt.step(simulation_time_period, row, color='lightgray')
-
-plt.xlabel('Simulation Time Period [Year]')
-plt.ylabel('PCI [-]')
-plt.title('PCI of first edge')
-plt.grid(True)
-plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
-plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
-plt.minorticks_on()
-plt.show()
+# for row in pci_matrix[:-1]:
+#     plt.step(simulation_time_period, row, color='lightgray')
+#
+# plt.xlabel('Simulation Time Period [Year]')
+# plt.ylabel('PCI [-]')
+# plt.title('PCI of first edge')
+# plt.grid(True)
+# plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
+# plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
+# plt.minorticks_on()
+# plt.show()
