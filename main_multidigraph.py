@@ -75,7 +75,7 @@ print(road_network_1)
 # plt.show()
 
 # Simulation time period and sample size
-simulation_time_period = range(0, 46)                          # 0-101 years        # 0-601 months = 50 years
+simulation_time_period = range(0, 46)                          # 0-101 years        # 0-601 months = 50 years # 0-46
 sample_size = 5                                                 # increase sample size ! 300  # 50 ?
 
 # Quality levels of road maintenance
@@ -237,7 +237,7 @@ print(indices)
 # print(values)
 
 # Print of the indices and values
-for idx, value in zip(indices, values):
+for idx, value in zip(indices[0], values):
     print(f"Index: {idx}, Value: {value}")
 
 # print(len(strategies_matrix_efficiency))
