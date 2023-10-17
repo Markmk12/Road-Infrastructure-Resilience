@@ -199,7 +199,7 @@ for idx, strategy in enumerate(all_strategies):
             efficiency_matrix[sample, t] = normed_sample_efficiency_t
 
             # Save PCI value of edge
-            pci_matrix[sample, t] = temp_network[1][2][0]['PCI']
+            # pci_matrix[sample, t] = temp_network[1][2][0]['PCI']                              # wozu benötige ich das noch???
 
             # end3 = time.time()
             # print("Execution time of one time step: ", str(end3 - start3), "[sec]")

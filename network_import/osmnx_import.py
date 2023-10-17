@@ -14,7 +14,7 @@ cf2 = '["highway"~"motorway|trunk|primary"]'
 cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Region Hannover', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
+G = ox.graph_from_place('Hannover', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
 
 # G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
 # G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
@@ -159,5 +159,9 @@ for u, v, data in G.edges(data=True):
         if isinstance(value, list):
             data[key] = ",".join(map(str, value))
 
+# Debugging origin keys
+for u, v, key, data in G.edges(data=True, keys=True):
+    print(u, v, key)  # Hier wird der ursprüngliche Key von OSMnx ausgegeben
+
 # Saving the retrieved graph for export
-nx.write_gexf(G, "networks_of_investigation/germany_region_hannover.gexf")
+# nx.write_gexf(G, "networks_of_investigation/germany_region_hannover.gexf")
