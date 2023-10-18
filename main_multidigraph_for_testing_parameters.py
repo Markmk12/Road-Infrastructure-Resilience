@@ -250,6 +250,7 @@ plt.grid(True)
 plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
 plt.minorticks_on()
+plt.ylim(0, 1)
 plt.show()
 
 # Plot of the samples PCI of first edge

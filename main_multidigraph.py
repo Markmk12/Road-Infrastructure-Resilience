@@ -243,16 +243,41 @@ costs = strategies_matrix_costs[indices[0]]
 # print(values)
 # print(costs)
 
-# Print of the indices and values
+# Print of the indices and values and save them in a list
+best_strategies_list = []
 for idx, value, cost in zip(indices[0], values, costs):
-    print(f"Strategy: {idx}, Resilience: {value}, Expected total costs: {cost}")
+    strategy = f"Strategy: {idx}, Resilience: {value}, Expected total costs: {cost}"
+    best_strategies_list.append(strategy)
 
-# print(len(strategies_matrix_efficiency))
-# print(len(strategies_matrix_resilience))
+# print(best_strategies_list)
 
-# num_rows, num_cols = strategies_matrix_efficiency.shape
-# print(f"Number of rows: {num_rows}")
-# print(f"Number of columns: {num_cols}")
+# Choosing the best strategy based on resilience
+sorted_strategies = sorted(best_strategies_list, key=lambda x: float(x.split("Expected total costs: ")[1]))
+
+# Der Eintrag mit den kleinsten "Expected total costs" ist nun der erste in der sortierten Liste:
+best_strategy = sorted_strategies[0]
+
+print(sorted_strategies)
+print(best_strategy)
+
+# Get index of the best strategy as an integer
+strategy_str = best_strategy.split(",")[0]  # Dies teilt den String bei jedem Komma und nimmt den ersten Teil, also "Strategy: 5"
+idx_str = strategy_str.split(":")[1].strip()  # Dies teilt den String bei ':' und nimmt den zweiten Teil, also " 5", und entfernt dann die Leerzeichen
+idx_best = int(idx_str)
+
+# Plot
+# efficiency_mean_best_strategy = strategies_matrix_efficiency[-1, :]
+plt.step(simulation_time_period, strategies_matrix_efficiency[idx_best, :], color='red', linestyle='-')
+
+plt.xlabel('Simulation Time Period [Year]')
+plt.ylabel('Network Efficiency [-]')
+plt.title('Network Efficiency')
+plt.grid(True)
+plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
+plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
+plt.minorticks_on()
+plt.ylim(0, 1)
+plt.show()
 
 # Plot of all strategies
 # for row in strategies_matrix_efficiency:
@@ -279,15 +304,3 @@ else:
 
     plt.tight_layout()  # Provides enough space between the subplots.
     plt.show()
-
-# mean_values = strategies_matrix_efficiency[indices[0], :]
-# for row in mean_values:
-#     plt.step(simulation_time_period, row, color='red', linestyle='-')
-# plt.xlabel('Time [Year]')
-# plt.ylabel('Network Efficiency [-]')
-# plt.title('Network Efficiency')
-# plt.grid(True)
-# plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
-# plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
-# plt.minorticks_on()
-# plt.show()
