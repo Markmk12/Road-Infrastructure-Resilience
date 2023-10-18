@@ -14,7 +14,7 @@ cf2 = '["highway"~"motorway|trunk|primary"]'
 cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Hannover', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
+G = ox.graph_from_place('Springe', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
 
 # G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
 # G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
@@ -124,14 +124,14 @@ for u, v, attr in edge_list:
 # Visualize the graph as with OSMNX
 edge_labels = {(u, v): data['PCI'] for u, v, key, data in G.edges(keys=True, data=True)}
 fig, ax = ox.plot_graph(G, show=False, close=False)
+plt.show()
 
 # Edge labels
-for (u, v), label in edge_labels.items():
-    x1, y1 = G.nodes[u]['x'], G.nodes[u]['y']
-    x2, y2 = G.nodes[v]['x'], G.nodes[v]['y']
-    ax.text((x1 + x2) / 2, (y1 + y2) / 2, str(label), fontsize=8, ha='center', va='center', bbox=dict(facecolor='white', edgecolor='none', boxstyle='round,pad=0.2'))
-plt.show()
-# plt.savefig('photo 1', dpi=1000,  bbox_inches='tight')
+# for (u, v), label in edge_labels.items():
+#     x1, y1 = G.nodes[u]['x'], G.nodes[u]['y']
+#     x2, y2 = G.nodes[v]['x'], G.nodes[v]['y']
+#     ax.text((x1 + x2) / 2, (y1 + y2) / 2, str(label), fontsize=8, ha='center', va='center', bbox=dict(facecolor='white', edgecolor='none', boxstyle='round,pad=0.2'))
+# plt.show()
 
 
 # Visualize the graph as with NetworkX  (Not suitable for drawing MultiGraphs; use OSMNX )

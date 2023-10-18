@@ -97,6 +97,7 @@ print("Resilience threshold: ", str(res_threshold))
 # Results
 strategies_matrix_efficiency = np.zeros((len(all_strategies), len(simulation_time_period)))
 strategies_matrix_resilience = np.zeros(len(all_strategies))
+strategies_matrix_costs = np.zeros((len(all_strategies)))
 
 # Brute-force search
 for idx, strategy in enumerate(all_strategies):
@@ -104,6 +105,7 @@ for idx, strategy in enumerate(all_strategies):
     # Matrix
     efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
     pci_matrix = np.zeros((sample_size, len(simulation_time_period)))
+    costs_matrix = np.zeros((sample_size, len(simulation_time_period)))
 
     # Simulation of the network efficiency over 100 years
     for sample in range(sample_size):
@@ -170,6 +172,9 @@ for idx, strategy in enumerate(all_strategies):
                     data['time'] = tf.travel_time(data['velocity'], data['length'])
                     data['maintenance'] = maintenance_status
 
+                    # Costs of the measure
+                    costs_matrix[sample, t] = costs_matrix[sample, t] + costs
+
                 # Completed corrective maintenance
                 elif data['maintenance'] == 'corrective_measures_ongoing':
                     _, duration, new_pci, maintenance_status, age_reset, costs = ma.corrective_maintenance(
@@ -185,7 +190,7 @@ for idx, strategy in enumerate(all_strategies):
                 # print(temp_network[1][2][0]['PCI'])
                 # print(temp_network[1][2][0]['maintenance'])
 
-            # Sample Network Efficiency at time t
+            # Network Efficiency at time t
             efficiency_sample_t = system.network_efficiency(temp_network)
             # Sample Normalizing
             normed_sample_efficiency_t = efficiency_sample_t / target_efficiency
@@ -208,38 +213,46 @@ for idx, strategy in enumerate(all_strategies):
     mean_efficiency_row = efficiency_matrix.mean(axis=0)
     efficiency_matrix = np.vstack([efficiency_matrix, mean_efficiency_row])
 
-    # Debugging
-    # print(efficiency_matrix)
+    # Calculate the costs mean of each column and save it in an extra row
+    mean_costs_row = costs_matrix.mean(axis=0)
+    costs_matrix = np.vstack([costs_matrix, mean_costs_row])
 
     # Resilience
     resilience = system.resilience_metric(efficiency_matrix[-1, :], 1, len(simulation_time_period))
-
-    # Save the efficiency es an entry strategies_matrix
     strategies_matrix_resilience[idx] = resilience
+
+    # Save the estimated efficiency es an entry of strategies_matrix_efficiency
     strategies_matrix_efficiency[idx, :] = mean_efficiency_row
+
+    # Save the estimated costs as an entry of strategies_matrix_costs (These are the expected total costs of the strategy)
+    strategies_matrix_costs[idx] = np.sum(mean_costs_row, axis=0)
 
 
 # Debugging
 # print(strategies_matrix_resilience)
 # print(strategies_matrix_efficiency)
+# print(strategies_matrix_costs)
 
 # Find the best strategy
 indices = np.where(strategies_matrix_resilience > res_threshold)
 values = strategies_matrix_resilience[indices]
+costs = strategies_matrix_costs[indices[0]]
 
-print(indices)
+# Debugging
+# print(indices)
 # print(values)
+# print(costs)
 
 # Print of the indices and values
-for idx, value in zip(indices[0], values):
-    print(f"Index: {idx}, Value: {value}")
+for idx, value, cost in zip(indices[0], values, costs):
+    print(f"Strategy: {idx}, Resilience: {value}, Expected total costs: {cost}")
 
 # print(len(strategies_matrix_efficiency))
 # print(len(strategies_matrix_resilience))
 
-num_rows, num_cols = strategies_matrix_efficiency.shape
-print(f"Number of rows: {num_rows}")
-print(f"Number of columns: {num_cols}")
+# num_rows, num_cols = strategies_matrix_efficiency.shape
+# print(f"Number of rows: {num_rows}")
+# print(f"Number of columns: {num_cols}")
 
 # Plot of all strategies
 # for row in strategies_matrix_efficiency:
