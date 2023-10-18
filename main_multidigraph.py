@@ -265,6 +265,9 @@ strategy_str = best_strategy.split(",")[0]  # Dies teilt den String bei jedem Ko
 idx_str = strategy_str.split(":")[1].strip()  # Dies teilt den String bei ':' und nimmt den zweiten Teil, also " 5", und entfernt dann die Leerzeichen
 idx_best = int(idx_str)
 
+# Path
+print(all_strategies[idx_best])
+
 # Plot
 # efficiency_mean_best_strategy = strategies_matrix_efficiency[-1, :]
 plt.step(simulation_time_period, strategies_matrix_efficiency[idx_best, :], color='red', linestyle='-')
