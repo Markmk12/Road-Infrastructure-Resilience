@@ -14,15 +14,15 @@ cf2 = '["highway"~"motorway|trunk|primary"]'
 cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Springe', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
+G = ox.graph_from_place('Berlin', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
 
 # G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
 # G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
 # print(G)
 
 # Simplification
-# G = ox.project_graph(G)
-# G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
+G = ox.project_graph(G)
+G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
 
 # Transform MultiDiGraph into MultiGraph
 # G = ox.utils_graph.get_undirected(G)                                                                                  # Why transform MultiDiGraph into MultiGraph ?
@@ -164,4 +164,4 @@ for u, v, key, data in G.edges(data=True, keys=True):
     print(u, v, key)  # Hier wird der ursprüngliche Key von OSMnx ausgegeben
 
 # Saving the retrieved graph for export
-# nx.write_gexf(G, "networks_of_investigation/germany_region_hannover.gexf")
+nx.write_gexf(G, "networks_of_investigation/germany_berlin.gexf")

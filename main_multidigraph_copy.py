@@ -16,7 +16,7 @@ import time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
+# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_hannover.gexf")
 
 # Perfect state of the road network
 # road_network_0 = imported_road_network
@@ -28,15 +28,15 @@ road_network_0.add_node(2)
 road_network_0.add_node(3)
 road_network_0.add_node(4)
 road_network_0.add_node(5)
-road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(2, 3, key=2, highway='secondary', length=100000, capacity=15000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(1, 3, key=3, highway='secondary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(3, 4, key=4, highway='secondary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(2, 4, key=5, highway='primary', length=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
+road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(2, 3, key=2, highway='secondary', length=100000, capacity=15000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(1, 3, key=3, highway='secondary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(3, 4, key=4, highway='secondary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(2, 4, key=5, highway='primary', length=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
 
 # Ideal network efficiency (target efficiency)
 target_efficiency = system.network_efficiency(road_network_0)
@@ -47,32 +47,17 @@ road_network_1 = road_network_0
 
 # Randomly sampling PCI and age to each edge and adjust correspond velocity and travel time
 # start1 = time.time()
-
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
-
-    # data['age'] = 0
-    data['age'] = np.random.choice(list(range(23)))
-
-    if 0 <= data['age'] <= 5:
-        data['PCI'] = np.random.choice(list(range(90, 100)))
-
-    elif 6 <= data['age'] <= 11:
-        data['PCI'] = np.random.choice(list(range(75, 90)))
-
-    elif 12 <= data['age'] <= 17:
-        data['PCI'] = np.random.choice(list(range(50, 75)))
-
-    elif 18 <= data['age'] <= 23:
-        data['PCI'] = np.random.choice(list(range(0, 50)))
-
-    data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
-    data['time'] = tf.travel_time(data['velocity'], data['length'])
-
+    # data['PCI'] = np.random.choice(list(range(70, 100)))
+    data['age'] = 0
+    # data['age'] = np.random.choice(list(range(4)))
+    # data['velocity'] = tf.velocity_change(data['PCI'], data['velocity'], data['maxspeed'])
+    # data['time'] = tf.travel_time(data['velocity'], data['length'])
 # end1 = time.time()
 # print("Execution time of randomization: ", str(end1-start1), "[sec]")
 
 # Debugging (show all edges of the graph with their attributes)
-# print(road_network_1)
+print(road_network_1)
 # for u, v, attrs in road_network_1.edges(data=True):
 #     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
@@ -84,7 +69,7 @@ for _, _, key, data in road_network_1.edges(keys=True, data=True):
 # plt.show()
 
 # Simulation time period and sample size
-simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
+simulation_time_period = range(0, 46)                          # 0-101 years        # 0-601 months = 50 years # 0-46
 sample_size = 5                                                 # increase sample size ! 300  # 50 ?
 
 # Quality levels of road maintenance
@@ -136,15 +121,18 @@ for idx, strategy in enumerate(all_strategies):
             # start3 = time.time()
 
             # Changing the strategy configuration (tuple) every 15 years
-            if 0 <= t <= 9:
+            if 0 <= t <= 14:
                 quality_level = strategy[0]
-            if 10 <= t <= 19:
+            if 15 <= t <= 29:
                 quality_level = strategy[1]
-            if t >= 20:
+            if t >= 30:
                 quality_level = strategy[2]
 
             # Modify the network for time t
             for u, v, key, data in temp_network.edges(keys=True, data=True):
+
+                data['age'] = data['age'] + 1
+                data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])
 
                 # Logical correction (PCI values could only be in an interval 0-100)
                 data['PCI'] = max(0, min(data['PCI'], 100))
@@ -152,102 +140,65 @@ for idx, strategy in enumerate(all_strategies):
                 # Inspection and Maintenance
                 # Inspection
                 if data['maintenance'] == 'no':
-
-                    # Deterioration
-                    data['age'] = data['age'] + 1
-                    data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])
-
                     data['maintenance'] = ma.inspection(data['PCI'], data['maintenance'])
                     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                     data['time'] = tf.travel_time(data['velocity'], data['length'])
 
-                # Start of measures
-                # Start of preventive maintenance
+                # Ongoing measures
+                # Ongoing preventive maintenance
                 elif data['maintenance'] == 'preventive_measures_planning':
-
-                    # Deterioration
-                    data['age'] = data['age'] + 1
-                    data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])
-
-                    travel_time_impact, duration, *_ = ma.preventive_maintenance(quality_level[0], data['PCI'], data['length'], data['lanes'])
+                    travel_time_impact, *_ = ma.preventive_maintenance(quality_level[0], data['PCI'], data['length'], data['lanes'])
 
                     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                     data['time'] = tf.travel_time(data['velocity'], data['length'])*travel_time_impact
+                    data['maintenance'] = 'preventive_measures_ongoing'
 
-                    data['duration'] = duration
-                    if data['duration'] == 0:
-                        data['maintenance'] = 'preventive_measures_ending'
-                    else:
-                        data['maintenance'] = 'preventive_measures_ongoing'
-
-                # Start of corrective maintenance
-                elif data['maintenance'] == 'corrective_measures_planning':
-
-                    # Deterioration
-                    data['age'] = data['age'] + 1
-                    data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])
-
-                    travel_time_impact, duration, *_ = ma.corrective_maintenance(quality_level[1], data['PCI'], data['length'], data['age'], data['lanes'])
+                elif data['maintenance'] == 'preventive_measures_planning':
+                    travel_time_impact, *_ = ma.preventive_maintenance(quality_level[0], data['PCI'], data['length'], data['lanes'])
 
                     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                     data['time'] = tf.travel_time(data['velocity'], data['length']) * travel_time_impact
+                    data['maintenance'] = 'preventive_measures_ongoing'
 
-                    data['duration'] = duration
-                    if data['duration'] == 0:
-                        data['maintenance'] = 'corrective_measures_ending'
-                    else:
-                        data['maintenance'] = 'corrective_measures_ongoing'
+                # Ongoing corrective maintenance
+                elif data['maintenance'] == 'corrective_measures_planning':
+                    travel_time_impact, *_ = ma.corrective_maintenance(quality_level[1], data['PCI'], data['length'], data['age'], data['lanes'])
 
-                # Ongoing measures
-                # Ongoing of preventive maintenance
-                elif data['maintenance'] == 'preventive_measures_ongoing' and data['duration'] != 0:
-
-                    # # No Deterioration?
-                    # data['age'] = data['age'] + 1
-                    # data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])
-
-                    data['duration'] = data['duration']-1
-                    if data['duration'] == 0:
-                        data['maintenance'] = 'preventive_measures_ending'
-
-                # Ongoing of corrective maintenance
-                elif data['maintenance'] == 'corrective_measures_ongoing' and data['duration'] != 0:
-
-                    # # No Deterioration?
-                    # data['age'] = data['age'] + 1
-                    # data['PCI'] = data['PCI'] - pv.pavement_deterioration_random_process(data['age'])
-
-                    data['duration'] = data['duration'] - 1
-                    if data['duration'] == 0:
-                        data['maintenance'] = 'corrective_measures_ending'
+                    data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
+                    data['time'] = tf.travel_time(data['velocity'], data['length']) * travel_time_impact
+                    data['maintenance'] = 'corrective_measures_ongoing'
 
                 # Completed measures
                 # Completed preventive maintenance
-                elif data['maintenance'] == 'preventive_measures_ending' and data['duration'] == 0:
-                    _, duration, new_pci, age_reset, costs = ma.preventive_maintenance(quality_level[0], data['PCI'], data['length'], data['lanes'])
+                elif data['maintenance'] == 'preventive_measures_ongoing':
+                    _, duration, new_pci, maintenance_status, age_reset, costs = ma.preventive_maintenance(quality_level[0], data['PCI'], data['length'], data['lanes'])
 
                     data['age'] = data['age'] - age_reset
                     data['PCI'] = new_pci
                     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                     data['time'] = tf.travel_time(data['velocity'], data['length'])
-                    data['maintenance'] = 'no'
+                    data['maintenance'] = maintenance_status
 
-                    # Costs of the preventive measure
+                    # Costs of the measure
                     costs_matrix[sample, t] = costs_matrix[sample, t] + costs
 
                 # Completed corrective maintenance
-                elif data['maintenance'] == 'corrective_measures_ending' and data['duration'] == 0:
-                    _, duration, new_pci, age_reset, costs, lanes = ma.corrective_maintenance(
+                elif data['maintenance'] == 'corrective_measures_ongoing':
+                    _, duration, new_pci, maintenance_status, age_reset, costs = ma.corrective_maintenance(
                         quality_level[1], data['PCI'], data['length'], data['age'], data['length'])
 
                     data['age'] = data['age'] - age_reset
                     data['PCI'] = new_pci
                     data['velocity'] = tf.velocity_change_linear(data['PCI'], data['velocity'], data['maxspeed'])
                     data['time'] = tf.travel_time(data['velocity'], data['length'])
-                    data['maintenance'] = 'no'
+                    data['maintenance'] = maintenance_status
 
-                    # Costs of the corrective measure
+                    # Costs of the measure
                     costs_matrix[sample, t] = costs_matrix[sample, t] + costs
+
+                # Debugging
+                # print(temp_network[1][2][0]['PCI'])
+                # print(temp_network[1][2][0]['maintenance'])
 
             # Network Efficiency at time t
             efficiency_sample_t = system.network_efficiency(temp_network)
@@ -256,6 +207,9 @@ for idx, strategy in enumerate(all_strategies):
             # Save the normed efficiency at time t in a matrix (rows = sample, columns = time)
             efficiency_matrix[sample, t] = normed_sample_efficiency_t
 
+            # Save PCI value of edge
+            # pci_matrix[sample, t] = temp_network[1][2][0]['PCI']                              # wozu benötige ich das noch???
+
             # end3 = time.time()
             # print("Execution time of one time step: ", str(end3 - start3), "[sec]")
 
@@ -263,7 +217,7 @@ for idx, strategy in enumerate(all_strategies):
         # print("Execution time of one sample: ", str(end2 - start2), "[sec]")
 
     # Delete all rows (sample) in the matrix that have a row element greater than 1
-    # efficiency_matrix = efficiency_matrix[~(efficiency_matrix > 1).any(axis=1)]
+    efficiency_matrix = efficiency_matrix[~(efficiency_matrix > 1).any(axis=1)]
 
     # Calculate the efficiency mean of each column and save it in an extra row
     mean_efficiency_row = efficiency_matrix.mean(axis=0)
@@ -328,7 +282,7 @@ print(all_strategies[idx_best])
 # efficiency_mean_best_strategy = strategies_matrix_efficiency[-1, :]
 plt.step(simulation_time_period, strategies_matrix_efficiency[idx_best, :], color='red', linestyle='-')
 
-plt.xlabel('Time')
+plt.xlabel('Simulation Time Period [Year]')
 plt.ylabel('Network Efficiency [-]')
 plt.title('Network Efficiency')
 plt.grid(True)
@@ -344,22 +298,22 @@ plt.show()
 # plt.show()
 
 # Plot of the efficiency for the best resilient strategies
-# number_of_plots = len(indices[0])
-# if number_of_plots <= 0:
-#     print("Number of plots cannot be zero or negative!")
-# else:
-#     fig, axes = plt.subplots(number_of_plots, 1, figsize=(8, 4*number_of_plots))  # 4*number_of_plots gives each plot enough vertical space.
-#
-#     for idx, row_index in enumerate(indices[0]):
-#         ax = axes[idx]  # Select the current subplot.
-#         ax.step(simulation_time_period, strategies_matrix_efficiency[row_index], color='red', linestyle='-')
-#         ax.set_xlabel('Time')
-#         ax.set_ylabel('Network Efficiency [-]')
-#         ax.set_title(f'Network Efficiency for Index {row_index}')
-#         ax.grid(True)
-#         ax.grid(which='major', color='#DDDDDD', linewidth=0.9)
-#         ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
-#         ax.minorticks_on()
-#
-#     plt.tight_layout()  # Provides enough space between the subplots.
-#     plt.show()
+number_of_plots = len(indices[0])
+if number_of_plots <= 0:
+    print("Number of plots cannot be zero or negative!")
+else:
+    fig, axes = plt.subplots(number_of_plots, 1, figsize=(8, 4*number_of_plots))  # 4*number_of_plots gives each plot enough vertical space.
+
+    for idx, row_index in enumerate(indices[0]):
+        ax = axes[idx]  # Select the current subplot.
+        ax.step(simulation_time_period, strategies_matrix_efficiency[row_index], color='red', linestyle='-')
+        ax.set_xlabel('Time [Year]')
+        ax.set_ylabel('Network Efficiency [-]')
+        ax.set_title(f'Network Efficiency for Index {row_index}')
+        ax.grid(True)
+        ax.grid(which='major', color='#DDDDDD', linewidth=0.9)
+        ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
+        ax.minorticks_on()
+
+    plt.tight_layout()  # Provides enough space between the subplots.
+    plt.show()

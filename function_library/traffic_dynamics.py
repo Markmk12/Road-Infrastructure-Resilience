@@ -34,7 +34,7 @@ def velocity_change_linear(pci, velocity, max_speed):
     if pci < 0:
         pci = 0
 
-    new_velocity = max_speed - (0.8*(100 - pci))
+    new_velocity = max_speed - (0.5*(100 - pci))
 
     if new_velocity <= 0:
         new_velocity = 5      # Schrittgeschwindigkeit

@@ -6,6 +6,10 @@ import networkx as nx
 def network_efficiency(graph):
     n = nx.Graph.number_of_nodes(graph)
     shortest_path_matrix = nx.floyd_warshall_numpy(graph, weight='time')
+
+    if np.any(np.isnan(shortest_path_matrix)):
+        print("NaN values detected in shortest path matrix!")
+
     efficiency = 1/(n*(n-1))*np.sum(np.divide(1, shortest_path_matrix, where=shortest_path_matrix != 0))
     return efficiency
 
@@ -23,17 +27,6 @@ def network_efficiency(graph):
 #
 #     efficiency = sum_of_inverse_distances / (n * (n - 1))
 #     return efficiency
-
-
-# def network_efficiency(G):
-#     # Berechne die kürzesten Weglängen zwischen allen Paaren von Knoten
-#     shortest_path_lengths = dict(nx.all_pairs_dijkstra_path_length(G))
-#
-#     # Berechne die umgekehrten kürzesten Weglängen
-#     inv_lengths = [1 / d for source, targets in shortest_path_lengths.items() for target, d in targets.items() if d > 0]
-#
-#     # Nehme den Durchschnitt der umgekehrten kürzesten Weglängen
-#     return np.mean(inv_lengths)
 
 
 def resilience_metric(q, target_q, observation_time):                   # according Ouyang et al.
