@@ -33,7 +33,7 @@ start = time.time()
 # Test Case (small network)
 
 road_network_0 = nx.MultiDiGraph()
-road_network_0 = nx.MultiGraph()
+# road_network_0 = nx.MultiGraph()
 road_network_0.add_node(1)
 road_network_0.add_node(2)
 road_network_0.add_node(3)

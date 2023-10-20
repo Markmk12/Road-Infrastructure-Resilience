@@ -16,7 +16,7 @@ import time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
+# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_region_hannover.gexf")
 
 # Perfect state of the road network
 # road_network_0 = imported_road_network
