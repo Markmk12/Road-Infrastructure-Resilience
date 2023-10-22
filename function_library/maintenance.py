@@ -29,10 +29,10 @@ def preventive_maintenance(quality_level, pci, length, lanes):
     elif quality_level == 'moderate':
 
         # Consider variance in PCI improvement
-        pci = pci + np.random.normal(25, 5)                 # 15 2
+        pci = pci + np.random.normal(25, 5)
         travel_time_impact = 1.25
         duration = 1
-        age_reset = 6                                       # 3
+        age_reset = 6
         costs = length*lanes*12.5
         maintenance_status = 'no'
 
@@ -40,7 +40,7 @@ def preventive_maintenance(quality_level, pci, length, lanes):
     elif quality_level == 'extensive':
 
         # Consider variance in PCI improvement
-        pci = pci + np.random.normal(40, 5)                 # 30 4
+        pci = pci + np.random.normal(40, 5)
         travel_time_impact = 1.5
         duration = 2
         age_reset = 10
@@ -61,7 +61,6 @@ def corrective_maintenance(quality_level, pci, length, age, lanes):
         age_reset = 0
         costs = length*lanes*0
         maintenance_status = 'no'
-
 
     # Road rehabilitation/renovation
     elif quality_level == 'moderate':

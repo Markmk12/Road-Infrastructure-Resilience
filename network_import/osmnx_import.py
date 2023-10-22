@@ -6,6 +6,9 @@ import numpy as np
 import pandas as pd
 from function_library import traffic_dynamics as tf
 
+# Set location here:
+location = 'Hamburg'
+
 # Filter
 cf01 = '["highway"~"motorway|trunk|primary|secondary|tertiary"]'
 cf00 = '["highway"~"motorway|trunk|primary|motorway_link|trunk_link|primary_link"]'                      # diesen filter für autobahnen-betrachtung
@@ -14,7 +17,7 @@ cf2 = '["highway"~"motorway|trunk|primary"]'
 cf3 = '["highway"~"motorway"]'
 
 # Plot region within its borders
-G = ox.graph_from_place('Berlin', network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
+G = ox.graph_from_place(location, network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
 
 # G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
 # G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
@@ -22,21 +25,21 @@ G = ox.graph_from_place('Berlin', network_type='drive', custom_filter=cf00)     
 
 # Simplification
 G = ox.project_graph(G)
-G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
+G = ox.simplification.consolidate_intersections(G, tolerance=500, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
 
 # Transform MultiDiGraph into MultiGraph
-# G = ox.utils_graph.get_undirected(G)                                                                                  # Why transform MultiDiGraph into MultiGraph ?
+# G = ox.utils_graph.get_undirected(G)
 print(G)
 
 # Delete nodes with degree of 2 or lower
 # nodes_to_remove = [node for node, degree in G.degree() if degree == 2]
 # G.remove_nodes_from(nodes_to_remove)
 
-# Filtern des Graphen, um alle Straßen mit dem Tag "unclassified" zu entfernen
+# Filter the graph to remove all roads with the tag "unclassified".
 edges_to_remove = [(u, v, k) for u, v, k, data in G.edges(keys=True, data=True) if data.get('highway') == 'unclassified']
 G.remove_edges_from(edges_to_remove)
 
-# Entfernen von isolierten Knoten
+# Removing isolated nodes
 graph = ox.utils_graph.remove_isolated_nodes(G)
 
 # Traverses all edges and changes attributes from string to integer
@@ -63,19 +66,19 @@ for u, v, k, data in G.edges(data=True, keys=True):
             # If the attribute is a list of strings, process as before
             elif isinstance(data[attribute], list):
                 try:
-                    # Entfernen von nicht-numerischen Werten aus der Liste
+                    # Remove non-numeric values from the list
                     valid_values = [int(val) for val in data[attribute] if val.isdigit()]
 
-                    # Wenn keine gültigen Werte vorhanden sind, setzen Sie einen Standardwert
+                    # If there are no valid values, set a default value
                     if not valid_values:
-                        data[attribute] = 75  # oder einen anderen Standardwert
+                        data[attribute] = 75  # or another default value
                     else:
-                        # Wenn es gültige Werte gibt, berechnen Sie den Durchschnitt
+                        # If there are valid values, calculate the average
                         if attribute == 'lanes':
-                            # Nehmen Sie den minimalen Wert für 'lanes'
+                            # Take the minimum value for 'lanes'.
                             data[attribute] = min(valid_values)
                         elif attribute == 'maxspeed':
-                            # Berechnen Sie den Durchschnittswert für 'maxspeed'
+                            # Calculate the average value for 'maxspeed
                             data[attribute] = int(np.mean(valid_values))
                 except ValueError:
                     pass
@@ -98,7 +101,7 @@ for u, v, k, data in G.edges(data=True, keys=True):
 
     # Does a 'maxspeed' data exist for the edge?
     if 'maxspeed' in data:
-        # Wenn der Wert 'none' ist, setze ihn auf den Standardwert
+        # If the value is 'none', set it to the default value
         if data['maxspeed'] == 'none':
             data['maxspeed'] = 75
         else:
@@ -107,7 +110,7 @@ for u, v, k, data in G.edges(data=True, keys=True):
             except ValueError:
                 data['maxspeed'] = 75
     else:
-        # Wenn kein 'maxspeed' Attribut vorhanden ist, setze den Standardwert
+        # If no 'maxspeed' attribute is present, set the default value
         data['maxspeed'] = 75
 
     data['velocity'] = data['maxspeed']
@@ -122,9 +125,16 @@ for u, v, attr in edge_list:
     print(f"Edge ({u}, {v}): {attr}")
 
 # Visualize the graph as with OSMNX
-edge_labels = {(u, v): data['PCI'] for u, v, key, data in G.edges(keys=True, data=True)}
-fig, ax = ox.plot_graph(G, show=False, close=False)
+fig, ax = ox.plot_graph(G, node_color='red', edge_color='black', bgcolor='white', show=False, close=False)
 plt.show()
+
+# Save the plot
+# fig.savefig(f"plots/networks/{location}.png")
+
+# Visualize the graph as with OSMNX and its attribute PCI
+# edge_labels = {(u, v): data['PCI'] for u, v, key, data in G.edges(keys=True, data=True)}
+# fig, ax = ox.plot_graph(G, show=False, close=False)
+# plt.show()
 
 # Edge labels
 # for (u, v), label in edge_labels.items():
@@ -133,7 +143,6 @@ plt.show()
 #     ax.text((x1 + x2) / 2, (y1 + y2) / 2, str(label), fontsize=8, ha='center', va='center', bbox=dict(facecolor='white', edgecolor='none', boxstyle='round,pad=0.2'))
 # plt.show()
 
-
 # Visualize the graph as with NetworkX  (Not suitable for drawing MultiGraphs; use OSMNX )
 # pos = nx.spring_layout(G)
 # nx.draw(G, pos, with_labels=True, node_size=500)
@@ -141,9 +150,9 @@ plt.show()
 # nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 # plt.show()
 
-# Dieser Code konvertiert die Listen in Zeichenketten, indem er die Elemente der Listen mit einem Komma verbindet.
-# Nachdem Sie diesen Code ausgeführt haben, sollten Sie in der Lage sein, den Graphen ohne Fehler im GEXF-Format
-# zu speichern.
+# This code converts the lists to strings by joining the elements of the lists with a comma.
+# After running this code, you should be able to save the graph in GEXF format without errors.
+# save it.
 
 for u, v, data in G.edges(data=True):
     if isinstance(data.get('osmid'), list):
@@ -153,7 +162,7 @@ for u, v, data in G.edges(data=True):
     if isinstance(data.get('ref'), list):
         data['ref'] = ",".join(data['ref'])
 
-#  alle Kantenattribute zu überprüfen und Listen in Zeichenketten umzuwandeln
+# check all edge attributes and convert lists to strings
 for u, v, data in G.edges(data=True):
     for key, value in data.items():
         if isinstance(value, list):
@@ -161,7 +170,7 @@ for u, v, data in G.edges(data=True):
 
 # Debugging origin keys
 for u, v, key, data in G.edges(data=True, keys=True):
-    print(u, v, key)  # Hier wird der ursprüngliche Key von OSMnx ausgegeben
+    print(u, v, key)  # The original key of OSMnx is output here
 
 # Saving the retrieved graph for export
-nx.write_gexf(G, "networks_of_investigation/germany_berlin.gexf")
+nx.write_gexf(G, f"networks_of_investigation/{location.lower()}.gexf")
