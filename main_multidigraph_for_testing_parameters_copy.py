@@ -62,7 +62,7 @@ road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, 
 
 # Ideal network efficiency (target efficiency)
 target_efficiency = system.network_efficiency(road_network_0)
-# target_efficiency = 1
+# optimal_efficiency = 1
 
 # Road network for simulation
 # Import of a graph

@@ -17,7 +17,7 @@ import sys
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/hamburg.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/hameln.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network
@@ -28,14 +28,14 @@ print(road_network_0)
 #     print("The graph is connected. Continue with the program.")
 # else:
 #     print("ERROR: The graph is not connected.")
-#     sys.exit(1)
+    # sys.exit(1)
 
 # Check of import graph (must be a MultiDiGraph)
 if nx.is_strongly_connected(road_network_0):
     print("The graph is strongly connected. Continue with the program.")
 else:
     print("ERROR: The graph is either weakly connected or not connected.")
-    sys.exit(1)
+    # sys.exit(1)
 
 # Test Case
 # road_network_0 = nx.MultiDiGraph()
@@ -54,8 +54,9 @@ else:
 # road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
 # road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
 
-# Ideal network efficiency (target efficiency)
-target_efficiency = system.network_efficiency(road_network_0)
+# Ideal network efficiency (optimal efficiency)
+optimal_efficiency = system.network_efficiency(road_network_0)
+print(optimal_efficiency)
 
 # Road network for simulation
 # Import of a graph
@@ -117,7 +118,7 @@ all_strategies = list(itertools.product(tuples, repeat=3))
 # print(all_strategies[0])
 
 # Set resilience threshold
-res_threshold = 0.80
+res_threshold = 0.70
 
 # Info of inputs before starting the calculation
 print(road_network_1)
@@ -149,7 +150,7 @@ for idx, strategy in enumerate(all_strategies):
         # Calculation of the network efficiency
         for t in simulation_time_period:
 
-            start3 = time.time()
+            # start3 = time.time()
 
             # Changing the strategy configuration (tuple) every 15 years
             if 0 <= t <= 9:
@@ -268,12 +269,12 @@ for idx, strategy in enumerate(all_strategies):
             # Network Efficiency at time t
             efficiency_sample_t = system.network_efficiency(temp_network)
             # Sample Normalizing
-            normed_sample_efficiency_t = efficiency_sample_t / target_efficiency
+            normed_sample_efficiency_t = efficiency_sample_t / optimal_efficiency
             # Save the normed efficiency at time t in a matrix (rows = sample, columns = time)
             efficiency_matrix[sample, t] = normed_sample_efficiency_t
 
-            end3 = time.time()
-            print("Execution time of one time step: ", str(end3 - start3), "[sec]")
+            # end3 = time.time()
+            # print("Execution time of one time step: ", str(end3 - start3), "[sec]")
 
         end2 = time.time()
         print("Execution time of one sample: ", str(end2 - start2), "[sec]")
@@ -290,7 +291,7 @@ for idx, strategy in enumerate(all_strategies):
     costs_matrix = np.vstack([costs_matrix, mean_costs_row])
 
     # Resilience
-    resilience = system.resilience_metric(efficiency_matrix[-1, :], 1, len(simulation_time_period))
+    resilience = system.resilience_metric(efficiency_matrix[-1, :], len(simulation_time_period))
     strategies_matrix_resilience[idx] = resilience
 
     # Save the estimated efficiency es an entry of strategies_matrix_efficiency

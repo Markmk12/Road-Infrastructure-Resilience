@@ -285,7 +285,7 @@ efficiency_matrix = np.vstack([efficiency_matrix, mean_efficiency_row])
 # print(efficiency_matrix)
 
 # Resilience
-resilience = system.resilience_metric(efficiency_matrix[-1, :], 1, len(simulation_time_period))
+resilience = system.resilience_metric(efficiency_matrix[-1, :], len(simulation_time_period))
 
 # Print of the results
 # print("The predicted normalized Network Efficiency is: " + str(normed_efficiency_history[-1]))
