@@ -28,7 +28,7 @@ G = ox.project_graph(G)
 G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
 
 # Transform MultiDiGraph into MultiGraph
-G = ox.utils_graph.get_undirected(G)
+# G = ox.utils_graph.get_undirected(G)
 print(G)
 
 # Delete nodes with degree of 2 or lower
@@ -40,7 +40,7 @@ edges_to_remove = [(u, v, k) for u, v, k, data in G.edges(keys=True, data=True) 
 G.remove_edges_from(edges_to_remove)
 
 # Removing isolated nodes
-graph = ox.utils_graph.remove_isolated_nodes(G)
+G = ox.utils_graph.remove_isolated_nodes(G)
 
 # Traverses all edges and changes attributes from string to integer
 # If an edge has more than one lane data, only the lower value is taken
@@ -174,3 +174,4 @@ for u, v, key, data in G.edges(data=True, keys=True):
 
 # Saving the retrieved graph for export
 nx.write_gexf(G, f"networks_of_investigation/{location.lower()}.gexf")
+print(G)
