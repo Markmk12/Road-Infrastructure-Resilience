@@ -10,7 +10,7 @@ def network_efficiency(graph):
     The efficiency of a graph is defined as the average of the inverse shortest
     path lengths between all pairs of nodes. It represents a measure of the average
     accessibility between nodes in a network. For the calculation the proposed formula of
-    Latora, V. and Marchiori, M. (2001) is used.
+    Latora and Marchiori (2001) is used.
 
     Parameters:
     -----------
@@ -55,7 +55,7 @@ def resilience_metric(q, observation_time):
     Calculate the resilience of a system using the probabilistic resilience metric of Ouyang et al. (2012).
 
     The resilience metric takes values between 0 and 1. For simplicity the target efficiency is a non-random constant
-    and the rewritten formula of Salomon J. et al. (2020) is implemented.
+    and the rewritten formula of Salomon et al. (2020) is implemented.
 
 
 
