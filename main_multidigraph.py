@@ -17,17 +17,24 @@ import sys
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_hameln.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/hamburg.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network
 
-# Check of import graph is connected
-if nx.is_strongly_connected(road_network_0):
-    print("The graph is strongly connected. Continue with the program.")
+# Check
+if nx.is_connected(road_network_0):
+    print("The graph is connected. Continue with the program.")
 else:
-    print("ERROR: The graph is either weakly connected or not connected.")
+    print("ERROR: The graph is not connected.")
     sys.exit(1)
+
+# Check of import graph (must be a MultiDiGraph) is connected
+# if nx.is_strongly_connected(road_network_0):
+#     print("The graph is strongly connected. Continue with the program.")
+# else:
+#     print("ERROR: The graph is either weakly connected or not connected.")
+#     sys.exit(1)
 
 # Test Case
 # road_network_0 = nx.MultiDiGraph()
@@ -93,7 +100,7 @@ for _, _, key, data in road_network_1.edges(keys=True, data=True):
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
-sample_size = 5                                                 # increase sample size ! 300  # 50 ?
+sample_size = 1                                                 # increase sample size ! 300  # 50 ?
 
 # Quality levels of road maintenance
 quality_levels = ["none", "moderate", "extensive"]

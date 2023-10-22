@@ -25,10 +25,10 @@ G = ox.graph_from_place(location, network_type='drive', custom_filter=cf00)     
 
 # Simplification
 G = ox.project_graph(G)
-G = ox.simplification.consolidate_intersections(G, tolerance=500, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
+G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
 
 # Transform MultiDiGraph into MultiGraph
-# G = ox.utils_graph.get_undirected(G)
+G = ox.utils_graph.get_undirected(G)
 print(G)
 
 # Delete nodes with degree of 2 or lower
