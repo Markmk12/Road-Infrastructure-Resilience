@@ -1,23 +1,20 @@
 import numpy as np
-import pandas as pd
 import copy
 import networkx as nx
 import matplotlib.pyplot as plt
 from function_library import system, traffic_dynamics as tf, pavement as pv, maintenance as ma
 import itertools
-import math
 import time
 import sys
 
 # Notes and TODOs:
-# Maintenance
-# Spikes in NetEff? Have set a filter for now, Spikes because of wide gamma distribution for larger t ?
+# nothing
 
 # Measure computation time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/hameln.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/kreis minden-lübbecke.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network
@@ -34,7 +31,7 @@ print(road_network_0)
 if nx.is_strongly_connected(road_network_0):
     print("The graph is strongly connected. Continue with the program.")
 else:
-    print("ERROR: The graph is either weakly connected or not connected.")
+    print("The graph is either weakly connected or not connected.")
     # sys.exit(1)
 
 # Test Case
@@ -152,7 +149,7 @@ for idx, strategy in enumerate(all_strategies):
 
             # start3 = time.time()
 
-            # Changing the strategy configuration (tuple) every 15 years
+            # Changing the strategy configuration (tuple) every 10 years
             if 0 <= t <= 9:
                 quality_level = strategy[0]
             if 10 <= t <= 19:
@@ -322,12 +319,10 @@ for idx, value, cost in zip(indices[0], values, costs):
     strategy = f"Strategy: {idx}, Resilience: {value}, Expected total costs: {cost}"
     best_strategies_list.append(strategy)
 
-# print(best_strategies_list)
-
 # Choosing the best strategy based on resilience
 sorted_strategies = sorted(best_strategies_list, key=lambda x: float(x.split("Expected total costs: ")[1]))
 
-# Der Eintrag mit den kleinsten "Expected total costs" ist nun der erste in der sortierten Liste:
+# The entry with the smallest "Expected total costs" is now at the top of the sorted list:
 best_strategy = sorted_strategies[0]
 
 print(sorted_strategies)
@@ -338,11 +333,10 @@ strategy_str = best_strategy.split(",")[0]  # Dies teilt den String bei jedem Ko
 idx_str = strategy_str.split(":")[1].strip()  # Dies teilt den String bei ':' und nimmt den zweiten Teil, also " 5", und entfernt dann die Leerzeichen
 idx_best = int(idx_str)
 
-# Path
+# Path of the best strategy
 print(all_strategies[idx_best])
 
 # Plot
-# efficiency_mean_best_strategy = strategies_matrix_efficiency[-1, :]
 plt.step(simulation_time_period, strategies_matrix_efficiency[idx_best, :], color='red', linestyle='-')
 
 plt.xlabel('Time')

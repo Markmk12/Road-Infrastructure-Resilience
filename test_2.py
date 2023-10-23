@@ -18,7 +18,7 @@ from function_library import system
 # road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
 # road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
 
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/hamburg.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/ruhr.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network

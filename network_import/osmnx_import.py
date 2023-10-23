@@ -1,39 +1,63 @@
-import math
 import matplotlib.pyplot as plt
 import networkx as nx
 import osmnx as ox
 import numpy as np
-import pandas as pd
+import sys
 from function_library import traffic_dynamics as tf
 
-# Set location here:
-location = 'Hamburg'
+# Set single location here (if you are using this comment the next two sections!)
+location = 'Berlin'
 
-# Filter
-cf01 = '["highway"~"motorway|trunk|primary|secondary|tertiary"]'
-cf00 = '["highway"~"motorway|trunk|primary|motorway_link|trunk_link|primary_link"]'                      # diesen filter für autobahnen-betrachtung
-cf1 = '["highway"~"motorway|trunk|primary|secondary"]'
-cf2 = '["highway"~"motorway|trunk|primary"]'
-cf3 = '["highway"~"motorway"]'
+# Set multiple locations here (if you are using this comment the upper and the following block!)
+# locations = ['Berlin, Germany', 'Brandenburg, Germany']
 
-# Plot region within its borders
-G = ox.graph_from_place(location, network_type='drive', custom_filter=cf00)               # , custom_filter=cf01)
+# Set coordinates from a location (if you are using this comment the two upper lines)
+# Coordinates (e.g. center of Berlin lat. 52.5200 / lon. 13.4050)
+# latitude = 52.5200
+# longitude = 13.4050
+# distance = 40 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
 
-# G = ox.graph.graph_from_address(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)
-# G = ox.graph.graph_from_point(52.519514655923146, 13.406701005419093, dist=40000, dist_type='bbox', network_type='drive', custom_filter=cf00)      # Für Berlin betrachtung der Ringautobahn (40km) A10 in Brandenburg notwendig
-# print(G)
+# Filter (from here no more comment or uncomment something)
+filter_0 = ''
+filter_1 = '["highway"~"motorway|trunk|primary|motorway_link|trunk_link|primary_link"]'         # Bachelor Thesis
+filter_2 = '["highway"~"motorway|trunk|primary|secondary|tertiary"]'
+filter_3 = '["highway"~"motorway|trunk|primary|secondary"]'
+filter_4 = '["highway"~"motorway|trunk|primary"]'
+filter_5 = '["highway"~"motorway|primary"]'
+filter_6 = '["highway"~"motorway|primary|secondary"]'
+
+# Set a tolerance in [m] (This is used to combine nearby clusters of nodes of an intersection into one node)
+tolerance = 200
+
+#
+if 'location' in globals():
+
+    # Get region within its borders
+    G = ox.graph_from_place(location, network_type='drive', custom_filter=filter_1)
+
+elif 'locations' in globals():
+
+    # Get various cities and regions
+    graphs = []
+    for city in locations:
+        G = ox.graph_from_place(city, network_type='drive', custom_filter=filter_1)
+        graphs.append(G)
+    # Combine alle single graphs into one
+    G = nx.compose_all(graphs)
+
+elif 'latitude' and 'longitude' in globals():
+    G = ox.graph_from_point((latitude, longitude), dist=distance, network_type='drive', custom_filter=filter_1)
+
+else:
+    print("Please set a single location or a list of multiple locations and comment the line for the other.")
+    sys.exit(1)
 
 # Simplification
 G = ox.project_graph(G)
-G = ox.simplification.consolidate_intersections(G, tolerance=150, rebuild_graph=True, dead_ends=False, reconnect_edges=True)    # Toleranz von 10m oder Toleranz von 150m (Reduktion um fast 50% der Knoten und Kanten) ?
+G = ox.simplification.consolidate_intersections(G, tolerance=tolerance, rebuild_graph=True, dead_ends=False, reconnect_edges=True)
 
 # Transform MultiDiGraph into MultiGraph
 # G = ox.utils_graph.get_undirected(G)
-print(G)
-
-# Delete nodes with degree of 2 or lower
-# nodes_to_remove = [node for node, degree in G.degree() if degree == 2]
-# G.remove_nodes_from(nodes_to_remove)
 
 # Filter the graph to remove all roads with the tag "unclassified".
 edges_to_remove = [(u, v, k) for u, v, k, data in G.edges(keys=True, data=True) if data.get('highway') == 'unclassified']
@@ -124,7 +148,9 @@ edge_list = G.edges(data=True)
 for u, v, attr in edge_list:
     print(f"Edge ({u}, {v}): {attr}")
 
+
 # Visualize the graph as with OSMNX
+print(G)
 fig, ax = ox.plot_graph(G, node_color='red', edge_color='black', bgcolor='white', show=False, close=False)
 plt.show()
 
@@ -143,17 +169,8 @@ plt.show()
 #     ax.text((x1 + x2) / 2, (y1 + y2) / 2, str(label), fontsize=8, ha='center', va='center', bbox=dict(facecolor='white', edgecolor='none', boxstyle='round,pad=0.2'))
 # plt.show()
 
-# Visualize the graph as with NetworkX  (Not suitable for drawing MultiGraphs; use OSMNX )
-# pos = nx.spring_layout(G)
-# nx.draw(G, pos, with_labels=True, node_size=500)
-# labels = nx.get_edge_attributes(G, 'PCI')
-# nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-# plt.show()
 
 # This code converts the lists to strings by joining the elements of the lists with a comma.
-# After running this code, you should be able to save the graph in GEXF format without errors.
-# save it.
-
 for u, v, data in G.edges(data=True):
     if isinstance(data.get('osmid'), list):
         data['osmid'] = ",".join(map(str, data['osmid']))
@@ -169,9 +186,29 @@ for u, v, data in G.edges(data=True):
             data[key] = ",".join(map(str, value))
 
 # Debugging origin keys
-for u, v, key, data in G.edges(data=True, keys=True):
-    print(u, v, key)  # The original key of OSMnx is output here
+# for u, v, key, data in G.edges(data=True, keys=True):
+#     print(u, v, key)  # The original key of OSMnx is output here
 
-# Saving the retrieved graph for export
-nx.write_gexf(G, f"networks_of_investigation/{location.lower()}.gexf")
-print(G)
+
+# Saving the graph
+if 'location' in globals():
+
+    # Saving the retrieved graph for export
+    nx.write_gexf(G, f"networks_of_investigation/{location.lower()}.gexf")
+
+elif 'locations' in globals():
+
+    # Saving the retrieved graph for export
+    formatted_cities = [city.replace(", Germany", "").replace(" ", "_").lower() for city in locations]
+    filename = "_".join(formatted_cities) + ".gexf"
+    nx.write_gexf(G, f"networks_of_investigation/{filename}")
+
+elif'latitude' and 'longitude' in globals():
+
+    # Saving the retrieved graph for export
+    filename = f"graph_{latitude}_{longitude}.gexf"
+    nx.write_gexf(G, f"networks_of_investigation/{filename}")
+
+else:
+    print("The extracted graph is not stored!")
+    sys.exit(1)
