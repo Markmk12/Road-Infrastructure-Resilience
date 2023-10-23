@@ -20,20 +20,20 @@ start = time.time()
 # imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_berlin.gexf")
 
 # Perfect state of the road network
-# road_network_0 = imported_road_network
+# G = imported_road_network
 
 # Test Case (one road)
-# road_network_0 = nx.MultiDiGraph()
-# road_network_0.add_node(1)
-# road_network_0.add_node(2)
-# road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
-# road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# G = nx.MultiDiGraph()
+# G.add_node(1)
+# G.add_node(2)
+# G.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+# G.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
 
 
 # Test Case (small network)
 
 road_network_0 = nx.MultiDiGraph()
-# road_network_0 = nx.MultiGraph()
+# G = nx.MultiGraph()
 road_network_0.add_node(1)
 road_network_0.add_node(2)
 road_network_0.add_node(3)

@@ -19,7 +19,7 @@ start = time.time()
 # imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_hannover.gexf")
 
 # Perfect state of the road network
-# road_network_0 = imported_road_network
+# G = imported_road_network
 
 # Test Case
 road_network_0 = nx.MultiDiGraph()

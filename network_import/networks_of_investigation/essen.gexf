@@ -1,0 +1,2315 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2023-10-23">
+    <creator>NetworkX 3.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="8" title="lanes" type="long" />
+      <attribute id="9" title="length" type="double" />
+      <attribute id="10" title="tunnel" type="string" />
+      <attribute id="11" title="maxspeed" type="long" />
+      <attribute id="12" title="PCI" type="long" />
+      <attribute id="13" title="maintenance" type="string" />
+      <attribute id="14" title="networkx_key" type="long" />
+      <attribute id="15" title="velocity" type="long" />
+      <attribute id="16" title="age" type="long" />
+      <attribute id="17" title="time" type="double" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="osmid_original" type="string" />
+      <attribute id="1" title="x" type="float" />
+      <attribute id="2" title="y" type="float" />
+      <attribute id="3" title="street_count" type="long" />
+      <attribute id="4" title="ref" type="string" />
+      <attribute id="5" title="highway" type="string" />
+      <attribute id="6" title="lon" type="float" />
+      <attribute id="7" title="lat" type="float" />
+    </attributes>
+    <nodes>
+      <node id="0" label="0">
+        <attvalues>
+          <attvalue for="0" value="[160719, 35986358, 160722, 25974541, 25974545, 71617915, 27448907, 27448916, 287077756, 287976519, 287077515, 3598152815]" />
+          <attvalue for="1" value="363490.3979197739" />
+          <attvalue for="2" value="5700694.17035923" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="1" label="1">
+        <attvalues>
+          <attvalue for="0" value="[278084703, 1484539833, 278084704]" />
+          <attvalue for="1" value="363984.0110807729" />
+          <attvalue for="2" value="5702147.813786947" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="2" label="2">
+        <attvalues>
+          <attvalue for="0" value="[164790, 1308136263]" />
+          <attvalue for="1" value="359073.35569458" />
+          <attvalue for="2" value="5697858.115601094" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="3" label="3">
+        <attvalues>
+          <attvalue for="0" value="277464459" />
+          <attvalue for="2" value="5698567.668685226" />
+          <attvalue for="1" value="359748.88234665256" />
+          <attvalue for="4" value="27" />
+          <attvalue for="5" value="motorway_junction" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9828569" />
+          <attvalue for="7" value="51.4209455" />
+        </attvalues>
+      </node>
+      <node id="4" label="4">
+        <attvalues>
+          <attvalue for="0" value="[164796, 303715418, 25974529, 32696969, 280813177, 32696971, 32696974, 32922715, 3208400023, 3208658299, 932019928, 265273622, 3207790013, 3208658298, 303715443, 265273624, 419220527, 303715474, 303715444, 3208658297, 932019896, 932019936, 932020019, 3208658300]" />
+          <attvalue for="1" value="360820.9844540981" />
+          <attvalue for="2" value="5698785.846338119" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="5" label="5">
+        <attvalues>
+          <attvalue for="0" value="[165971, 2111254872, 3376759912, 2084781281]" />
+          <attvalue for="1" value="365600.77641205775" />
+          <attvalue for="2" value="5703141.381112786" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="6" label="6">
+        <attvalues>
+          <attvalue for="0" value="[165975, 50906850, 835280619]" />
+          <attvalue for="1" value="366622.58317968575" />
+          <attvalue for="2" value="5703252.811965577" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="7" label="7">
+        <attvalues>
+          <attvalue for="0" value="[1378642973, 165982, 601380064, 20907951, 248604584, 20907964, 1427798967, 601380066, 1092209228]" />
+          <attvalue for="1" value="368482.7477841908" />
+          <attvalue for="2" value="5704060.709339063" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="8" label="8">
+        <attvalues>
+          <attvalue for="0" value="30103122" />
+          <attvalue for="2" value="5703952.574154766" />
+          <attvalue for="1" value="367884.4705380385" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0977842" />
+          <attvalue for="7" value="51.4712935" />
+        </attvalues>
+      </node>
+      <node id="9" label="9">
+        <attvalues>
+          <attvalue for="0" value="642348" />
+          <attvalue for="2" value="5702057.122655428" />
+          <attvalue for="1" value="363398.292719609" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0339642" />
+          <attvalue for="7" value="51.4531948" />
+        </attvalues>
+      </node>
+      <node id="10" label="10">
+        <attvalues>
+          <attvalue for="0" value="[642353, 268158237, 280047655, 26891444, 303823431, 288018699, 268596153, 35828439, 35828446, 268158471, 35828450, 255983909, 1205568352, 268596147, 289141275, 289141281, 3210942887]" />
+          <attvalue for="1" value="362366.64493097714" />
+          <attvalue for="2" value="5701676.3417846775" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="11" label="11">
+        <attvalues>
+          <attvalue for="0" value="[268158351, 27430840, 10877885768, 96010911, 32555033, 34634600, 705903051, 34496032, 299276315, 34496046, 268280315, 34596197, 35262187, 451773901, 1576185215, 1576185085, 96010909, 1111712200, 268280122, 280434240, 429794999, 1249720704, 451773915, 1576185081, 1576185231]" />
+          <attvalue for="1" value="361071.56964169675" />
+          <attvalue for="2" value="5701487.987767469" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="12" label="12">
+        <attvalues>
+          <attvalue for="0" value="[25269692, 32188013, 277086887, 1606178375]" />
+          <attvalue for="1" value="360661.06660103856" />
+          <attvalue for="2" value="5708525.735439109" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="13" label="13">
+        <attvalues>
+          <attvalue for="0" value="[25269709, 25371504, 1387400343, 25372183, 287730788, 25372200, 25372302, 1387400386, 1387400372, 1584790657, 91755933, 91755968, 1584790637, 287730176, 91756030, 287730179, 1584790642, 94575384, 96590326, 1584790660]" />
+          <attvalue for="1" value="360950.4006850681" />
+          <attvalue for="2" value="5707835.347060815" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="14" label="14">
+        <attvalues>
+          <attvalue for="0" value="[1029129412, 287335526, 3841337642]" />
+          <attvalue for="1" value="360944.4240822992" />
+          <attvalue for="2" value="5706688.613263448" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="15" label="15">
+        <attvalues>
+          <attvalue for="0" value="[25269776, 96189467, 36219869, 36219871, 94575314, 1304246511, 1304246512, 1304246513]" />
+          <attvalue for="1" value="361615.7583572149" />
+          <attvalue for="2" value="5703789.308214376" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="16" label="16">
+        <attvalues>
+          <attvalue for="0" value="[25269784, 1079325189]" />
+          <attvalue for="1" value="361746.3152547524" />
+          <attvalue for="2" value="5703311.881522778" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="17" label="17">
+        <attvalues>
+          <attvalue for="0" value="[25371511, 25371514, 81309011]" />
+          <attvalue for="1" value="360713.3225579091" />
+          <attvalue for="2" value="5708503.895359121" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="18" label="18">
+        <attvalues>
+          <attvalue for="0" value="1584790594" />
+          <attvalue for="2" value="5708158.58558038" />
+          <attvalue for="1" value="361822.12807869224" />
+          <attvalue for="4" value="14" />
+          <attvalue for="5" value="motorway_junction" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0089069" />
+          <attvalue for="7" value="51.5076421" />
+        </attvalues>
+      </node>
+      <node id="19" label="19">
+        <attvalues>
+          <attvalue for="0" value="[25372751, 1599446165, 1599446171, 36219882, 1731350643, 36219896, 36219898, 280286769, 307045657, 279385212, 254348681, 279385200, 279385187, 307045661, 571514409, 4013259051, 2529484474, 316188685, 1107966484, 1107966535, 699682153, 1731350632]" />
+          <attvalue for="1" value="360930.98944160505" />
+          <attvalue for="2" value="5702890.545212402" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="20" label="20">
+        <attvalues>
+          <attvalue for="0" value="2729360645" />
+          <attvalue for="2" value="5698587.589033931" />
+          <attvalue for="1" value="359750.86408226995" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9828775" />
+          <attvalue for="7" value="51.421125" />
+        </attvalues>
+      </node>
+      <node id="21" label="21">
+        <attvalues>
+          <attvalue for="0" value="30106666" />
+          <attvalue for="2" value="5699652.619554574" />
+          <attvalue for="1" value="362403.1372891769" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0205853" />
+          <attvalue for="7" value="51.4313459" />
+        </attvalues>
+      </node>
+      <node id="22" label="22">
+        <attvalues>
+          <attvalue for="0" value="[26891481, 248561629, 487357445, 26891486]" />
+          <attvalue for="1" value="357454.96148472815" />
+          <attvalue for="2" value="5696333.620851076" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="23" label="23">
+        <attvalues>
+          <attvalue for="0" value="[27408049, 1134029383, 274982547, 1134028115, 279245705]" />
+          <attvalue for="1" value="366652.11987160565" />
+          <attvalue for="2" value="5703290.045613056" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="24" label="24">
+        <attvalues>
+          <attvalue for="0" value="[340209630, 270101088, 299701375, 308526416]" />
+          <attvalue for="1" value="364247.61739995674" />
+          <attvalue for="2" value="5700084.706931021" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="25" label="25">
+        <attvalues>
+          <attvalue for="0" value="30103157" />
+          <attvalue for="2" value="5702119.292567382" />
+          <attvalue for="1" value="363552.1912748029" />
+          <attvalue for="4" value="24" />
+          <attvalue for="5" value="motorway_junction" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0361538" />
+          <attvalue for="7" value="51.4537906" />
+        </attvalues>
+      </node>
+      <node id="26" label="26">
+        <attvalues>
+          <attvalue for="0" value="247626926" />
+          <attvalue for="2" value="5698741.249415824" />
+          <attvalue for="1" value="360022.1733278275" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9867163" />
+          <attvalue for="7" value="51.4225729" />
+        </attvalues>
+      </node>
+      <node id="27" label="27">
+        <attvalues>
+          <attvalue for="0" value="[32762162, 35543671, 32762167, 35543673, 32922643, 35543689]" />
+          <attvalue for="1" value="360612.6854145044" />
+          <attvalue for="2" value="5695533.29297904" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="28" label="28">
+        <attvalues>
+          <attvalue for="0" value="[34092233, 32922629, 34091939, 267810832, 34092030, 34092154, 70336672, 267659563, 292043893, 393906062, 267810835]" />
+          <attvalue for="1" value="360910.8886990429" />
+          <attvalue for="2" value="5694837.4061218565" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="29" label="29">
+        <attvalues>
+          <attvalue for="0" value="727732057" />
+          <attvalue for="2" value="5697716.870571958" />
+          <attvalue for="1" value="360448.4411190414" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9932465" />
+          <attvalue for="7" value="51.4134726" />
+        </attvalues>
+      </node>
+      <node id="30" label="30">
+        <attvalues>
+          <attvalue for="0" value="[33069619, 2450096106, 731947233]" />
+          <attvalue for="1" value="358593.3277156376" />
+          <attvalue for="2" value="5703134.587124703" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="31" label="31">
+        <attvalues>
+          <attvalue for="0" value="1837177044" />
+          <attvalue for="2" value="5701208.342422532" />
+          <attvalue for="1" value="360117.4232409405" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9871109" />
+          <attvalue for="7" value="51.4447664" />
+        </attvalues>
+      </node>
+      <node id="32" label="32">
+        <attvalues>
+          <attvalue for="0" value="[3321458490, 34872424, 35983040]" />
+          <attvalue for="1" value="359744.484232121" />
+          <attvalue for="2" value="5701173.87991554" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="33" label="33">
+        <attvalues>
+          <attvalue for="0" value="[34496022, 291449396]" />
+          <attvalue for="1" value="358649.60043186403" />
+          <attvalue for="2" value="5700920.603715867" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="34" label="34">
+        <attvalues>
+          <attvalue for="0" value="34595982" />
+          <attvalue for="2" value="5701024.293993005" />
+          <attvalue for="1" value="359120.4652357691" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9728477" />
+          <attvalue for="7" value="51.4428654" />
+        </attvalues>
+      </node>
+      <node id="35" label="35">
+        <attvalues>
+          <attvalue for="0" value="[278688629, 3321458486]" />
+          <attvalue for="1" value="359896.1455136391" />
+          <attvalue for="2" value="5701175.566044701" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="36" label="36">
+        <attvalues>
+          <attvalue for="0" value="642343" />
+          <attvalue for="2" value="5700912.872270207" />
+          <attvalue for="1" value="358494.05730514997" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9638848" />
+          <attvalue for="7" value="51.441708" />
+        </attvalues>
+      </node>
+      <node id="37" label="37">
+        <attvalues>
+          <attvalue for="0" value="[35826260, 1024148060, 376767792]" />
+          <attvalue for="1" value="364803.4318322575" />
+          <attvalue for="2" value="5699500.528282541" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="38" label="38">
+        <attvalues>
+          <attvalue for="0" value="35827528" />
+          <attvalue for="2" value="5697611.358696784" />
+          <attvalue for="1" value="360387.3685341794" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9924104" />
+          <attvalue for="7" value="51.4125094" />
+        </attvalues>
+      </node>
+      <node id="39" label="39">
+        <attvalues>
+          <attvalue for="0" value="1590256426" />
+          <attvalue for="2" value="5703069.143780718" />
+          <attvalue for="1" value="362140.63329411566" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0154805" />
+          <attvalue for="7" value="51.4619844" />
+        </attvalues>
+      </node>
+      <node id="40" label="40">
+        <attvalues>
+          <attvalue for="0" value="[253830743, 253830745]" />
+          <attvalue for="1" value="359035.88264849514" />
+          <attvalue for="2" value="5697873.2902735695" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="41" label="41">
+        <attvalues>
+          <attvalue for="0" value="[37142683, 68747315, 68747311, 21454593, 69643296, 69666817, 4758360237, 4758360236]" />
+          <attvalue for="1" value="366080.84951403463" />
+          <attvalue for="2" value="5697001.760147057" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="42" label="42">
+        <attvalues>
+          <attvalue for="0" value="[68745485, 68745486, 268556087, 1360912520]" />
+          <attvalue for="1" value="366741.71930061927" />
+          <attvalue for="2" value="5696443.541164205" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="43" label="43">
+        <attvalues>
+          <attvalue for="0" value="[68745499, 5553459306, 81423979, 68745503]" />
+          <attvalue for="1" value="366475.6936645693" />
+          <attvalue for="2" value="5694599.688483147" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="44" label="44">
+        <attvalues>
+          <attvalue for="0" value="[68747283, 68747292, 294157262, 248212179, 320860010]" />
+          <attvalue for="1" value="366427.0852703186" />
+          <attvalue for="2" value="5694397.810707772" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="45" label="45">
+        <attvalues>
+          <attvalue for="0" value="[338894629, 268556069, 268556082, 1049925508]" />
+          <attvalue for="1" value="366727.9753376525" />
+          <attvalue for="2" value="5696545.957991759" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="46" label="46">
+        <attvalues>
+          <attvalue for="0" value="766429693" />
+          <attvalue for="2" value="5694532.970128193" />
+          <attvalue for="1" value="362625.01842551195" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0257582" />
+          <attvalue for="7" value="51.3853919" />
+        </attvalues>
+      </node>
+      <node id="47" label="47">
+        <attvalues>
+          <attvalue for="0" value="[96173269, 96173358, 96173271]" />
+          <attvalue for="1" value="363325.6400619374" />
+          <attvalue for="2" value="5702723.212037756" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="48" label="48">
+        <attvalues>
+          <attvalue for="0" value="98162147" />
+          <attvalue for="2" value="5700732.347036352" />
+          <attvalue for="1" value="361328.675100498" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0047157" />
+          <attvalue for="7" value="51.4407868" />
+        </attvalues>
+      </node>
+      <node id="49" label="49">
+        <attvalues>
+          <attvalue for="0" value="[3956435459, 3207677493, 1301687667, 1301687647]" />
+          <attvalue for="1" value="361134.63776810764" />
+          <attvalue for="2" value="5700026.480884544" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="50" label="50">
+        <attvalues>
+          <attvalue for="0" value="2267324105" />
+          <attvalue for="2" value="5701054.758560269" />
+          <attvalue for="1" value="361415.26731396036" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0058346" />
+          <attvalue for="7" value="51.4437053" />
+        </attvalues>
+      </node>
+      <node id="51" label="51">
+        <attvalues>
+          <attvalue for="0" value="104435333" />
+          <attvalue for="2" value="5705730.0140843885" />
+          <attvalue for="1" value="359161.08224363625" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9715571" />
+          <attvalue for="7" value="51.4851618" />
+        </attvalues>
+      </node>
+      <node id="52" label="52">
+        <attvalues>
+          <attvalue for="0" value="[1304242799, 356209811]" />
+          <attvalue for="1" value="359444.3392941478" />
+          <attvalue for="2" value="5705590.808709443" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="53" label="53">
+        <attvalues>
+          <attvalue for="0" value="[144277045, 292065922, 144277051, 1730364225, 280787256, 290169625, 298982144, 1730364219, 294272000, 1730364180]" />
+          <attvalue for="1" value="356361.974188857" />
+          <attvalue for="2" value="5703333.329415265" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="54" label="54">
+        <attvalues>
+          <attvalue for="0" value="[164572273, 2446666646, 3311637960]" />
+          <attvalue for="1" value="359729.19299360935" />
+          <attvalue for="2" value="5702959.82629457" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="55" label="55">
+        <attvalues>
+          <attvalue for="0" value="[487357528, 247620184, 248561604, 487357499]" />
+          <attvalue for="1" value="357786.93413031846" />
+          <attvalue for="2" value="5696424.219097984" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="56" label="56">
+        <attvalues>
+          <attvalue for="0" value="1837177046" />
+          <attvalue for="2" value="5701246.286847164" />
+          <attvalue for="1" value="360101.7211217886" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9868701" />
+          <attvalue for="7" value="51.4451035" />
+        </attvalues>
+      </node>
+      <node id="57" label="57">
+        <attvalues>
+          <attvalue for="0" value="278084119" />
+          <attvalue for="2" value="5702368.411827284" />
+          <attvalue for="1" value="364197.18468346645" />
+          <attvalue for="4" value="25" />
+          <attvalue for="5" value="motorway_junction" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0453355" />
+          <attvalue for="7" value="51.4561844" />
+        </attvalues>
+      </node>
+      <node id="58" label="58">
+        <attvalues>
+          <attvalue for="0" value="[2111247389, 8734053830, 6561205149]" />
+          <attvalue for="1" value="364923.2971218631" />
+          <attvalue for="2" value="5702957.686404598" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="59" label="59">
+        <attvalues>
+          <attvalue for="0" value="279374073" />
+          <attvalue for="2" value="5699525.748332008" />
+          <attvalue for="1" value="362275.2168952251" />
+          <attvalue for="4" value="29" />
+          <attvalue for="5" value="motorway_junction" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0187956" />
+          <attvalue for="7" value="51.4301747" />
+        </attvalues>
+      </node>
+      <node id="60" label="60">
+        <attvalues>
+          <attvalue for="0" value="570086866" />
+          <attvalue for="2" value="5700696.422746781" />
+          <attvalue for="1" value="362529.2074123504" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0219925" />
+          <attvalue for="7" value="51.4407566" />
+        </attvalues>
+      </node>
+      <node id="61" label="61">
+        <attvalues>
+          <attvalue for="0" value="280675275" />
+          <attvalue for="2" value="5700335.838047669" />
+          <attvalue for="1" value="362545.19577931246" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0223624" />
+          <attvalue for="7" value="51.4375201" />
+        </attvalues>
+      </node>
+      <node id="62" label="62">
+        <attvalues>
+          <attvalue for="0" value="6106604481" />
+          <attvalue for="2" value="5703261.130505036" />
+          <attvalue for="1" value="356908.1016456332" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9401306" />
+          <attvalue for="7" value="51.462411" />
+        </attvalues>
+      </node>
+      <node id="63" label="63">
+        <attvalues>
+          <attvalue for="0" value="[4313081478, 4313081472]" />
+          <attvalue for="1" value="361050.67289686133" />
+          <attvalue for="2" value="5705874.839660573" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="64" label="64">
+        <attvalues>
+          <attvalue for="0" value="292065900" />
+          <attvalue for="2" value="5704636.063153366" />
+          <attvalue for="1" value="355191.7744501217" />
+          <attvalue for="3" value="2" />
+          <attvalue for="6" value="6.9148775" />
+          <attvalue for="7" value="51.4743294" />
+        </attvalues>
+      </node>
+      <node id="65" label="65">
+        <attvalues>
+          <attvalue for="0" value="292065916" />
+          <attvalue for="2" value="5704407.893857555" />
+          <attvalue for="1" value="355415.3926422385" />
+          <attvalue for="3" value="2" />
+          <attvalue for="6" value="6.9181885" />
+          <attvalue for="7" value="51.4723363" />
+        </attvalues>
+      </node>
+      <node id="66" label="66">
+        <attvalues>
+          <attvalue for="0" value="403343075" />
+          <attvalue for="2" value="5699245.165706675" />
+          <attvalue for="1" value="364815.8108158606" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0554269" />
+          <attvalue for="7" value="51.428265" />
+        </attvalues>
+      </node>
+      <node id="67" label="67">
+        <attvalues>
+          <attvalue for="0" value="[2452562322, 2452562249]" />
+          <attvalue for="1" value="359144.3269130638" />
+          <attvalue for="2" value="5703102.691506085" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="68" label="68">
+        <attvalues>
+          <attvalue for="0" value="[1564404712, 1304242793, 1304242797, 2426269533, 2424869694, 1599446193, 4023160034, 2107092800, 2424869706, 2426269587]" />
+          <attvalue for="1" value="360326.4225700874" />
+          <attvalue for="2" value="5704385.789802267" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="69" label="69">
+        <attvalues>
+          <attvalue for="0" value="[1029129410, 1029129437]" />
+          <attvalue for="1" value="360935.2202160886" />
+          <attvalue for="2" value="5706774.429220777" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="70" label="70">
+        <attvalues>
+          <attvalue for="0" value="[1304242800, 1599446181]" />
+          <attvalue for="1" value="360856.3483130673" />
+          <attvalue for="2" value="5703933.918273685" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="71" label="71">
+        <attvalues>
+          <attvalue for="0" value="[1584790703, 277075668, 2947708495, 1584790741, 1585521820]" />
+          <attvalue for="1" value="362324.9689301723" />
+          <attvalue for="2" value="5708261.460979266" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="72" label="72">
+        <attvalues>
+          <attvalue for="0" value="1621828749" />
+          <attvalue for="2" value="5706901.736128629" />
+          <attvalue for="1" value="357794.8242483152" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="6.9514209" />
+          <attvalue for="7" value="51.495349" />
+        </attvalues>
+      </node>
+      <node id="73" label="73">
+        <attvalues>
+          <attvalue for="0" value="[1748543923, 1748543979, 1748544008, 2446696055]" />
+          <attvalue for="1" value="357516.0441041251" />
+          <attvalue for="2" value="5703361.993455987" />
+          <attvalue for="3" value="0" />
+        </attvalues>
+      </node>
+      <node id="74" label="74">
+        <attvalues>
+          <attvalue for="0" value="4044208221" />
+          <attvalue for="2" value="5705318.3775001345" />
+          <attvalue for="1" value="361212.22904546745" />
+          <attvalue for="3" value="3" />
+          <attvalue for="6" value="7.0012412" />
+          <attvalue for="7" value="51.4819698" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="0" target="1" id="0">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1559.2478546480354" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="70" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="70" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.3364981611268876" />
+        </attvalues>
+      </edge>
+      <edge source="0" target="21" id="1">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1541.3934800778595" />
+          <attvalue for="11" value="120" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="120" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7706967400389297" />
+        </attvalues>
+      </edge>
+      <edge source="0" target="24" id="2">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="984.678325678506" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.1816139908142071" />
+        </attvalues>
+      </edge>
+      <edge source="1" target="5" id="3">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1927.397218383651" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.5419177747069208" />
+        </attvalues>
+      </edge>
+      <edge source="2" target="3" id="4">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1184.3465174554697" />
+          <attvalue for="11" value="120" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="120" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5921732587277349" />
+        </attvalues>
+      </edge>
+      <edge source="3" target="4" id="5">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="1106.4044559696893" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.3276853471636272" />
+        </attvalues>
+      </edge>
+      <edge source="3" target="4" id="6">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1115.901567304283" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="1" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6695409403825697" />
+        </attvalues>
+      </edge>
+      <edge source="4" target="59" id="7">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1760.283504971048" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.0561701029826287" />
+        </attvalues>
+      </edge>
+      <edge source="4" target="20" id="8">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1122.4187094090705" />
+          <attvalue for="11" value="110" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="110" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.612228386950402" />
+        </attvalues>
+      </edge>
+      <edge source="4" target="26" id="9">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="808.7943592564542" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9705532311077449" />
+        </attvalues>
+      </edge>
+      <edge source="4" target="49" id="10">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1318.9749221923298" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.582769906630796" />
+        </attvalues>
+      </edge>
+      <edge source="4" target="38" id="11">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1331.7799246379088" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.5981359095654906" />
+        </attvalues>
+      </edge>
+      <edge source="5" target="6" id="12">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1041.6181857223721" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8332945485778976" />
+        </attvalues>
+      </edge>
+      <edge source="6" target="7" id="13">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="2110.4125961243008" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.6883300768994407" />
+        </attvalues>
+      </edge>
+      <edge source="7" target="8" id="14">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1183.0606347498767" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9464485077999012" />
+        </attvalues>
+      </edge>
+      <edge source="7" target="8" id="15">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="645.5780280914615" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="1" />
+          <attvalue for="11" value="75" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5164624224731692" />
+        </attvalues>
+      </edge>
+      <edge source="8" target="23" id="16">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1453.1423523969765" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.1625138819175813" />
+        </attvalues>
+      </edge>
+      <edge source="9" target="1" id="17">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="656.1696974041193" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5249357579232955" />
+        </attvalues>
+      </edge>
+      <edge source="10" target="11" id="18">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="1411.3585681213053" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.6936302817455664" />
+        </attvalues>
+      </edge>
+      <edge source="10" target="11" id="19">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2042.6900262713102" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="80" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="1" />
+          <attvalue for="15" value="80" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.5320175197034829" />
+        </attvalues>
+      </edge>
+      <edge source="10" target="11" id="20">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1388.5020548527239" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="2" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.6662024658232686" />
+        </attvalues>
+      </edge>
+      <edge source="10" target="39" id="21">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1478.7103444707525" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.7744524133649031" />
+        </attvalues>
+      </edge>
+      <edge source="10" target="9" id="22">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1112.1599415401524" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.889727953232122" />
+        </attvalues>
+      </edge>
+      <edge source="10" target="60" id="23">
+        <attvalues>
+          <attvalue for="8" value="4" />
+          <attvalue for="9" value="1020.6036938934831" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.2247244326721798" />
+        </attvalues>
+      </edge>
+      <edge source="11" target="10" id="24">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1963.5089606607546" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="80" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="80" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.472631720495566" />
+        </attvalues>
+      </edge>
+      <edge source="11" target="10" id="25">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="1500.5892286655976" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="1" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.800707074398717" />
+        </attvalues>
+      </edge>
+      <edge source="11" target="10" id="26">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1370.5309328743165" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="2" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.6446371194491798" />
+        </attvalues>
+      </edge>
+      <edge source="11" target="32" id="27">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1374.6599278024485" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8247959566814691" />
+        </attvalues>
+      </edge>
+      <edge source="11" target="56" id="28">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="1001.548495236146" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.2018581942833753" />
+        </attvalues>
+      </edge>
+      <edge source="11" target="50" id="29">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="623.1551389205914" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7477861667047097" />
+        </attvalues>
+      </edge>
+      <edge source="11" target="19" id="30">
+        <attvalues>
+          <attvalue for="8" value="4" />
+          <attvalue for="9" value="1463.0906497331666" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.7557087796797999" />
+        </attvalues>
+      </edge>
+      <edge source="12" target="13" id="31">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1630.6082759222968" />
+          <attvalue for="11" value="85" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="85" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.1510176065333861" />
+        </attvalues>
+      </edge>
+      <edge source="12" target="13" id="32">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="1061.9124442966383" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="1" />
+          <attvalue for="11" value="75" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8495299554373107" />
+        </attvalues>
+      </edge>
+      <edge source="12" target="13" id="33">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="755.0412054410906" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="2" />
+          <attvalue for="11" value="75" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6040329643528725" />
+        </attvalues>
+      </edge>
+      <edge source="13" target="14" id="34">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1166.1567155289724" />
+          <attvalue for="11" value="60" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="60" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.1661567155289725" />
+        </attvalues>
+      </edge>
+      <edge source="13" target="17" id="35">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="1142.1632170423677" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="11" value="75" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9137305736338942" />
+        </attvalues>
+      </edge>
+      <edge source="13" target="17" id="36">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1506.9390361406242" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="1" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9041634216843746" />
+        </attvalues>
+      </edge>
+      <edge source="13" target="17" id="37">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="727.8190456473743" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="2" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.4366914273884246" />
+        </attvalues>
+      </edge>
+      <edge source="13" target="18" id="38">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="950.3051854777212" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7602441483821769" />
+        </attvalues>
+      </edge>
+      <edge source="14" target="63" id="39">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="825.7250642743442" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9908700771292129" />
+        </attvalues>
+      </edge>
+      <edge source="15" target="16" id="40">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="499.9028030461246" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5998833636553494" />
+        </attvalues>
+      </edge>
+      <edge source="15" target="47" id="41">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2442.409168658992" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.93089100239079" />
+        </attvalues>
+      </edge>
+      <edge source="15" target="19" id="42">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1181.1193804741984" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.417343256569038" />
+        </attvalues>
+      </edge>
+      <edge source="15" target="63" id="43">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2258.4961005928967" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.7101953207114757" />
+        </attvalues>
+      </edge>
+      <edge source="16" target="10" id="44">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1995.363107712525" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.3944357292550302" />
+        </attvalues>
+      </edge>
+      <edge source="16" target="15" id="45">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="510.36914834136513" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6124429780096382" />
+        </attvalues>
+      </edge>
+      <edge source="18" target="71" id="46">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="532.6099734279062" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="11" value="75" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.4260879787423249" />
+        </attvalues>
+      </edge>
+      <edge source="18" target="71" id="47">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="795.0451113101974" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="1" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6360360890481579" />
+        </attvalues>
+      </edge>
+      <edge source="19" target="15" id="48">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1180.8915878302764" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.4170699053963316" />
+        </attvalues>
+      </edge>
+      <edge source="19" target="70" id="49">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1186.357170598366" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.4236286047180395" />
+        </attvalues>
+      </edge>
+      <edge source="19" target="54" id="50">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1289.0388687115021" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.5468466424538025" />
+        </attvalues>
+      </edge>
+      <edge source="19" target="11" id="51">
+        <attvalues>
+          <attvalue for="8" value="4" />
+          <attvalue for="9" value="1463.0906497331669" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.7557087796798" />
+        </attvalues>
+      </edge>
+      <edge source="20" target="40" id="52">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1194.0251047129373" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.95522008377035" />
+        </attvalues>
+      </edge>
+      <edge source="21" target="4" id="53">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1927.4483810676206" />
+          <attvalue for="11" value="120" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="120" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9637241905338103" />
+        </attvalues>
+      </edge>
+      <edge source="23" target="58" id="54">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1812.3899256453974" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.4499119405163179" />
+        </attvalues>
+      </edge>
+      <edge source="24" target="66" id="55">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1098.1713341607194" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.3178056009928631" />
+        </attvalues>
+      </edge>
+      <edge source="24" target="0" id="56">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="979.6920078935296" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.1756304094722356" />
+        </attvalues>
+      </edge>
+      <edge source="25" target="10" id="57">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1278.0887871397504" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.0224710297118005" />
+        </attvalues>
+      </edge>
+      <edge source="26" target="20" id="58">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="314.56600000000003" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.3774792" />
+        </attvalues>
+      </edge>
+      <edge source="27" target="28" id="59">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1001.7400576337228" />
+          <attvalue for="11" value="55" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="55" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.0928073356004249" />
+        </attvalues>
+      </edge>
+      <edge source="27" target="29" id="60">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2498.5303484932597" />
+          <attvalue for="11" value="55" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="55" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.725669471083556" />
+        </attvalues>
+      </edge>
+      <edge source="28" target="27" id="61">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="968.6598019913181" />
+          <attvalue for="11" value="55" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="55" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.056719783990529" />
+        </attvalues>
+      </edge>
+      <edge source="28" target="46" id="62">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1924.866717516221" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.309840061019465" />
+        </attvalues>
+      </edge>
+      <edge source="29" target="4" id="63">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1217.7019968651477" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.4612423962381773" />
+        </attvalues>
+      </edge>
+      <edge source="30" target="73" id="64">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1121.174251203038" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.3454091014436456" />
+        </attvalues>
+      </edge>
+      <edge source="30" target="67" id="65">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="561.9234342614717" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6743081211137661" />
+        </attvalues>
+      </edge>
+      <edge source="31" target="11" id="66">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="995.9093357046991" />
+          <attvalue for="11" value="60" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="60" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9959093357046991" />
+        </attvalues>
+      </edge>
+      <edge source="32" target="36" id="67">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1277.4022157319066" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.766441329439144" />
+        </attvalues>
+      </edge>
+      <edge source="33" target="34" id="68">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="726.3839393888869" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5811071515111095" />
+        </attvalues>
+      </edge>
+      <edge source="34" target="35" id="69">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="790.5462747358326" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6324370197886661" />
+        </attvalues>
+      </edge>
+      <edge source="35" target="11" id="70">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1514.5717399835562" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.211657391986845" />
+        </attvalues>
+      </edge>
+      <edge source="37" target="24" id="71">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="832.7265655221023" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9992718786265229" />
+        </attvalues>
+      </edge>
+      <edge source="38" target="27" id="72">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2486.3216205012022" />
+          <attvalue for="11" value="60" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="60" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.486321620501202" />
+        </attvalues>
+      </edge>
+      <edge source="39" target="16" id="73">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="509.4641937447187" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6113570324936625" />
+        </attvalues>
+      </edge>
+      <edge source="40" target="22" id="74">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2249.6706368375476" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.7997365094700382" />
+        </attvalues>
+      </edge>
+      <edge source="41" target="37" id="75">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2950.5827084712027" />
+          <attvalue for="11" value="60" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="60" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.950582708471203" />
+        </attvalues>
+      </edge>
+      <edge source="41" target="42" id="76">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="881.7916900630246" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5290750140378148" />
+        </attvalues>
+      </edge>
+      <edge source="42" target="43" id="77">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2000.3861779886256" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.2002317067931751" />
+        </attvalues>
+      </edge>
+      <edge source="44" target="45" id="78">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2318.8476697605165" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.3913086018563101" />
+        </attvalues>
+      </edge>
+      <edge source="45" target="41" id="79">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="798.4765697486714" />
+          <attvalue for="11" value="90" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="90" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5323177131657809" />
+        </attvalues>
+      </edge>
+      <edge source="46" target="28" id="80">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1924.8667175162211" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.3098400610194654" />
+        </attvalues>
+      </edge>
+      <edge source="47" target="15" id="81">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2440.547321337734" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.928656785605281" />
+        </attvalues>
+      </edge>
+      <edge source="48" target="49" id="82">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="758.8179673385752" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.9105815608062903" />
+        </attvalues>
+      </edge>
+      <edge source="48" target="50" id="83">
+        <attvalues>
+          <attvalue for="8" value="4" />
+          <attvalue for="9" value="333.89300000000003" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.4006716" />
+        </attvalues>
+      </edge>
+      <edge source="49" target="4" id="84">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1303.7903653399849" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.564548438407982" />
+        </attvalues>
+      </edge>
+      <edge source="49" target="48" id="85">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="739.2565318148947" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8871078381778736" />
+        </attvalues>
+      </edge>
+      <edge source="50" target="11" id="86">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="654.8891375370065" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7858669650444078" />
+        </attvalues>
+      </edge>
+      <edge source="50" target="48" id="87">
+        <attvalues>
+          <attvalue for="8" value="4" />
+          <attvalue for="9" value="333.89300000000003" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.4006716" />
+        </attvalues>
+      </edge>
+      <edge source="51" target="52" id="88">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="320.8252570410272" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.38499030844923265" />
+        </attvalues>
+      </edge>
+      <edge source="52" target="68" id="89">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1609.5335581841082" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.9314402698209296" />
+        </attvalues>
+      </edge>
+      <edge source="53" target="65" id="90">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1432.279329831508" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.7187351957978096" />
+        </attvalues>
+      </edge>
+      <edge source="53" target="62" id="91">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="564.6232916493174" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6775479499791808" />
+        </attvalues>
+      </edge>
+      <edge source="54" target="19" id="92">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1332.1189963861304" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.5985427956633564" />
+        </attvalues>
+      </edge>
+      <edge source="54" target="67" id="93">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="611.8860657292869" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7342632788751442" />
+        </attvalues>
+      </edge>
+      <edge source="55" target="2" id="94">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1944.3756113664708" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.5555004890931765" />
+        </attvalues>
+      </edge>
+      <edge source="57" target="0" id="95">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1916.2730032036861" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="80" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="80" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.4372047524027647" />
+        </attvalues>
+      </edge>
+      <edge source="57" target="25" id="96">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="701.318" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.5610544000000001" />
+        </attvalues>
+      </edge>
+      <edge source="58" target="57" id="97">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="970.1884800140057" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7761507840112045" />
+        </attvalues>
+      </edge>
+      <edge source="59" target="60" id="98">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="1319.7530000000002" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.5837036000000002" />
+        </attvalues>
+      </edge>
+      <edge source="59" target="0" id="99">
+        <attvalues>
+          <attvalue for="8" value="3" />
+          <attvalue for="9" value="1721.778259847179" />
+          <attvalue for="11" value="100" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="100" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.0330669559083074" />
+        </attvalues>
+      </edge>
+      <edge source="60" target="61" id="100">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="365.18399999999997" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.43822079999999997" />
+        </attvalues>
+      </edge>
+      <edge source="60" target="10" id="101">
+        <attvalues>
+          <attvalue for="8" value="4" />
+          <attvalue for="9" value="1020.6036938934831" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.2247244326721798" />
+        </attvalues>
+      </edge>
+      <edge source="61" target="21" id="102">
+        <attvalues>
+          <attvalue for="8" value="1" />
+          <attvalue for="9" value="733.9119999999998" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8806943999999997" />
+        </attvalues>
+      </edge>
+      <edge source="62" target="53" id="103">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="554.4058393876843" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6652870072652212" />
+        </attvalues>
+      </edge>
+      <edge source="62" target="73" id="104">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="620.1405953663092" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.744168714439571" />
+        </attvalues>
+      </edge>
+      <edge source="63" target="74" id="105">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="593.4094314580796" />
+          <attvalue for="10" value="yes" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7120913177496955" />
+        </attvalues>
+      </edge>
+      <edge source="63" target="69" id="106">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="919.636340576523" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.1035636086918275" />
+        </attvalues>
+      </edge>
+      <edge source="64" target="65" id="107">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="319.816" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.3837792" />
+        </attvalues>
+      </edge>
+      <edge source="65" target="53" id="108">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1432.2793298315075" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.718735195797809" />
+        </attvalues>
+      </edge>
+      <edge source="65" target="64" id="109">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="321.001" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.38520119999999997" />
+        </attvalues>
+      </edge>
+      <edge source="66" target="41" id="110">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="2693.7716321213716" />
+          <attvalue for="11" value="60" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="60" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.6937716321213716" />
+        </attvalues>
+      </edge>
+      <edge source="67" target="30" id="111">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="561.9234342614718" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.6743081211137663" />
+        </attvalues>
+      </edge>
+      <edge source="67" target="54" id="112">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="611.886065729287" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.7342632788751444" />
+        </attvalues>
+      </edge>
+      <edge source="68" target="70" id="113">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="700.1504418469201" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8401805302163041" />
+        </attvalues>
+      </edge>
+      <edge source="68" target="52" id="114">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1601.5635237916636" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.9218762285499962" />
+        </attvalues>
+      </edge>
+      <edge source="69" target="13" id="115">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1078.9266709913807" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8631413367931047" />
+        </attvalues>
+      </edge>
+      <edge source="70" target="19" id="116">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1170.6958508942826" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.4048350210731393" />
+        </attvalues>
+      </edge>
+      <edge source="70" target="68" id="117">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="707.4774385466228" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.8489729262559473" />
+        </attvalues>
+      </edge>
+      <edge source="71" target="13" id="118">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1472.2268207545799" />
+          <attvalue for="11" value="75" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="75" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.177781456603664" />
+        </attvalues>
+      </edge>
+      <edge source="72" target="51" id="119">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1833.5209999999997" />
+          <attvalue for="11" value="60" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="60" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.8335209999999997" />
+        </attvalues>
+      </edge>
+      <edge source="73" target="30" id="120">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1121.1742512030378" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="1.3454091014436453" />
+        </attvalues>
+      </edge>
+      <edge source="73" target="62" id="121">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="620.1405953663092" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="0.744168714439571" />
+        </attvalues>
+      </edge>
+      <edge source="74" target="15" id="122">
+        <attvalues>
+          <attvalue for="8" value="2" />
+          <attvalue for="9" value="1674.275503945559" />
+          <attvalue for="11" value="50" />
+          <attvalue for="12" value="100" />
+          <attvalue for="13" value="no" />
+          <attvalue for="14" value="0" />
+          <attvalue for="15" value="50" />
+          <attvalue for="16" value="0" />
+          <attvalue for="17" value="2.0091306047346706" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

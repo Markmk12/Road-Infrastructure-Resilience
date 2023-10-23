@@ -14,42 +14,11 @@ import sys
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/kreis minden-lübbecke.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network
 print(road_network_0)
-
-# Check (only uncomment if the graph is a Graph or a DiGraph)
-# if nx.is_connected(road_network_0):
-#     print("The graph is connected. Continue with the program.")
-# else:
-#     print("ERROR: The graph is not connected.")
-    # sys.exit(1)
-
-# Check of import graph (must be a MultiDiGraph)
-if nx.is_strongly_connected(road_network_0):
-    print("The graph is strongly connected. Continue with the program.")
-else:
-    print("The graph is either weakly connected or not connected.")
-    # sys.exit(1)
-
-# Test Case
-# road_network_0 = nx.MultiDiGraph()
-# road_network_0.add_node(1)
-# road_network_0.add_node(2)
-# road_network_0.add_node(3)
-# road_network_0.add_node(4)
-# road_network_0.add_node(5)
-# road_network_0.add_edge(1, 2, key=0, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(2, 1, key=1, highway='primary', length=100000, capacity=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(2, 3, key=2, highway='secondary', length=100000, capacity=15000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(1, 3, key=3, highway='secondary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(3, 4, key=4, highway='secondary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(2, 4, key=5, highway='primary', length=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(4, 2, key=6, highway='primary', length=100000, lanes=2, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(4, 5, key=7, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
-# road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=1, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0, duration=0)
 
 # Ideal network efficiency (optimal efficiency)
 optimal_efficiency = system.network_efficiency(road_network_0)
@@ -90,16 +59,9 @@ for _, _, key, data in road_network_1.edges(keys=True, data=True):
 # for u, v, attrs in road_network_1.edges(data=True):
 #     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
-# Visualize the graph
-# pos = nx.spring_layout(road_network_1)
-# nx.draw(road_network_1, pos, with_labels=True, node_size=500)
-# labels = nx.get_edge_attributes(road_network_1, 'PCI')                    # (doesn't work for MultiDiGraphs)
-# nx.draw_networkx_edge_labels(road_network_1, pos, edge_labels=labels)     # (doesn't work for MultiDiGraphs)
-# plt.show()
-
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
-sample_size = 2                                                 # increase sample size ! 300  # 50 ?
+sample_size = 50                                                 # increase sample size ! 300  # 50 ?
 
 # Quality levels of road maintenance
 quality_levels = ["none", "moderate", "extensive"]
@@ -115,7 +77,7 @@ all_strategies = list(itertools.product(tuples, repeat=3))
 # print(all_strategies[0])
 
 # Set resilience threshold
-res_threshold = 0.70
+res_threshold = 0.80
 
 # Info of inputs before starting the calculation
 print(road_network_1)
@@ -329,14 +291,14 @@ print(sorted_strategies)
 print(best_strategy)
 
 # Get index of the best strategy as an integer
-strategy_str = best_strategy.split(",")[0]  # Dies teilt den String bei jedem Komma und nimmt den ersten Teil, also "Strategy: 5"
-idx_str = strategy_str.split(":")[1].strip()  # Dies teilt den String bei ':' und nimmt den zweiten Teil, also " 5", und entfernt dann die Leerzeichen
+strategy_str = best_strategy.split(",")[0]
+idx_str = strategy_str.split(":")[1].strip()
 idx_best = int(idx_str)
 
 # Path of the best strategy
 print(all_strategies[idx_best])
 
-# Plot
+# Plot of the best strategy
 plt.step(simulation_time_period, strategies_matrix_efficiency[idx_best, :], color='red', linestyle='-')
 
 plt.xlabel('Time')

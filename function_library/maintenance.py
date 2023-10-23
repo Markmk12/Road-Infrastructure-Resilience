@@ -1,15 +1,14 @@
 import numpy as np
-import math
 
 
 def inspection(pci, maintenance_status):
 
     # Imperfect inspection considers (budget and manpower)
     if pci < 25:
-        maintenance_status = np.random.choice(['no', 'corrective_measures_planning'], p=[0.3, 0.7])
+        maintenance_status = np.random.choice(['no', 'corrective_measures_planning'], p=[0.2, 0.8])
 
     elif pci < 90:
-        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.3, 0.7])
+        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.2, 0.8])
 
     return maintenance_status
 

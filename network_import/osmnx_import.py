@@ -5,17 +5,21 @@ import numpy as np
 import sys
 from function_library import traffic_dynamics as tf
 
-# Set single location here (if you are using this comment the next two sections!)
-location = 'Berlin'
 
-# Set multiple locations here (if you are using this comment the upper and the following block!)
-# locations = ['Berlin, Germany', 'Brandenburg, Germany']
+# [No. 1] Set single location here (if you are using this comment the next two sections!)
+location = 'Hannover'
 
-# Set coordinates from a location (if you are using this comment the two upper lines)
+# [No. 2] Set multiple locations here (if you are using this comment the upper and the following block!)
+locations = ['Berlin, Germany', 'Brandenburg, Germany']
+
+# [No. 3] Set coordinates from a location (if you are using this comment the two upper lines)
 # Coordinates (e.g. center of Berlin lat. 52.5200 / lon. 13.4050)
-# latitude = 52.5200
-# longitude = 13.4050
-# distance = 40 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
+latitude = 53.5511
+longitude = 9.9937
+distance = 8 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
+
+# Select here which of the above lines [1, 2, 3] should be used for retrieval
+retrieve = 1
 
 # Filter (from here no more comment or uncomment something)
 filter_0 = ''
@@ -25,17 +29,19 @@ filter_3 = '["highway"~"motorway|trunk|primary|secondary"]'
 filter_4 = '["highway"~"motorway|trunk|primary"]'
 filter_5 = '["highway"~"motorway|primary"]'
 filter_6 = '["highway"~"motorway|primary|secondary"]'
+filter_7 = '["highway"~"motorway|trunk|primary|secondary|motorway_link|trunk_link|primary_link"]'
+filter_8 = '["highway"~"motorway|trunk|primary|secondary"]'
 
 # Set a tolerance in [m] (This is used to combine nearby clusters of nodes of an intersection into one node)
 tolerance = 200
 
 #
-if 'location' in globals():
+if retrieve == 1:
 
     # Get region within its borders
-    G = ox.graph_from_place(location, network_type='drive', custom_filter=filter_1)
+    G = ox.graph_from_place(location, network_type='drive', custom_filter=filter_7)
 
-elif 'locations' in globals():
+elif retrieve == 2:
 
     # Get various cities and regions
     graphs = []
@@ -45,7 +51,7 @@ elif 'locations' in globals():
     # Combine alle single graphs into one
     G = nx.compose_all(graphs)
 
-elif 'latitude' and 'longitude' in globals():
+elif retrieve == 3:
     G = ox.graph_from_point((latitude, longitude), dist=distance, network_type='drive', custom_filter=filter_1)
 
 else:
@@ -191,19 +197,19 @@ for u, v, data in G.edges(data=True):
 
 
 # Saving the graph
-if 'location' in globals():
+if retrieve == 1:
 
     # Saving the retrieved graph for export
     nx.write_gexf(G, f"networks_of_investigation/{location.lower()}.gexf")
 
-elif 'locations' in globals():
+elif retrieve == 2:
 
     # Saving the retrieved graph for export
     formatted_cities = [city.replace(", Germany", "").replace(" ", "_").lower() for city in locations]
     filename = "_".join(formatted_cities) + ".gexf"
     nx.write_gexf(G, f"networks_of_investigation/{filename}")
 
-elif'latitude' and 'longitude' in globals():
+elif retrieve == 3:
 
     # Saving the retrieved graph for export
     filename = f"graph_{latitude}_{longitude}.gexf"

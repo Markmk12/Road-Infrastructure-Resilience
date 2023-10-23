@@ -20,7 +20,7 @@ start = time.time()
 # imported_road_network = nx.read_gexf("network_import/networks_of_investigation/germany_bennigsen.gexf")
 
 # Perfect state of the road network
-# road_network_0 = imported_road_network
+# G = imported_road_network
 
 # Test Case
 road_network_0 = nx.MultiDiGraph()
@@ -41,7 +41,7 @@ road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, 
 
 # # Füge 50 zusätzliche Knoten hinzu
 # for i in range(6, 56):  # Wir starten von 6, da 5 der letzte Knoten in Ihrer Vorlage war
-#     road_network_0.add_node(i)
+#     G.add_node(i)
 #
 # # Füge zufällige Kanten hinzu
 # for _ in range(200):  # Als Beispiel fügen wir 200 zufällige Kanten hinzu
@@ -49,16 +49,16 @@ road_network_0.add_edge(5, 4, key=8, highway='primary', length=100000, lanes=4, 
     # target = random.randint(1, 55)  # Wählen Sie zufällig einen Knoten von 1 bis 55
     #
     # # Überprüfen, ob eine Kante zwischen source und target existiert
-    # if target in road_network_0[source]:
-    #     key = len(road_network_0[source][target])
+    # if target in G[source]:
+    #     key = len(G[source][target])
     # else:
     #     key = 0  # Wenn es keine Kante gibt, setzen wir den key auf 0
     #
-    # road_network_0.add_edge(source, target, key=key, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
+    # G.add_edge(source, target, key=key, highway='primary', length=100000, capacity=100000, lanes=4, velocity=100, maxspeed=100, traffic_load=0, PCI=100, time=60, maintenance='no', age=0)
 
 # Debugging (delete all isolated nodes)
-# isolated_nodes = list(nx.isolates(road_network_0))
-# road_network_0.remove_nodes_from(isolated_nodes)
+# isolated_nodes = list(nx.isolates(G))
+# G.remove_nodes_from(isolated_nodes)
 
 # Ideal network efficiency (target efficiency)
 target_efficiency = system.network_efficiency(road_network_0)
