@@ -12,7 +12,7 @@ import sys
 # nothing
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_dusseldorf_3'
+file = 'test_graph_5'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -26,15 +26,15 @@ simulation_time_period = range(0, 31)                          # 0-101 years    
 sample_size = 5                                                 # increase sample size ! 300  # 50 ?
 
 # Set resilience threshold
-res_threshold = 0.80
+res_threshold = 0.90
 
 
 # Measure computation time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/graph_51.2277_6.7735.gexf")
-# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
+# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/graph_51.2277_6.7735.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network
@@ -116,6 +116,8 @@ strategies_matrix_costs = np.zeros((len(all_strategies)))
 
 # Brute-force search
 for idx, strategy in enumerate(all_strategies):
+
+    # start0 = time.time()
 
     # Matrix
     efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
