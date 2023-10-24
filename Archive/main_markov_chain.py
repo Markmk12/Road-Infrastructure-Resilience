@@ -132,7 +132,7 @@ axs[1, 1].set_ylabel('Normed network Efficiency [-]')
 axs[1, 1].set_title("Normed network efficiency prediction")
 axs[1, 1].grid(True)
 
-# Display the plots
+# Display the results
 plt.tight_layout()
 plt.show()
 

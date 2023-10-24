@@ -161,7 +161,7 @@ fig, ax = ox.plot_graph(G, node_color='red', edge_color='black', bgcolor='white'
 plt.show()
 
 # Save the plot
-# fig.savefig(f"plots/networks/{location}.png")
+# fig.savefig(f"results/networks/{location}.png")
 
 # Visualize the graph as with OSMNX and its attribute PCI
 # edge_labels = {(u, v): data['PCI'] for u, v, key, data in G.edges(keys=True, data=True)}

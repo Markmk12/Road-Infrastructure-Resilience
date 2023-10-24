@@ -5,16 +5,36 @@ import matplotlib.pyplot as plt
 from function_library import system, traffic_dynamics as tf, pavement as pv, maintenance as ma
 import itertools
 import time
+import os
 import sys
 
 # Notes and TODOs:
 # nothing
 
+# START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
+file = 'test_dusseldorf_3'
+
+path = os.path.join('results', file)
+if os.path.exists(path):
+    print("File already exists. Please change the name or delete the existing file.")
+    sys.exit()
+else:
+    os.makedirs(path)
+
+# Simulation time period and sample size
+simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
+sample_size = 5                                                 # increase sample size ! 300  # 50 ?
+
+# Set resilience threshold
+res_threshold = 0.80
+
+
 # Measure computation time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/graph_51.2277_6.7735.gexf")
+# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network
@@ -29,12 +49,12 @@ print(optimal_efficiency)
 road_network_1 = road_network_0
 
 # Randomly sampling PCI and age to each edge and adjust correspond velocity and travel time
+# The value of the PCI depends on the age
 # start1 = time.time()
 
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
 
-    # data['age'] = 0
-    data['age'] = np.random.choice(list(range(23)))
+    data['age'] = np.random.choice(list(range(14)))
 
     if 0 <= data['age'] <= 5:
         data['PCI'] = np.random.choice(list(range(90, 100)))
@@ -59,12 +79,12 @@ for _, _, key, data in road_network_1.edges(keys=True, data=True):
 # for u, v, attrs in road_network_1.edges(data=True):
 #     print(f"Edge: ({u}, {v}), Attributes: {attrs}")
 
-# Simulation time period and sample size
-simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
-sample_size = 50                                                 # increase sample size ! 300  # 50 ?
+# Saving the initial road network
+name = "initial_road_network.gexf"
+nx.write_gexf(road_network_1, os.path.join(path, name))
 
 # Quality levels of road maintenance
-quality_levels = ["none", "moderate", "extensive"]
+quality_levels = ['sparse', 'moderate', 'extensive']
 
 # Generate all strategy paths and time points of decision-making
 # Generate all tuple for one time point
@@ -76,18 +96,22 @@ all_strategies = list(itertools.product(tuples, repeat=3))
 # Debugging
 # print(all_strategies[0])
 
-# Set resilience threshold
-res_threshold = 0.80
-
 # Info of inputs before starting the calculation
 print(road_network_1)
 print("Simulation time period: ", simulation_time_period[0], "-", simulation_time_period[-1], "[Years]")
 print("Sample size: " + str(sample_size))
 print("Resilience threshold: ", str(res_threshold))
 
+# Saving the input parameters
+np.save(os.path.join('results', file, 'simulation_time_period.npy'), simulation_time_period)
+np.save(os.path.join('results', file, 'sample_size.npy'), sample_size)
+np.save(os.path.join('results', file, 'all_strategies.npy'), all_strategies)
+np.save(os.path.join('results', file, 'res_threshold.npy'), res_threshold)
+
 # Results
 strategies_matrix_efficiency = np.zeros((len(all_strategies), len(simulation_time_period)))
 strategies_matrix_resilience = np.zeros(len(all_strategies))
+costs_history_matrix = np.zeros((len(all_strategies), len(simulation_time_period)))
 strategies_matrix_costs = np.zeros((len(all_strategies)))
 
 # Brute-force search
@@ -248,6 +272,7 @@ for idx, strategy in enumerate(all_strategies):
     # Calculate the costs mean of each column and save it in an extra row
     mean_costs_row = costs_matrix.mean(axis=0)
     costs_matrix = np.vstack([costs_matrix, mean_costs_row])
+    costs_history_matrix[idx] = mean_costs_row
 
     # Resilience
     resilience = system.resilience_metric(efficiency_matrix[-1, :], len(simulation_time_period))
@@ -282,12 +307,12 @@ for idx, value, cost in zip(indices[0], values, costs):
     best_strategies_list.append(strategy)
 
 # Choosing the best strategy based on resilience
-sorted_strategies = sorted(best_strategies_list, key=lambda x: float(x.split("Expected total costs: ")[1]))
+sorted_best_strategies = sorted(best_strategies_list, key=lambda x: float(x.split("Expected total costs: ")[1]))
 
 # The entry with the smallest "Expected total costs" is now at the top of the sorted list:
-best_strategy = sorted_strategies[0]
+best_strategy = sorted_best_strategies[0]
 
-print(sorted_strategies)
+print(sorted_best_strategies)
 print(best_strategy)
 
 # Get index of the best strategy as an integer
@@ -295,8 +320,25 @@ strategy_str = best_strategy.split(",")[0]
 idx_str = strategy_str.split(":")[1].strip()
 idx_best = int(idx_str)
 
-# Path of the best strategy
+# Path configuration of the best strategy
 print(all_strategies[idx_best])
+
+# Costs and cumulated costs history of the best strategy path
+best_strategy_costs = costs_history_matrix[idx_best]
+best_strategy_costs_cumulated = np.cumsum(best_strategy_costs)
+# print(best_strategy_costs)
+# print(best_strategy_costs_cumulated)
+# print(np.sum(best_strategy_costs))
+
+# Saving the results
+np.save(os.path.join('results', file, 'strategies_matrix_efficiency.npy'), strategies_matrix_efficiency)
+np.save(os.path.join('results', file, 'strategies_matrix_resilience.npy'), strategies_matrix_resilience)
+np.save(os.path.join('results', file, 'strategies_matrix_costs.npy'), strategies_matrix_costs)
+np.save(os.path.join('results', file, 'sorted_best_strategies.npy'), sorted_best_strategies)
+np.save(os.path.join('results', file, 'best_strategy.npy'), best_strategy)
+np.save(os.path.join('results', file, 'idx_best.npy'), idx_best)
+np.save(os.path.join('results', file, 'best_strategy_costs.npy'), best_strategy_costs)
+
 
 # Plot of the best strategy
 plt.step(simulation_time_period, strategies_matrix_efficiency[idx_best, :], color='red', linestyle='-')
@@ -309,30 +351,69 @@ plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
 plt.minorticks_on()
 plt.ylim(0, 1)
-plt.show()
 
-# Plot of all strategies
-# for row in strategies_matrix_efficiency:
-#     plt.step(simulation_time_period, row, color='lightgray')
+# Saving the plots in different file formats
+plt.savefig(os.path.join('results', file, "efficiency.png"))
+plt.savefig(os.path.join('results', file, "efficiency.svg"))
+plt.savefig(os.path.join('results', file, "efficiency.eps"))       # no transparency
 # plt.show()
+plt.clf()
 
-# Plot of the efficiency for the best resilient strategies
-# number_of_plots = len(indices[0])
-# if number_of_plots <= 0:
-#     print("Number of plots cannot be zero or negative!")
-# else:
-#     fig, axes = plt.subplots(number_of_plots, 1, figsize=(8, 4*number_of_plots))  # 4*number_of_plots gives each plot enough vertical space.
-#
-#     for idx, row_index in enumerate(indices[0]):
-#         ax = axes[idx]  # Select the current subplot.
-#         ax.step(simulation_time_period, strategies_matrix_efficiency[row_index], color='red', linestyle='-')
-#         ax.set_xlabel('Time')
-#         ax.set_ylabel('Network Efficiency [-]')
-#         ax.set_title(f'Network Efficiency for Index {row_index}')
-#         ax.grid(True)
-#         ax.grid(which='major', color='#DDDDDD', linewidth=0.9)
-#         ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
-#         ax.minorticks_on()
-#
-#     plt.tight_layout()  # Provides enough space between the subplots.
-#     plt.show()
+# Plot of the costs
+# Bar chart with zorder=2
+bars = plt.bar(range(len(best_strategy_costs)), best_strategy_costs, color='blue', label='Costs', zorder=2)
+
+# Line chart with zorder=3
+plt.plot(best_strategy_costs_cumulated, color='red', marker='o', label='Cumulated Costs', zorder=3)
+
+# Grid
+plt.grid(True, zorder=1)
+plt.grid(which='major', color='#DDDDDD', linewidth=0.9, zorder=1)
+plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9, zorder=1)
+plt.minorticks_on()
+
+# Axis title and plot title
+plt.xlabel('Time')
+plt.ylabel('Costs [EUR]')
+plt.title('Costs of the best strategy')
+
+# Show legend
+plt.legend()
+
+# Saving the plots in different file formats
+plt.savefig(os.path.join('results', file, "costs.png"))
+plt.savefig(os.path.join('results', file, "costs.svg"))
+plt.savefig(os.path.join('results', file, "costs.eps"))     # no transparency
+# plt.show()
+plt.clf()
+
+# Plot of the costs logarithmic
+# Bar chart with zorder=2
+bars = plt.bar(range(len(best_strategy_costs)), best_strategy_costs, color='blue', label='Costs', zorder=2)
+
+# Line chart with zorder=3
+plt.plot(best_strategy_costs_cumulated, color='red', marker='o', label='Cumulated Costs', zorder=3)
+
+# Grid
+plt.grid(True, zorder=1)
+plt.grid(which='major', color='#DDDDDD', linewidth=0.9, zorder=1)
+plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9, zorder=1)
+plt.minorticks_on()
+
+# Set y-axis to logarithmic scale
+plt.yscale('log')
+
+# Axis title and plot title
+plt.xlabel('Time')
+plt.ylabel('Costs [EUR]')
+plt.title('Costs of the best strategy')
+
+# Show legend
+plt.legend()
+
+# Saving the plots in different file formats
+plt.savefig(os.path.join('results', file, "costs_log.png"))
+plt.savefig(os.path.join('results', file, "costs_log.svg"))
+plt.savefig(os.path.join('results', file, "costs_log.eps"))     # no transparency
+# plt.show()
+plt.clf()

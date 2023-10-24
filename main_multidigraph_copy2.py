@@ -3,7 +3,7 @@ import pandas as pd
 import copy
 import networkx as nx
 import matplotlib.pyplot as plt
-from function_library import system, traffic_dynamics as tf, pavement as pv, maintenance as ma
+from function_library import system, traffic_dynamics as tf, pavement as pv, maintenance_copy2 as ma
 import itertools
 import math
 import time
@@ -313,7 +313,7 @@ plt.show()
 # Plot of the efficiency for the best resilient strategies
 number_of_plots = len(indices[0])
 if number_of_plots <= 0:
-    print("Number of plots cannot be zero or negative!")
+    print("Number of results cannot be zero or negative!")
 else:
     fig, axes = plt.subplots(number_of_plots, 1, figsize=(8, 4*number_of_plots))  # 4*number_of_plots gives each plot enough vertical space.
 
