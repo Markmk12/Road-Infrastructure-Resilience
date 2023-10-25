@@ -298,7 +298,6 @@ plt.savefig('standard_deviation_percent_plot.svg', format='svg')
 plt.show()
 
 
-
 # Plot Efficiency
 fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(samples_matrix_efficiency.shape[0]):
