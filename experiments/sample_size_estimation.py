@@ -246,7 +246,7 @@ for idx, sample_size in enumerate(sample_sizes):
     samples_matrix_standard[idx, :] = standard_efficiency_row
 
 
-# Erstellen des Plots
+# Plot Variance
 fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(samples_matrix_variance.shape[0]):
     ax.plot(samples_matrix_variance[i], label=f'{sample_sizes[i]} Samples')
@@ -262,20 +262,18 @@ plt.grid(which='major', color='#DDDDDD', linewidth=0.9, zorder=1)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9, zorder=1)
 plt.minorticks_on()
 
-# Speichern des Plots in verschiedenen Formaten
+# Saving Plot
 plt.tight_layout()
 plt.savefig('variance_plot.png')
 plt.savefig('variance_plot.eps', format='eps')
 plt.savefig('variance_plot.svg', format='svg')
 
-# Anzeigen des Plots
 plt.show()
 
 
-# Standardabweichung in Prozent umrechnen
+# Standard Deviation in %
 samples_matrix_standard_percent = samples_matrix_standard * 100
 
-# Erstellen des Plots
 fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(samples_matrix_standard_percent.shape[0]):
     ax.plot(samples_matrix_standard_percent[i], label=f'{sample_sizes[i]} Samples')
@@ -291,17 +289,17 @@ plt.grid(which='major', color='#DDDDDD', linewidth=0.9, zorder=1)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9, zorder=1)
 plt.minorticks_on()
 
-# Speichern des Plots in verschiedenen Formaten
+# Saving
 plt.tight_layout()
 plt.savefig('standard_deviation_percent_plot.png')
 plt.savefig('standard_deviation_percent_plot.eps', format='eps')
 plt.savefig('standard_deviation_percent_plot.svg', format='svg')
 
-# Anzeigen des Plots
 plt.show()
 
 
-# Erstellen des Plots
+
+# Plot Efficiency
 fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(samples_matrix_efficiency.shape[0]):
     ax.plot(samples_matrix_efficiency[i], label=f'{sample_sizes[i]} Samples')
@@ -317,11 +315,10 @@ plt.grid(which='major', color='#DDDDDD', linewidth=0.9, zorder=1)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9, zorder=1)
 plt.minorticks_on()
 
-# Speichern des Plots in verschiedenen Formaten
+# Saving Plot
 plt.tight_layout()
 plt.savefig('efficiency_plot.png')
 plt.savefig('efficiency_plot.eps', format='eps')
 plt.savefig('efficiency_plot.svg', format='svg')
 
-# Anzeigen des Plots
 plt.show()
