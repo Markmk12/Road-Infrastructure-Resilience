@@ -10,7 +10,7 @@ import sys
 
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_graph_5'
+file = 'test_dusseldorf_2'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -21,17 +21,17 @@ else:
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
-sample_size = 5                                                 # increase sample size ! 300  # 50 ?
+sample_size = 2                                                 # increase sample size ! 300  # 50 ?
 
 # Set resilience threshold
-res_threshold = 0.85
+res_threshold = 0.80
 
 # Measure computation time
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/graph_51.2277_6.7735.gexf")
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/graph_51.2277_6.7735.gexf")
+# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
 
 # Perfect state of the road network
 road_network_0 = imported_road_network

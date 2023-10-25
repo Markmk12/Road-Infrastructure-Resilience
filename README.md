@@ -56,10 +56,6 @@ Schritte oder Anweisungen, um spezifische Ergebnisse oder Abbildungen in der Arb
 - Name
 - E-Mail-Adresse
 
-## Danksagung
-
-Dank an Personen, Institutionen oder Projekte, die bei der Arbeit geholfen haben.
-
 ---
 
 © Jahr, Ihr Name

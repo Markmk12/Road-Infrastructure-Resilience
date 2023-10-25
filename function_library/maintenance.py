@@ -26,11 +26,11 @@ def inspection(pci, maintenance_status):
 
     """
 
-    if pci < 25:
-        maintenance_status = np.random.choice(['no', 'corrective_measures_planning'], p=[0.25, 0.75])
+    if pci < 30:                                                                                            # 25
+        maintenance_status = np.random.choice(['no', 'corrective_measures_planning'], p=[0.3, 0.7])       # 0.25, 0.75
 
     elif pci < 90:
-        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.3, 0.7])
+        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.5, 0.5])         # 0.3, 0.7
 
     return maintenance_status
 
