@@ -1,90 +1,65 @@
-# Titel der Bachelorarbeit
+# Thesis Title
 
-Kurze Beschreibung des Projekts und was der Code macht.
+Short description of the project and its purpose.
 
-## Inhaltsverzeichnis
+## Table of Contents
 
-- [Einleitung](#einleitung)
+- [Introduction](#introduction)
 - [Installation](#installation)
-- [Benutzung](#benutzung)
-- [Dateistruktur](#dateistruktur)
-- [Eingabe & Ausgabe](#eingabe--ausgabe)
-- [Tests](#tests)
-- [Reproduktion der Ergebnisse](#reproduktion-der-ergebnisse)
-- [Lizenz](#lizenz)
-- [Kontakt](#kontakt)
-- [Danksagung](#danksagung)
+- [Usage](#usage)
+- [File Structure](#file-structure)
+- [Input & Output](#input--output)
+- [Testing](#testing)
+- [Reproducing Results](#reproducing-results)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgements](#acknowledgements)
 
-## Einleitung
+## Introduction
 
-Detailliertere Beschreibung des Projekts und des Hintergrunds.
+A more detailed description of the project and its background.
 
 ## Installation
 
-1. Voraussetzungen (z.B. Betriebssystem, Softwareversionen).
-2. Schritte zur Installation der Abhängigkeiten.
-3. So klonen oder laden Sie den Code herunter.
+1. Prerequisites (e.g., operating system, software versions).
+2. Steps to install dependencies.
+3. How to clone or download the code.
 
-## Benutzung
+## Usage
 
-- Wie man den Code ausführt.
-- Beispielbefehle und ihre Ausgaben.
+- How to run the code.
+- Example commands and their expected outputs.
 
-## Dateistruktur
+## File Structure
 
-- `ordner/` - Beschreibung des Ordners.
-- `datei.ext` - Was macht diese Datei?
+- `folder/` - Description of the folder.
+- `file.ext` - What this file does.
 
-## Eingabe & Ausgabe
+## Input & Output
 
-Beschreibung der erwarteten Eingaben und der generierten Ausgaben.
+Description of the expected inputs and produced outputs.
 
-## Tests
+## Testing
 
-Wie man Tests ausführt und was sie abdecken.
+How to run tests and what they cover.
 
-## Reproduktion der Ergebnisse
+## Reproducing Results
 
-Schritte oder Anweisungen, um spezifische Ergebnisse oder Abbildungen in der Arbeit zu reproduzieren.
+Steps or instructions to reproduce specific results or figures from the thesis.
 
-## Lizenz
+## License
 
 [MIT](LICENSE)
 
-## Kontakt
+## Contact
 
 - Name
-- E-Mail-Adresse
+- Email address
+
+## Acknowledgements
+
+Thanks to individuals, institutions, or projects that assisted in the work.
 
 ---
 
-© Jahr, Ihr Name
-
-
-# Road-Infrastructure-Resilience
-
-Code for the Bachelor Project: Identification of Infrastructure Life-Cycle Strategies based on Resilience
-
-Mark Hoyer
-MatrNo.: 3049430
-Date: 26 October 2023
-
-
-# Die wichtigsten Ordner und Dateien sind:
-
-"main":                 Dies ist das Hauptprogramm
-"network_import":       Dies ist ein Python Package um 
-"function_library":     Hier befinden sich alle Funktionen, welche im Hauptprogramm "main" aufgerufen werden.
-"results":              In diesem Ordner werden die Ergebnisse und Plots aus "main" gespeichert. Dort findet ihr 
-                        auch eine Testergebnisse.
-"experiments":          Hier wurde mit Teilen des Hauptprogramms oder Funktionen experimentiert. Die Dateien in 
-                        diesem Ordner 
-                        haben keinen Einfluss auf das Hauptprogramm.
-"requirements":         Hier sind alle Paket-Abhängikeiten zu finden
-
-# Weitere Ordner (die nicht wichtig sind):
-
-"Archive": Den Ordner Archive bitte nicht beachten. Dort befinden sich alte Dateien aus dem Entwicklungsprozess, die zu Schade sind um sie zu löschen.
-"cache": Cache
-"venv": Für die virtuelle Umgebung
-
+© Year, Your Name

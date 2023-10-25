@@ -10,7 +10,7 @@ import sys
 
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_dusseldorf_2'
+file = 'test_berlin'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -21,7 +21,7 @@ else:
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
-sample_size = 2                                                 # increase sample size ! 300  # 50 ?
+sample_size = 3                                                 # increase sample size ! 300  # 50 ?
 
 # Set resilience threshold
 res_threshold = 0.80
@@ -30,7 +30,7 @@ res_threshold = 0.80
 start = time.time()
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/graph_51.2277_6.7735.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/berlin.gexf")
 # imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
 
 # Perfect state of the road network
@@ -108,6 +108,7 @@ np.save(os.path.join('results', file, 'res_threshold.npy'), res_threshold)
 
 # Results
 strategies_matrix_efficiency = np.zeros((len(all_strategies), len(simulation_time_period)))
+strategies_matrix_variance = np.zeros((len(all_strategies), len(simulation_time_period)))
 strategies_matrix_resilience = np.zeros(len(all_strategies))
 costs_history_matrix = np.zeros((len(all_strategies), len(simulation_time_period)))
 preventive_history_matrix = np.zeros((len(all_strategies), len(simulation_time_period)))
@@ -121,7 +122,8 @@ for idx, strategy in enumerate(all_strategies):
 
     # Matrix
     efficiency_matrix = np.zeros((sample_size, len(simulation_time_period)))
-    pci_matrix = np.zeros((sample_size, len(simulation_time_period)))
+    # variance_matrix = np.zeros((sample_size, len(simulation_time_period)))
+    # pci_matrix = np.zeros((sample_size, len(simulation_time_period)))
     costs_matrix = np.zeros((sample_size, len(simulation_time_period)))
     prev_measures_count_matrix = np.zeros((sample_size, len(simulation_time_period)))
     corr_measures_count_matrix = np.zeros((sample_size, len(simulation_time_period)))
@@ -279,6 +281,9 @@ for idx, strategy in enumerate(all_strategies):
     mean_efficiency_row = efficiency_matrix.mean(axis=0)
     efficiency_matrix = np.vstack([efficiency_matrix, mean_efficiency_row])
 
+    # Calculate the variance of each column
+    variance_efficiency_row = efficiency_matrix.var(axis=0)
+
     # Calculate the costs mean of each column and save it in an extra row
     mean_costs_row = costs_matrix.mean(axis=0)
     costs_matrix = np.vstack([costs_matrix, mean_costs_row])
@@ -298,10 +303,13 @@ for idx, strategy in enumerate(all_strategies):
     resilience = system.resilience_metric(efficiency_matrix[-1, :], len(simulation_time_period))
     strategies_matrix_resilience[idx] = resilience
 
-    # Save the estimated efficiency es an entry of strategies_matrix_efficiency
+    # Save the expected efficiency es an entry of strategies_matrix_efficiency
     strategies_matrix_efficiency[idx, :] = mean_efficiency_row
 
-    # Save the estimated costs as an entry of strategies_matrix_costs (These are the expected total costs of the strategy)
+    # Save the variance as an entry of stra
+    strategies_matrix_variance[idx, :] = variance_efficiency_row
+
+    # Save the expected costs as an entry of strategies_matrix_costs (These are the expected total costs of the strategy)
     strategies_matrix_costs[idx] = np.sum(mean_costs_row, axis=0)
 
     end0 = time.time()
@@ -324,7 +332,11 @@ sorted_best_strategies = sorted(best_strategies_list, key=lambda x: float(x.spli
 print(sorted_best_strategies)
 
 # The entry with the smallest "Expected total costs" is now at the top of the sorted list:
-best_strategy = sorted_best_strategies[0]
+try:
+    best_strategy = sorted_best_strategies[0]
+except IndexError:
+    print("No optimal strategy exists that has the required resilience.")
+    best_strategy = None
 
 # Get index of the best strategy as an integer
 if not best_strategy:
@@ -358,6 +370,7 @@ else:
 
 # Saving the results
 np.save(os.path.join('results', file, 'strategies_matrix_efficiency.npy'), strategies_matrix_efficiency)
+np.save(os.path.join('results', file, 'strategies_matrix_variance.npy'), strategies_matrix_variance)
 np.save(os.path.join('results', file, 'strategies_matrix_resilience.npy'), strategies_matrix_resilience)
 np.save(os.path.join('results', file, 'strategies_matrix_costs.npy'), strategies_matrix_costs)
 np.save(os.path.join('results', file, 'preventive_history_matrix.npy'), preventive_history_matrix)
@@ -369,7 +382,7 @@ np.save(os.path.join('results', file, 'best_strategy.npy'), best_strategy)
 # Plot of the best strategy
 plt.step(simulation_time_period, strategies_matrix_efficiency[idx_best, :], color='red', linestyle='-')
 
-plt.xlabel('Time')
+plt.xlabel('Year')
 plt.ylabel('Expected Network Efficiency [-]')
 plt.title('Expected Network Efficiency')
 plt.grid(True)
@@ -377,6 +390,12 @@ plt.grid(which='major', color='#DDDDDD', linewidth=0.9)
 plt.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.9)
 plt.minorticks_on()
 plt.ylim(0, 1)
+
+# # Move the left spine (y-axis) to x=0
+# ax = plt.gca()  # Get the current axis
+# ax.spines['left'].set_position(('data', 0))
+# ax.spines['right'].set_color('none')
+# ax.spines['top'].set_color('none')
 
 # Saving the plot in different file formats
 plt.savefig(os.path.join('results', file, "efficiency.png"))
@@ -400,8 +419,8 @@ plt.minorticks_on()
 
 # Axis title and plot title
 plt.xlabel('Time')
-plt.ylabel('Costs [EUR]')
-plt.title('Costs of the best strategy')
+plt.ylabel('Expected Costs [EUR]')
+plt.title('Expected Costs of the best strategy')
 
 # Show legend
 plt.legend()
@@ -432,7 +451,7 @@ plt.yscale('log')
 
 # Axis title and plot title
 plt.xlabel('Time')
-plt.ylabel('Costs [EUR]')
+plt.ylabel('Expected Costs [EUR]')
 plt.title('Expected Costs of the best strategy')
 
 # Show legend
@@ -446,7 +465,7 @@ plt.savefig(os.path.join('results', file, "costs_log.eps"))  # no transparency
 plt.clf()
 
 
-# Plot of the measures count
+# Plot of the measures count (logarithmic)
 x = np.arange(len(best_preventive_count))
 
 plt.bar(x, best_preventive_count, label='Preventive Count', alpha=0.7, zorder=2)
@@ -465,9 +484,9 @@ plt.minorticks_on()
 plt.yscale('log')
 
 # Axis title and plot title
-plt.xlabel('Index')
-plt.ylabel('Count')
-plt.title('Preventive and Corrective Measures')
+plt.xlabel('Year')
+plt.ylabel('Number of Measures [-]')
+plt.title('Expected Preventive and Corrective Measures')
 plt.legend()
 
 # Saving the plots in different file formats
@@ -476,7 +495,7 @@ plt.savefig(os.path.join('results', file, "measures_log.svg"))
 plt.savefig(os.path.join('results', file, "measures_log.eps"))  # no transparency
 
 plt.tight_layout()
-plt.show()
+# plt.show()
 plt.clf()
 
 # Plot of the measures count
@@ -496,9 +515,9 @@ plt.minorticks_on()
 
 
 # Axis title and plot title
-plt.xlabel('Index')
-plt.ylabel('Count')
-plt.title('Preventive and Corrective Measures')
+plt.xlabel('Year')
+plt.ylabel('Number of Measures [-]')
+plt.title('Expected Preventive and Corrective Measures')
 plt.legend()
 
 # Saving the plots in different file formats
@@ -507,4 +526,4 @@ plt.savefig(os.path.join('results', file, "measures.svg"))
 plt.savefig(os.path.join('results', file, "measures.eps"))  # no transparency
 
 plt.tight_layout()
-plt.show()
+# plt.show()
