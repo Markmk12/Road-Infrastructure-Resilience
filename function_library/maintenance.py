@@ -30,7 +30,7 @@ def inspection(pci, maintenance_status):
         maintenance_status = np.random.choice(['no', 'corrective_measures_planning'], p=[0.25, 0.75])
 
     elif pci < 90:
-        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.25, 0.75])
+        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.3, 0.7])
 
     return maintenance_status
 
@@ -43,6 +43,8 @@ def preventive_maintenance(quality_level, pci, length, lanes):
     impact on various parameters such as the Pavement Condition Index (PCI), travel time, duration of maintenance, and costs.
     The function incorporates random fluctuations in the PCI improvements based on the quality of the maintenance measures
     taken. Each quality level corresponds to different types of maintenance actions.
+
+    Important: The quality level 'none' is not in use.
 
     Parameters:
     -----------
@@ -119,10 +121,12 @@ def corrective_maintenance(quality_level, pci, length, age, lanes):
     """
     Calculate the effects of corrective maintenance on road infrastructure based on the quality of maintenance.
 
-    Depending on the quality level of the maintenance ('none', 'moderate', or 'extensive'), this function determines the
+    Depending on the quality level of the maintenance ('sparse', 'moderate', or 'extensive'), this function determines the
     impact on various parameters such as the Pavement Condition Index (PCI), travel time, duration of maintenance, and costs.
     The function incorporates random fluctuations in the PCI improvements based on the quality of the maintenance measures
     taken. Each quality level corresponds to specific corrective actions on the road.
+
+    Important: The quality level 'none' is not in use.
 
     Parameters:
     -----------
@@ -190,7 +194,7 @@ def corrective_maintenance(quality_level, pci, length, age, lanes):
         # PCI as good as new
         pci = 100
         travel_time_impact = float('inf')
-        duration = 4                        #length / (60 * 365 * 2)              #((length/60)/365)/2           # länge/60 m pro Tag / 365 Standartjahr / 2 Halbjahr
+        duration = 4
         age_reset = age
         costs = length*lanes*100            # 100 EUR per m
         maintenance_status = 'no'

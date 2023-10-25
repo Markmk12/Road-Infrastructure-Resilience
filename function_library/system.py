@@ -80,3 +80,20 @@ def resilience_metric(q, observation_time):
     resilience = 1 - (target_q * observation_time - np.sum(q)) / (target_q * observation_time)
 
     return resilience
+
+
+# Pi Index (according Rordrigue (2020))
+def network_development(G):
+
+    # Total length of G
+    total_length = sum(data['weight'] for u, v, key, data in G.edges(keys=True, data=True))
+
+    # Diameter of G (shortest path between the most distanced nodes of a graph)
+    # For simplicity transform MultiDiGraph into MultiGraph
+    H = nx.MultiGraph(G)
+    graph_diameter = nx.diameter(H, weight='length')
+
+    # Network development (Pi Index)
+    pi_index = total_length / graph_diameter
+
+    return pi_index
