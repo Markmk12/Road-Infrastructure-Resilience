@@ -5,21 +5,22 @@ import numpy as np
 import sys
 from function_library import traffic_dynamics as tf
 
+# Start here:
+# Select here which one of the three lower lines [1, 2, 3] should be used for retrieval
+retrieve = 1
 
 # [No. 1] Set single location here (if you are using this comment the next two sections!)
-location = 'Hannover'
+location = 'Dusseldorf'
 
 # [No. 2] Set multiple locations here (if you are using this comment the upper and the following block!)
 locations = ['Berlin, Germany', 'Brandenburg, Germany']
 
 # [No. 3] Set coordinates from a location (if you are using this comment the two upper lines)
 # Coordinates (e.g. center of Berlin lat. 52.5200 / lon. 13.4050)
-latitude = 53.5511
-longitude = 9.9937
-distance = 8 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
+latitude = 52.5200
+longitude = 13.4050
+distance = 40 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
 
-# Select here which of the above lines [1, 2, 3] should be used for retrieval
-retrieve = 1
 
 # Filter (from here no more comment or uncomment something)
 filter_0 = ''
@@ -39,7 +40,7 @@ tolerance = 200
 if retrieve == 1:
 
     # Get region within its borders
-    G = ox.graph_from_place(location, network_type='drive', custom_filter=filter_7)
+    G = ox.graph_from_place(location, network_type='drive', custom_filter=filter_1)
 
 elif retrieve == 2:
 
