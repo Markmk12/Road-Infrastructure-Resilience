@@ -58,7 +58,7 @@ The IDE should automatically read the requirements.txt (it contains all package 
 - Extract a road network structure with the package `network_import/`. You can create a fictional graph with `networkx_import.py` 
 or retrieve a graph based on Open Street Map Data with `osmnx_import.py`. The graph is automatically saved in a subfolder.
 For the exact procedure see the comments in the corresponding file
-- In `main.py` the simulation takes place. Import a road network and set some simulation conditions (e.g. sample size, etc.).
+- In `main.py` the simulation takes place. Import a road network and set some simulation conditions (e.g. sample size etc.).
 The results are stored in `results/`. Likewise, the results are displayed in the terminal.
 - See the comments and the docstring for more information.
 
