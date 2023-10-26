@@ -25,17 +25,24 @@ ASCE-ASME J Risk and Uncert in Engrg Sys Part B Mech Engrg 6.2 (2020).
 - [Installation](#installation)
 - [Usage](#usage)
 - [File Structure](#file-structure)
-- [Input & Output](#input--output)
-- [Testing](#testing)
 - [Contact](#contact)
 
-## Introduction
+## Introduction (Very brief description of the approach. A more detailed one will follow in the report)
 
-The aim of the bachelor thesis is to create a simulation framework for a road network in its basic form.
-With the help of this simulation framework, life cycle strategies (more precisely, maintenance strategies) are to be identified,
-which are evaluated on the basis of a certain resilience level and their costs.
-Maintenance is divided into two categories. One is preventive maintenance and the other is corrective maintenance. 
-The quality of maintenance is divided into three categories (sparse, moderate, expensive).
+The goal of the bachelor thesis is to create a simulation framework for a road network in its basic form and to find 
+life cycle strategies (more precisely, maintenance strategies over time) that are based on a certain level of resilience and their costs.
+
+Maintenance can be divided into two categories. One is preventive maintenance and the other is corrective maintenance. 
+The quality of maintenance is divided into three categories (sparse, moderate, expensive). 
+
+Due to the fact that the brute force method is used to find the optimal maintenance strategies, the simulation scope is limited. 
+A period of 30 years is considered with a time step of one year. This period is divided into three equal intervals. 
+In each time interval, a combination of the quality levels for Preventive and Corrective Maintenance is used.
+For instance, one of the strategies is (sparse, moderate), (moderate, moderate), (moderate, extensive).
+
+For each strategy, the network efficiency is sampled n times and the resilience is determined for the entire period.
+
+At the end of the program, the most appropriate strategy is selected based on resilience and expected costs.
 
 ## Installation
 
@@ -45,8 +52,11 @@ The IDE should automatically read the requirements.txt (it contains all package 
 
 ## Usage
 
-- How to run the code.
-- Example commands and their expected outputs.
+- Extract a road network structure with the package `network_import/`. You can create a fictional graph with `networkx_import.py` 
+or retrieve a graph based on Open Street Map Data with `networkx_import.py`. The graph is automatically saved in a subfolder.
+For the exact procedure see the comments in the corresponding file
+- In `main.py` the simulation takes place. Import a road network and set some simulation conditions (e.g. sample size, etc.).
+The results are stored in `results/`.
 
 ## File Structure
 
@@ -57,14 +67,6 @@ The IDE should automatically read the requirements.txt (it contains all package 
 - `results/` - The results from main.py are stored here.
 - `main.py` - This is the main program to find maintenance strategies based on resilience and costs.
 - `requirements.txt` - Contains all package dependencies.
-
-## Input & Output
-
-Description of the expected inputs and produced outputs.
-
-## Testing
-
-How to run tests and what they cover.
 
 ## Contact
 

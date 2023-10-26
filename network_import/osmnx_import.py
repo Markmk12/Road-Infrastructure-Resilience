@@ -6,23 +6,23 @@ import sys
 from function_library import traffic_dynamics as tf
 
 # Start here:
-# Select here which one of the three lower lines [1, 2, 3] should be used for retrieval
+# Select here which one of the three extraction types [1, 2, 3] should be used for retrieval
 retrieve = 1
 
-# [No. 1] Set single location here (if you are using this comment the next two sections!)
+# [No. 1] Set single location here
 location = 'Dusseldorf'
 
-# [No. 2] Set multiple locations here (if you are using this comment the upper and the following block!)
+# [No. 2] Set multiple locations here
 locations = ['Berlin, Germany', 'Brandenburg, Germany']
 
-# [No. 3] Set coordinates from a location (if you are using this comment the two upper lines)
+# [No. 3] Set coordinates from a location
 # Coordinates (e.g. center of Berlin lat. 52.5200 / lon. 13.4050)
 latitude = 52.5200
 longitude = 13.4050
 distance = 40 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
 
 
-# Filter (from here no more comment or uncomment something)
+# Filter
 filter_0 = ''
 filter_1 = '["highway"~"motorway|trunk|primary|motorway_link|trunk_link|primary_link"]'         # Bachelor Thesis
 filter_2 = '["highway"~"motorway|trunk|primary|secondary|tertiary"]'
@@ -36,7 +36,7 @@ filter_8 = '["highway"~"motorway|trunk|primary|secondary"]'
 # Set a tolerance in [m] (This is used to combine nearby clusters of nodes of an intersection into one node)
 tolerance = 200
 
-#
+# # # # # # # # # From this line on, no more settings are to be made. # # # # # # # # #
 if retrieve == 1:
 
     # Get region within its borders

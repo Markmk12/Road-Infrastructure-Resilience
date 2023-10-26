@@ -10,7 +10,7 @@ import sys
 
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_berlin'
+file = 'test_high_sample'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -20,18 +20,23 @@ else:
     os.makedirs(path)
 
 # Simulation time period and sample size
-simulation_time_period = range(0, 31)                          # 0-101 years        # 0-601 months = 50 years # 0-46
-sample_size = 3                                                 # increase sample size ! 300  # 50 ?
+simulation_time_period = range(0, 31)               # Cannot be changed without changes elsewhere
+sample_size = 1800
 
 # Set resilience threshold
 res_threshold = 0.80
-
-# Measure computation time
-start = time.time()
+# Regardless of the maintenance strategy, note that not all network topologies can reach this threshold.
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
-imported_road_network = nx.read_gexf("network_import/networks_of_investigation/berlin.gexf")
-# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
+# imported_road_network = nx.read_gexf("network_import/networks_of_investigation/dusseldorf_region.gexf")
+imported_road_network = nx.read_gexf("network_import/networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
+
+# Important: The code only runs with MultiDiGraph or MultiGraphs. Graphs or DiGraphs are not supported.
+# Sometimes there is an error that the imported graph is a DiGraph. Although the graph is saved as MultiDiGraph during
+# export. It might help to convert the graph to a MultiGraph (or MultiDIGraph?) again at this point.
+
+
+# # # # # # # # # From this line on, no more settings are to be made. # # # # # # # # #
 
 # Perfect state of the road network
 road_network_0 = imported_road_network
@@ -51,7 +56,7 @@ road_network_1 = road_network_0
 
 for _, _, key, data in road_network_1.edges(keys=True, data=True):
 
-    data['age'] = np.random.choice(list(range(20)))                             # 14  oder # 18
+    data['age'] = np.random.choice(list(range(20)))                             # 14  or  # 18
 
     if 0 <= data['age'] <= 5:
         data['PCI'] = np.random.choice(list(range(90, 100)))
