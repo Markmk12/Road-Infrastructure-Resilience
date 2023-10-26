@@ -39,10 +39,13 @@ Due to the fact that the brute force method is used to find the optimal maintena
 A period of 30 years is considered with a time step of one year. This period is divided into three equal intervals. 
 In each time interval, a combination of the quality levels for Preventive and Corrective Maintenance is used.
 For instance, one of the strategies is (sparse, moderate), (moderate, moderate), (moderate, extensive).
-
 For each strategy, the network efficiency is sampled n times and the resilience is determined for the entire period.
-
 At the end of the program, the most appropriate strategy is selected based on resilience and expected costs.
+
+Network Efficiency depends on the travel time from each edge. The travel time on the respective edge is in turn dependent 
+on the Pavement Condition Index (PCI) and whether any maintenance measures take place on the edge. The deterioration of 
+the pavement is determined by a weighted linear combination of degradation processes (two Gamma Processes). One of the processes 
+represents deterioration due to traffic and the other represents deterioration due to environment.
 
 ## Installation
 
@@ -56,7 +59,8 @@ The IDE should automatically read the requirements.txt (it contains all package 
 or retrieve a graph based on Open Street Map Data with `networkx_import.py`. The graph is automatically saved in a subfolder.
 For the exact procedure see the comments in the corresponding file
 - In `main.py` the simulation takes place. Import a road network and set some simulation conditions (e.g. sample size, etc.).
-The results are stored in `results/`.
+The results are stored in `results/`. Likewise, the results are displayed in the terminal.
+- See the comments and the docstring for more information.
 
 ## File Structure
 

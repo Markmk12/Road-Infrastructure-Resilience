@@ -26,11 +26,11 @@ def inspection(pci, maintenance_status):
 
     """
 
-    if pci < 30:                                                                                            # 25
-        maintenance_status = np.random.choice(['no', 'corrective_measures_planning'], p=[0.3, 0.7])       # 0.25, 0.75
+    if pci < 30:
+        maintenance_status = np.random.choice(['no', 'corrective_measures_planning'], p=[0.3, 0.7])
 
     elif pci < 90:
-        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.5, 0.5])         # 0.3, 0.7
+        maintenance_status = np.random.choice(['no', 'preventive_measures_planning'], p=[0.5, 0.5])
 
     return maintenance_status
 
@@ -82,7 +82,7 @@ def preventive_maintenance(quality_level, pci, length, lanes):
 
     # Sparse measures
     if quality_level == 'sparse':
-        pci = pci + np.random.normal(2, 2)
+        pci = pci + np.random.normal(4, 2)
         travel_time_impact = 1.5
         duration = 0
         age_reset = 1
@@ -94,7 +94,7 @@ def preventive_maintenance(quality_level, pci, length, lanes):
 
         # Consider variance in PCI improvement
         pci = pci + np.random.normal(25, 5)
-        travel_time_impact = 1.25
+        travel_time_impact = 1.5
         duration = 1
         age_reset = 6
         costs = length*lanes*12.5
@@ -105,7 +105,7 @@ def preventive_maintenance(quality_level, pci, length, lanes):
 
         # Consider variance in PCI improvement
         pci = pci + np.random.normal(40, 5)
-        travel_time_impact = 1.5
+        travel_time_impact = 2
         duration = 2
         age_reset = 10
         costs = length*lanes*25

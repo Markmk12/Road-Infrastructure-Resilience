@@ -10,7 +10,7 @@ import sys
 
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_high_sample'
+file = 'test_2'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -21,7 +21,7 @@ else:
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)               # Cannot be changed without changes elsewhere
-sample_size = 1800
+sample_size = 5
 
 # Set resilience threshold
 res_threshold = 0.80
@@ -405,7 +405,7 @@ plt.ylim(0, 1)
 # Saving the plot in different file formats
 plt.savefig(os.path.join('results', file, "efficiency.png"))
 plt.savefig(os.path.join('results', file, "efficiency.svg"))
-plt.savefig(os.path.join('results', file, "efficiency.eps"))       # no transparency
+# plt.savefig(os.path.join('results', file, "efficiency.eps"))       # no transparency
 # plt.show()
 plt.clf()
 
@@ -433,7 +433,7 @@ plt.legend()
 # Saving the plots in different file formats
 plt.savefig(os.path.join('results', file, "costs.png"))
 plt.savefig(os.path.join('results', file, "costs.svg"))
-plt.savefig(os.path.join('results', file, "costs.eps"))  # no transparency
+# plt.savefig(os.path.join('results', file, "costs.eps"))  # no transparency
 # plt.show()
 plt.clf()
 
@@ -465,7 +465,7 @@ plt.legend()
 # Saving the plots in different file formats
 plt.savefig(os.path.join('results', file, "costs_log.png"))
 plt.savefig(os.path.join('results', file, "costs_log.svg"))
-plt.savefig(os.path.join('results', file, "costs_log.eps"))  # no transparency
+# plt.savefig(os.path.join('results', file, "costs_log.eps"))  # no transparency
 # plt.show()
 plt.clf()
 
@@ -497,7 +497,7 @@ plt.legend()
 # Saving the plots in different file formats
 plt.savefig(os.path.join('results', file, "measures_log.png"))
 plt.savefig(os.path.join('results', file, "measures_log.svg"))
-plt.savefig(os.path.join('results', file, "measures_log.eps"))  # no transparency
+# plt.savefig(os.path.join('results', file, "measures_log.eps"))  # no transparency
 
 plt.tight_layout()
 # plt.show()
@@ -528,7 +528,7 @@ plt.legend()
 # Saving the plots in different file formats
 plt.savefig(os.path.join('results', file, "measures.png"))
 plt.savefig(os.path.join('results', file, "measures.svg"))
-plt.savefig(os.path.join('results', file, "measures.eps"))  # no transparency
+# plt.savefig(os.path.join('results', file, "measures.eps"))  # no transparency
 
 plt.tight_layout()
 # plt.show()
