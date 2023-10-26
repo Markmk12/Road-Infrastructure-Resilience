@@ -21,7 +21,7 @@ else:
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)               # Cannot be changed without changes elsewhere
-sample_size = 5
+sample_size = 100
 
 # Set resilience threshold
 res_threshold = 0.80
