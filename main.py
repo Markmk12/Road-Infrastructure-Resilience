@@ -10,7 +10,7 @@ import sys
 
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_2'
+file = 'test_laptop'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -21,7 +21,7 @@ else:
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)               # Cannot be changed without changes elsewhere
-sample_size = 100
+sample_size = 3
 
 # Set resilience threshold
 res_threshold = 0.80
