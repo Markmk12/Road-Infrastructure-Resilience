@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
+# Disable LaTeX in plots (use the built-in Matplotlib renderer)
+plt.rcParams['text.usetex'] = False
+
 # Environmental deterioration
 alpha_environment = 0.1           # 1
 beta_environment = 1            # 1
@@ -40,20 +43,20 @@ cum_Y = np.cumsum(Y_values)
 cum_Y_weighted = np.cumsum(Y_weighted_values)
 
 # Plots
-plt.step(interval, cum_X_1, label='Cumulated X_1')
-plt.step(interval, cum_X_2, label='Cumulated X_2')
-plt.step(interval, cum_Y, label='Cumulated Y')
-plt.step(interval, cum_Y_weighted, label='Cumulated Y_weighted')
+plt.step(interval, cum_X_1, label=r'$X_1(t)$')
+plt.step(interval, cum_X_2, label=r'$X_2(t)$')
+plt.step(interval, cum_Y, label=r'$Y_{unweighted}(t)$')
+plt.step(interval, cum_Y_weighted, label=r'$Y(t)$')
 
-plt.title('Gamma Processes')
+# plt.title('Gamma Processes')
 plt.xlabel('t')
-plt.ylabel('Cumulated Sum')
+plt.ylabel('Degradation')  # Using built-in Matplotlib renderer for y label
 plt.legend()
 
 # Saving the plots in different file formats
-plt.savefig("gamma.png")
-plt.savefig("gamma.svg")
-plt.savefig("gamma.eps")  # no transparency
+plt.savefig("gamma_3.png")
+plt.savefig("gamma_3.svg")
+plt.savefig("gamma_3.eps")  # no transparency
 
 # Plot show
 plt.tight_layout()
