@@ -36,12 +36,12 @@ def pavement_deterioration_random_process(age):
         age = 0
 
     # Environmental deterioration
-    alpha_environment = 1
-    beta_environment = 1
+    alpha_environment = 0.5
+    beta_environment = 0.3
 
     # Deterioration through traffic
-    alpha_traffic = 0.5
-    beta_traffic = 0.3
+    alpha_traffic = 1
+    beta_traffic = 0.6
 
     # Weight of the degradation
     weight_environment = 0.35
