@@ -1,4 +1,5 @@
 import networkx as nx
+import matplotlib as plt
 
 # Here you can create simple graphs for testing
 # The graphs must be MultiDiGraphs or MultiGraphs (Graphs or DiGraphs will not work in the main program)
@@ -19,5 +20,8 @@ G.add_edge(4, 2, key=7, length=100000, lanes=2, velocity=100, maxspeed=100, PCI=
 G.add_edge(4, 5, key=8, length=100000, lanes=1, velocity=100, maxspeed=100, PCI=100, time=60, maintenance='no', age=0, duration=0)
 G.add_edge(5, 4, key=9, length=100000, lanes=1, velocity=100, maxspeed=100, PCI=100, time=60, maintenance='no', age=0, duration=0)
 
+nx.draw(G)
+
+
 # Saving
-nx.write_gexf(G, "networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
+# nx.write_gexf(G, "networks_of_investigation/simple_test_graphs/simple_test_graph_1.gexf")
