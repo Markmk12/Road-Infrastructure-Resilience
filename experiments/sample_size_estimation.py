@@ -53,7 +53,7 @@ quality_levels = ["sparse", "moderate", "extensive"]
 strategy = [('sparse', 'sparse'), ('sparse', 'sparse'), ('sparse', 'sparse')]
 
 
-simulation_time_period = range(0, 31)
+simulation_time_period = range(0, 101)
 sample_sizes = [5, 25, 50, 100, 200, 400, 800, 1600]
 
 samples_matrix_efficiency = np.zeros((len(sample_sizes), len(simulation_time_period)))
@@ -251,9 +251,9 @@ fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(samples_matrix_variance.shape[0]):
     ax.plot(samples_matrix_variance[i], label=f'{sample_sizes[i]} Samples')
 
-ax.set_title('Variance of Each Sample Over Time')
+# ax.set_title('Variance of Each Sample Over Time')
 ax.set_xlabel('Time')
-ax.set_ylabel('Variance Value')
+ax.set_ylabel('Variance')
 ax.legend(loc='best', fontsize='small')
 
 # Grid
@@ -278,7 +278,7 @@ fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(samples_matrix_standard_percent.shape[0]):
     ax.plot(samples_matrix_standard_percent[i], label=f'{sample_sizes[i]} Samples')
 
-ax.set_title('Standard Deviation of Each Sample Over Time (in %)')
+# ax.set_title('Standard Deviation of Each Sample Over Time (in %)')
 ax.set_xlabel('Time')
 ax.set_ylabel('Standard Deviation (%)')
 ax.legend(loc='best', fontsize='small')
@@ -303,9 +303,9 @@ fig, ax = plt.subplots(figsize=(10, 6))
 for i in range(samples_matrix_efficiency.shape[0]):
     ax.plot(samples_matrix_efficiency[i], label=f'{sample_sizes[i]} Samples')
 
-ax.set_title('Efficiency of Each Sample Over Time')
+# ax.set_title('Efficiency of Each Sample Over Time')
 ax.set_xlabel('Time')
-ax.set_ylabel('Efficiency Value')
+ax.set_ylabel('Efficiency')
 ax.legend(loc='best', fontsize='small')
 
 # Grid

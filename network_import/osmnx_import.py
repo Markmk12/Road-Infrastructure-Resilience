@@ -10,16 +10,16 @@ from function_library import traffic_dynamics as tf
 retrieve = 1
 
 # [No. 1] Set single location here
-location = 'Dusseldorf'
+location = 'Frankfurt'
 
 # [No. 2] Set multiple locations here
 locations = ['Berlin, Germany', 'Brandenburg, Germany']
 
 # [No. 3] Set coordinates from a location
 # Coordinates (e.g. center of Berlin lat. 52.5200 / lon. 13.4050)
-latitude = 52.5200
-longitude = 13.4050
-distance = 40 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
+latitude = 49.6311
+longitude = 8.3611
+distance = 20 * 1000     # Radius around coordinates in [m] (e.g. Berlin 40 km)
 
 
 # Filter
