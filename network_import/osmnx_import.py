@@ -10,7 +10,7 @@ from function_library import traffic_dynamics as tf
 retrieve = 1
 
 # [No. 1] Set single location here
-location = 'Frankfurt'
+location = 'Köln'
 
 # [No. 2] Set multiple locations here
 locations = ['Berlin, Germany', 'Brandenburg, Germany']

@@ -317,7 +317,7 @@ plt.minorticks_on()
 # Saving Plot
 plt.tight_layout()
 plt.savefig('efficiency_plot.png')
-plt.savefig('efficiency_plot.eps', format='eps')
+# plt.savefig('efficiency_plot.eps', format='eps')
 plt.savefig('efficiency_plot.svg', format='svg')
 
 plt.show()

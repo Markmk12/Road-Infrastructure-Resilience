@@ -10,7 +10,7 @@ import sys
 
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_frankfurt_2'
+file = 'test_worms_mannheim_075_2'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -21,15 +21,15 @@ else:
 
 # Simulation time period and sample size
 simulation_time_period = range(0, 31)               # Cannot be changed without changes elsewhere
-sample_size = 5
+sample_size = 7
 
 # Set resilience threshold
-res_threshold = 0.70
+res_threshold = 0.75
 # Regardless of the maintenance strategy, note that not all network topologies can reach this threshold.
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
 # imported_road_network = nx.read_gexf("network_import/networks_of_investigation/dusseldorf_region.gexf")
-imported_road_network = nx.read_gexf("frankfurt.gexf")
+imported_road_network = nx.read_gexf("worms_mannheim.gexf")
 
 # Important: The code only runs with MultiDiGraph or MultiGraphs. Graphs or DiGraphs are not supported.
 # Sometimes there is an error that the imported graph is a DiGraph. Although the graph is saved as MultiDiGraph during
@@ -414,7 +414,7 @@ plt.clf()
 bars = plt.bar(range(len(best_strategy_costs)), best_strategy_costs, color='blue', label='Costs', zorder=2)
 
 # Line chart with zorder=3
-plt.plot(best_strategy_costs_cumulated, color='red', marker='o', label='Cumulated expected costs', zorder=3)
+# plt.plot(best_strategy_costs_cumulated, color='red', marker='o', label='Cumulated expected costs', zorder=3)
 
 # Grid
 plt.grid(True, zorder=1)
@@ -476,8 +476,8 @@ x = np.arange(len(best_preventive_count))
 plt.bar(x, best_preventive_count, label='Preventive Count', alpha=0.7, zorder=2)
 plt.bar(x, best_corrective_count, bottom=best_preventive_count, label='Corrective Count', alpha=0.7, zorder=3)
 
-plt.plot(x, best_preventive_count_cumulated, label='Cumulated Preventive', color='blue', marker='o', zorder=4)
-plt.plot(x, best_corrective_count_cumulated, label='Cumulated Corrective', color='red', marker='o', zorder=5)
+# plt.plot(x, best_preventive_count_cumulated, label='Cumulated Preventive', color='blue', marker='o', zorder=4)
+# plt.plot(x, best_corrective_count_cumulated, label='Cumulated Corrective', color='red', marker='o', zorder=5)
 
 # Grid
 plt.grid(True, zorder=1)
@@ -509,8 +509,8 @@ x = np.arange(len(best_preventive_count))
 plt.bar(x, best_preventive_count, label='Preventive Count', alpha=0.7, zorder=2)
 plt.bar(x, best_corrective_count, bottom=best_preventive_count, label='Corrective Count', alpha=0.7, zorder=3)
 
-plt.plot(x, best_preventive_count_cumulated, label='Cumulated Preventive', color='blue', marker='o', zorder=4)
-plt.plot(x, best_corrective_count_cumulated, label='Cumulated Corrective', color='red', marker='o', zorder=5)
+# plt.plot(x, best_preventive_count_cumulated, label='Cumulated Preventive', color='blue', marker='o', zorder=4)
+# plt.plot(x, best_corrective_count_cumulated, label='Cumulated Corrective', color='red', marker='o', zorder=5)
 
 # Grid
 plt.grid(True, zorder=1)
