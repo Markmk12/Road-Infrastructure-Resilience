@@ -10,7 +10,7 @@ import sys
 
 
 # START HERE: Name the file under which the results will be saved (the results will be stored in the results' folder)
-file = 'test_worms_mannheim_075_2'
+file = 'test_frankfurt_080'
 
 path = os.path.join('results', file)
 if os.path.exists(path):
@@ -24,12 +24,12 @@ simulation_time_period = range(0, 31)               # Cannot be changed without 
 sample_size = 7
 
 # Set resilience threshold
-res_threshold = 0.75
+res_threshold = 0.8
 # Regardless of the maintenance strategy, note that not all network topologies can reach this threshold.
 
 # Import a road network (You can find examples in: network_import/networks_of_investigation)
 # imported_road_network = nx.read_gexf("network_import/networks_of_investigation/dusseldorf_region.gexf")
-imported_road_network = nx.read_gexf("worms_mannheim.gexf")
+imported_road_network = nx.read_gexf("frankfurt.gexf")
 
 # Important: The code only runs with MultiDiGraph or MultiGraphs. Graphs or DiGraphs are not supported.
 # Sometimes there is an error that the imported graph is a DiGraph. Although the graph is saved as MultiDiGraph during
