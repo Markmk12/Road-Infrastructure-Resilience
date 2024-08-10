@@ -78,4 +78,4 @@ The results are stored in `results/`. Likewise, the results are displayed in the
 
 ---
 
-© 2023, Mark Hoyer
+© 2023, Mark H.F.E. Hoyer
