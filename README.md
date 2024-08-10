@@ -12,11 +12,11 @@ road networks in Germany. The Python package OSMnx, which can extract network
 topologies from Open Street Map, is utilized. The results are discussed from an engineering perspective in terms of feasibility and computational complexity. Additionally,
 the thesis provides an outlook on future challenges and potential developments.
 
-Reference:
+**Reference**:
 [1] Salomon, Julian, et al. "Resilience decision-making for complex systems."
 ASCE-ASME J Risk and Uncert in Engrg Sys Part B Mech Engrg 6.2 (2020).
 
-Keywords: Resilience; Monte Carlo Simulation; Maintenance Strategies; Road Network; Pavement Degradation
+**Keywords**: Resilience; Monte Carlo Simulation; Maintenance Strategies; Road Network; Pavement Degradation
 
 ## Table of Contents
 
