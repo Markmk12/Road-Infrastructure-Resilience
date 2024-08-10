@@ -1,19 +1,18 @@
 # Bachelor Thesis - Study Topic: Identification of Infrastructure Life-Cycle Strategies Based on Resilience
 
-Abstract of the Task Sheet:
-The increasing size and complexity of technical systems that are critical to the stable wealth
-and development of modern societies requires new methodologies in engineering to
-quantify their resilience [1]. In order to address the complexity of such a process,
-researchers are challenged to develop sophisticated numerical and high-end computational
-tools to provide an adequate basis for comprehensive decision-making in terms of the
-authorities’ strategies. Consequently, current research aims for encompassing and rigorous
-simulation frameworks for complex systems, such as infrastructure networks.
-This bachelor’s thesis is concerned with the establishment of a simulation framework for an
-road infrastructure network in its fundamental form. Correspondingly, a manuscript and
-presentation should illustrate the theoretical validation of the applied models and a
-numerical study of feasibility in terms of computational efficiency and complexity. The
-student should discuss the challenges from an engineering perspective and give an outlook
-for future challenges and next developments.
+Road networks play an important role in the transportation of people and goods. They
+are critical infrastructure, especially for a nation’s economy. In Germany, nearly 80
+percent of goods are transported by road. Therefore, high demands are made on maintenance to ensure the efficiency and resilience of a road network, which results in high
+maintenance costs. This bachelor thesis proposes a decision making approach that allows authorities to select a cost-effective maintenance strategy considering a resilience
+threshold. The strategies are a combination of preventive and corrective maintenance,
+with varying intensities over time. To calculate resilience for each strategy, a Monte
+Carlo simulation is utilized. The pavement degradation of the roads is modeled by
+a linear combination of two gamma processes. This approach is applied to different
+road networks in Germany. The Python package OSMnx, which can extract network
+topologies from Open Street Map, is utilized. The results are discussed from an engineering perspective in terms of feasibility and computational complexity. Additionally,
+the thesis provides an outlook on future challenges and potential developments.
+
+Keywords: Resilience; Monte Carlo Simulation; Maintenance Strategies; Road Network; Pavement Degradation
 
 Reference:
 [1] Salomon, Julian, et al. "Resilience decision-making for complex systems."
