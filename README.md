@@ -27,7 +27,7 @@ ASCE-ASME J Risk and Uncert in Engrg Sys Part B Mech Engrg 6.2 (2020).
 - [File Structure](#file-structure)
 - [Contact](#contact)
 
-## Introduction (Very brief description of the approach. A more detailed one will follow in the report)
+## Introduction (Very short description of the approach. A more detailed one can be found in the bachelor thesis.)
 
 The goal of the bachelor thesis is to create a simulation framework for a road network in its basic form and to find 
 life cycle strategies (more precisely, maintenance strategies over time) that are based on a certain level of resilience and their costs.
